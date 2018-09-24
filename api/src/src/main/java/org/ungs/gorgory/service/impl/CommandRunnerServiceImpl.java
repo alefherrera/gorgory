@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 public class CommandRunnerServiceImpl implements CommandRunnerService {
 
     public String execute(String command) {
+        System.out.println(command);
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();

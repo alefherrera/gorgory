@@ -1,8 +1,6 @@
 package org.ungs.gorgory.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.CompilePayload;
 import org.ungs.gorgory.bean.CompileResponse;
 import org.ungs.gorgory.service.CommandFactoryService;
@@ -30,8 +28,15 @@ public class CompileController {
     public CompileResponse compile(@RequestBody CompilePayload payload) {
         String path = scopeCreatorService.getPath(payload.getLang(), payload.getCode());
         String command = commandFactoryService.getCommand(payload.getLang(), path);
+        command = command.replace("$PWD", "/Users/aherrera/Ungs/gorgory/api/src");
         String output = commandRunnerService.execute(command);
         return new CompileResponse(output);
+    }
+
+    @GetMapping("/echo/{text}")
+    public String echo(@PathVariable String text) {
+        String output = commandRunnerService.execute("echo " + text);
+        return output;
     }
 
 }
