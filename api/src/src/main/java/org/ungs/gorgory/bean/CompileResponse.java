@@ -6,6 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompileResponse {
 
+    public CompileResponse(String output) {
+        this.output = output;
+    }
+
     @JsonProperty("output")
     private String output;
 
