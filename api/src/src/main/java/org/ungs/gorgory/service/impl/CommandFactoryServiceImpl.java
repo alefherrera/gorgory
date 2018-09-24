@@ -36,6 +36,7 @@ public class CommandFactoryServiceImpl implements CommandFactoryService {
         File filePath = new File(path);
         String folder = filePath.getParent();
         String command = "docker run -it --rm --name my-running-script -v $PWD:/app -w /app/" + folder + " python:2 python script.py";
+//        String command = "docker run -it --rm --name my-running-script -v $PWD:/app -w /app/" + folder + " python:2 ls";
         return command;
     }
 }

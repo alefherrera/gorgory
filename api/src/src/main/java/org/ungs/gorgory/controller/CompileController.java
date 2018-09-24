@@ -28,7 +28,6 @@ public class CompileController {
     public CompileResponse compile(@RequestBody CompilePayload payload) {
         String path = scopeCreatorService.getPath(payload.getLang(), payload.getCode());
         String command = commandFactoryService.getCommand(payload.getLang(), path);
-        command = command.replace("$PWD", "/Users/aherrera/Ungs/gorgory/api/src");
         String output = commandRunnerService.execute(command);
         return new CompileResponse(output);
     }
