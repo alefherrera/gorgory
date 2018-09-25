@@ -8,7 +8,6 @@ import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
