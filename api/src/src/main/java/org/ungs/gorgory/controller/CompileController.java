@@ -8,6 +8,10 @@ import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 @RestController
 public class CompileController {
 
@@ -17,7 +21,7 @@ public class CompileController {
 
     public CompileController(
             CommandRunnerService commandRunnerService,
-            @Qualifier("local") CommandFactoryService commandFactoryService,
+            @Qualifier("docker") CommandFactoryService commandFactoryService,
             ScopeCreatorService scopeCreatorService
     ) {
         this.commandRunnerService = commandRunnerService;
@@ -28,14 +32,14 @@ public class CompileController {
     @PostMapping("/compile")
     public CompileResponse compile(@RequestBody CompilePayload payload) {
         String path = scopeCreatorService.getPath(payload.getLang(), payload.getCode());
-        String command = commandFactoryService.getCommand(payload.getLang(), path);
-        String output = commandRunnerService.execute(command);
+        Collection<String> commands = commandFactoryService.getCommands(payload.getLang(), path);
+        String output = commandRunnerService.execute(commands);
         return new CompileResponse(output);
     }
 
     @GetMapping("/echo/{text}")
     public String echo(@PathVariable String text) {
-        return commandRunnerService.execute("echo " + text);
+        return commandRunnerService.execute(Collections.singletonList("echo " + text));
     }
 
 }

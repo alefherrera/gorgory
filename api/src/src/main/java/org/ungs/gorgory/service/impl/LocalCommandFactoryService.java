@@ -4,14 +4,13 @@ import org.springframework.stereotype.Service;
 import org.ungs.gorgory.service.CommandFactoryService;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service("local")
 public class LocalCommandFactoryService implements CommandFactoryService {
 
-    private final Map<String, Function<String, String>> commandMap;
+    private final Map<String, Function<String, Collection<String>>> commandMap;
 
     public LocalCommandFactoryService() {
         commandMap = new HashMap<>();
@@ -19,19 +18,23 @@ public class LocalCommandFactoryService implements CommandFactoryService {
         commandMap.put("python", this::buildPythonCommand);
     }
 
-    public String getCommand(String lang, String path) {
+    public Collection<String> getCommands(String lang, String path) {
         return commandMap.get(lang).apply(path);
     }
 
-    private String buildJavaCommand(String path) {
+    private Collection<String> buildJavaCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
-        return "cd $PWD/" + folder + " && javac Script.java && java Script";
+        String compile = "cd $PWD/" + folder + " && javac Script.java";
+        String run = "cd $PWD/" + folder + " && java Script";
+        return Arrays.asList(compile, run);
     }
 
-    private String buildPythonCommand(String path) {
+    private Collection<String> buildPythonCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
-        return "python $PWD/" + filePath;
+        String run = "python $PWD/" + filePath;
+        return Collections.singletonList(run);
     }
+
 }
