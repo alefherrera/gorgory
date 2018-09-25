@@ -1,5 +1,6 @@
 package org.ungs.gorgory.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.CompilePayload;
 import org.ungs.gorgory.bean.CompileResponse;
@@ -16,7 +17,7 @@ public class CompileController {
 
     public CompileController(
             CommandRunnerService commandRunnerService,
-            CommandFactoryService commandFactoryService,
+            @Qualifier("local") CommandFactoryService commandFactoryService,
             ScopeCreatorService scopeCreatorService
     ) {
         this.commandRunnerService = commandRunnerService;
@@ -34,8 +35,7 @@ public class CompileController {
 
     @GetMapping("/echo/{text}")
     public String echo(@PathVariable String text) {
-        String output = commandRunnerService.execute("echo " + text);
-        return output;
+        return commandRunnerService.execute("echo " + text);
     }
 
 }
