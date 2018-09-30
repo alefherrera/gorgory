@@ -23,11 +23,10 @@ public class CompileController {
         this.commandFactoryService = commandFactoryService;
         this.scopeCreatorService = scopeCreatorService;
     }
-
     @PostMapping("/compile")
     public CompileResponse compile(@RequestBody CompilePayload payload) {
         String path = scopeCreatorService.getPath(payload.getLang(), payload.getCode());
-        String command = commandFactoryService.getCommand(payload.getLang(), path);
+        String command = commandFactoryService.getCompileCommand(payload.getLang(), path);
         String output = commandRunnerService.execute(command);
         return new CompileResponse(output);
     }

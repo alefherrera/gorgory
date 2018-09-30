@@ -20,15 +20,28 @@ public class CommandFactoryServiceImpl implements CommandFactoryService {
         commandMap.put("python", this::buildPythonCommand);
     }
 
-    public String getCommand(String lang, String path) {
+    public String getCompileCommand(String lang, String path) {
         String command = commandMap.get(lang).apply(path);
         return command;
     }
 
+    //TODO: por ahora solo con java
+    public String getLinkCommand(String folder){
+
+        //TODO: ver si se puede hacer un simlnk
+        return "ln ./lib/executioner.jar ./" + folder + "executioner.jar";
+
+    }
+
+    public String getExecuteCommand(String folder, String stdin){
+        return "echo \"" +stdin + "\" | docker run -i --rm -v $PWD:/app -w /app/" + folder + " openjdk:8-alpine java -jar executioner.jar" ;
+    }
+
+
     private String buildJavaCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
-        String command = "docker run --rm -v $PWD:/app -w /app/" + folder + " openjdk:8-alpine javac Script.java && java Script";
+        String command = "docker run --rm -v $PWD:/app -w /app/" + folder + " openjdk:8-alpine javac Script.java";// && java Script";
         return command;
     }
 

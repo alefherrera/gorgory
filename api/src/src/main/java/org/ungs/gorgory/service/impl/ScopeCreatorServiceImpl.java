@@ -42,4 +42,9 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
 
         return fullPath;
     }
+
+    @Override
+    public String getFolderOfGuid(String guid) {
+        return "scope/" + guid + "/";
+    }
 }

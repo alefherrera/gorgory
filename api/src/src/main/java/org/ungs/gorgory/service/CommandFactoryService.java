@@ -2,6 +2,9 @@ package org.ungs.gorgory.service;
 
 public interface CommandFactoryService {
 
-    String getCommand(String lang, String path);
+    String getCompileCommand(String lang, String path);
+
+    String getLinkCommand(String folder);
+    String getExecuteCommand(String folder, String stdin);
 
 }
