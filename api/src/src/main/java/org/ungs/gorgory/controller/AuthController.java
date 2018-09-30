@@ -31,7 +31,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public void signUp(@RequestBody SignUpPayload payload) {
-        userService.signUp(payload.getUsername(), payload.getPassword());
+        userService.save(payload.getUsername(), payload.getPassword());
     }
 
     @PostMapping("/login")

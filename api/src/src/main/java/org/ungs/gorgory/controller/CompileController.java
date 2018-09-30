@@ -1,6 +1,8 @@
 package org.ungs.gorgory.controller;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.CompilePayload;
 import org.ungs.gorgory.bean.CompileResponse;
@@ -37,6 +39,7 @@ public class CompileController {
     }
 
     @GetMapping("/echo/{text}")
+    @Secured("ROLE_ADMIN")
     public String echo(@PathVariable String text) {
         return commandRunnerService.execute(Collections.singletonList("echo " + text));
     }
