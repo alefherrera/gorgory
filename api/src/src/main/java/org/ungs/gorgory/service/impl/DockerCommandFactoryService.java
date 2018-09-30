@@ -25,16 +25,21 @@ public class DockerCommandFactoryService implements CommandFactoryService {
     private Collection<String> buildJavaCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
-        String compile = "docker run --rm -v $PWD:/app -w /app/" + folder + " openjdk:8-alpine javac Script.java";
-        String run = "docker run --rm -v $PWD:/app -w /app/" + folder + " openjdk:8-alpine java Script";
+        String dockerCommand = getDockerCommand(folder);
+        String compile = dockerCommand + " openjdk:8-alpine javac Script.java";
+        String run = dockerCommand + " openjdk:8-alpine java Script";
         return Arrays.asList(compile, run);
     }
 
     private Collection<String> buildPythonCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
-        String run = "docker run --rm --name my-running-script -v $PWD:/app -w /app/" + folder + " python:2 python script.py";
+        String run = getDockerCommand(folder) + " python:2-alpine python script.py";
         return Collections.singletonList(run);
+    }
+
+    private String getDockerCommand(String folder) {
+        return "docker run --rm -v $PWD:/app -w /app/" + folder;
     }
 
 }

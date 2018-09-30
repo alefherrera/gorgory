@@ -32,7 +32,6 @@ public class LocalCommandFactoryService implements CommandFactoryService {
 
     private Collection<String> buildPythonCommand(String path) {
         File filePath = new File(path);
-        String folder = filePath.getParent();
         String run = "python $PWD/" + filePath;
         return Collections.singletonList(run);
     }
