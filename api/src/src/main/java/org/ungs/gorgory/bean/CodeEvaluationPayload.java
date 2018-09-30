@@ -1,10 +1,14 @@
 package org.ungs.gorgory.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class CodeEvaluationPayload {
 
+    @JsonProperty("testCases")
     private List<InputOutputPair> testCases;
+    @JsonProperty("codeRegex")
     private String codeRegex;
 
     public List<InputOutputPair> getTestCases() {
@@ -23,26 +27,7 @@ public class CodeEvaluationPayload {
         this.codeRegex = codeRegex;
     }
 
-    public class InputOutputPair {
-        private List<String> inputParameters;
-        private String expectedOutput;
 
-        public List<String> getInputParameters() {
-            return inputParameters;
-        }
-
-        public void setInputParameters(List<String> inputParameters) {
-            this.inputParameters = inputParameters;
-        }
-
-        public String getExpectedOutput() {
-            return expectedOutput;
-        }
-
-        public void setExpectedOutput(String expectedOutput) {
-            this.expectedOutput = expectedOutput;
-        }
-    }
 
 
 }
