@@ -4,15 +4,31 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
     "react-scripts": "1.1.5",
-    "styled-components": "^3.4.9"
+    "redux": "^4.0.0",
+    "redux-actions": "^2.6.1",
+    "redux-persist": "^5.10.0",
+    "redux-promise-middleware": "^5.1.1",
+    "reselect": "^3.0.1",
+    "styled-components": "^3.4.9",
+    "type-to-reducer": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1"
   }
 }
