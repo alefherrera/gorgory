@@ -1,0 +1,26 @@
+{
+    "name": "Argument",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "testCase",
+            "otherEntityName": "testCase",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180930210616",
+    "entityTableName": "argument",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

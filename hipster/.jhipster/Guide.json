@@ -1,0 +1,29 @@
+{
+    "name": "Guide",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "exercise",
+            "otherEntityName": "exercise",
+            "otherEntityRelationshipName": "guide"
+        }
+    ],
+    "changelogDate": "20180930210611",
+    "entityTableName": "guide",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

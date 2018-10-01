@@ -1,0 +1,32 @@
+{
+    "name": "CaseResult",
+    "fields": [
+        {
+            "fieldName": "passed",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "testCase",
+            "otherEntityName": "testCase",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "resolution",
+            "otherEntityName": "resolution",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180930210614",
+    "entityTableName": "case_result",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

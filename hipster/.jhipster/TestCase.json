@@ -1,0 +1,38 @@
+{
+    "name": "TestCase",
+    "fields": [
+        {
+            "fieldName": "expected",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "argument",
+            "otherEntityName": "argument",
+            "otherEntityRelationshipName": "testCase"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "exercise",
+            "otherEntityName": "exercise",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "caseResult",
+            "otherEntityName": "caseResult",
+            "otherEntityRelationshipName": "testCase"
+        }
+    ],
+    "changelogDate": "20180930210615",
+    "entityTableName": "test_case",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

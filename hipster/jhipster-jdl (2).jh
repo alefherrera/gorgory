@@ -1,0 +1,82 @@
+
+
+
+entity Guide {
+	name String required
+}
+
+entity Exercise {
+	language Language
+}
+
+entity Resolution {
+	path String
+}
+
+entity CaseResult {
+	passed Boolean
+}
+
+entity TestCase {
+	expected String
+}
+
+entity Argument {
+	value String
+}
+
+enum Language {
+    PYTHON, JAVA
+}
+
+// Relationships
+
+relationship OneToMany {
+	Guide to Exercise
+}
+
+//relationship ManyToOne {
+//	Exercise to Guide
+//}
+
+relationship OneToMany {
+	Exercise to TestCase
+}
+
+//relationship ManyToOne {
+//	TestCase to Exercise
+//}
+
+relationship OneToMany {
+	TestCase to Argument
+}
+
+//relationship ManyToOne {
+//	Argument to TestCase
+//}
+
+relationship OneToMany {
+	Resolution to CaseResult
+}
+
+//relationship ManyToOne {
+//	CaseResult to Resolution
+//}
+
+relationship ManyToOne {
+	Resolution{student} to User
+}
+
+relationship ManyToOne {
+	Resolution to Exercise
+}
+
+relationship ManyToOne {
+	CaseResult to TestCase
+}
+
+
+
+service Resolution with serviceImpl
+
+

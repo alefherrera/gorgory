@@ -1,0 +1,31 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "org.ungs.gorgory"
+    },
+    "jhipsterVersion": "5.3.4",
+    "applicationType": "monolith",
+    "baseName": "gorgory",
+    "packageName": "org.ungs.gorgory",
+    "packageFolder": "org/ungs/gorgory",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MDliODU3YjJhMmYzODg5MTQzNzYyNmYzM2UxODgwNmY2M2ZmOGU3ZWE3ZTM5NWJlYzZhYWY5OWEzMjI5M2Y1N2UyZDI0NDRlYmYwNmQ1OGViYTIzZThiOTVjZmMxODc2NjQ0OWY0YmMyOTNkYmNjMTk2ZjQzYWU1MmY5ZTY3ZjE=",
+    "clientFramework": "react",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "enableTranslation": false
+  }
+}

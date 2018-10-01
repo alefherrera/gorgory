@@ -1,0 +1,38 @@
+{
+    "name": "Resolution",
+    "fields": [
+        {
+            "fieldName": "path",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "caseResult",
+            "otherEntityName": "caseResult",
+            "otherEntityRelationshipName": "resolution"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "student",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "exercise",
+            "otherEntityName": "exercise",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180930210613",
+    "entityTableName": "resolution",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

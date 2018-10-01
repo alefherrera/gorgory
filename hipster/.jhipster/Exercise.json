@@ -1,0 +1,39 @@
+{
+    "name": "Exercise",
+    "fields": [
+        {
+            "fieldName": "language",
+            "fieldType": "Language",
+            "fieldValues": "PYTHON,JAVA"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "testCase",
+            "otherEntityName": "testCase",
+            "otherEntityRelationshipName": "exercise"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "guide",
+            "otherEntityName": "guide",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "resolution",
+            "otherEntityName": "resolution",
+            "otherEntityRelationshipName": "exercise"
+        }
+    ],
+    "changelogDate": "20180930210612",
+    "entityTableName": "exercise",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
