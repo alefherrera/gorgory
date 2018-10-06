@@ -1,6 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.ungs.gorgory.model.ScopePath;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
 import java.io.BufferedWriter;
@@ -22,7 +23,7 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
         fileNameMap.put("python", "script.py");
     }
 
-    public String getPath(String lang, String code) {
+    public ScopePath getPath(String lang, String code) {
 
         String fileName = fileNameMap.get(lang);
         String uuid = UUID.randomUUID().toString();
@@ -40,6 +41,6 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
             throw new RuntimeException(e);
         }
 
-        return fullPath;
+        return new ScopePath(uuid, fullPath);
     }
 }

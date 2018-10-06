@@ -1,7 +1,9 @@
 package org.ungs.gorgory.service;
 
+import org.ungs.gorgory.model.ScopePath;
+
 public interface ScopeCreatorService {
 
-    String getPath(String lang, String code);
+    ScopePath getPath(String lang, String code);
 
 }
