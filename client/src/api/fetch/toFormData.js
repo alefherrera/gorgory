@@ -1,5 +1,6 @@
 /* eslint no-restricted-syntax: "off" */
 /* eslint no-prototype-builtins: "off" */
+/* eslint no-undef: "off" */
 
 const objectToFormData = (obj, form, namespace) => {
   const fd = form || new FormData();
