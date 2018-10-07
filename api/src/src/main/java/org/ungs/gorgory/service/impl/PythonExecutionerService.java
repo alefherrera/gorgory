@@ -18,10 +18,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +27,8 @@ public class PythonExecutionerService implements ExecutionerService {
     private final CommandFactoryService commandFactoryService;
     private final CommandRunnerService commandRunnerService;
 
-    public PythonExecutionerService(@Qualifier("local") CommandFactoryService commandFactoryService, CommandRunnerService commandRunnerService) {
+    public PythonExecutionerService(@Qualifier("local") CommandFactoryService commandFactoryService,
+                                    CommandRunnerService commandRunnerService) {
         this.commandFactoryService = commandFactoryService;
         this.commandRunnerService = commandRunnerService;
     }
@@ -38,7 +36,7 @@ public class PythonExecutionerService implements ExecutionerService {
     @Override
     public Result runTestCaseOnResolution(Resolution resolution, TestCase testCase) throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException {
         Collection<String> codeFilesPath = obtainCodeFiles(resolution.getPath());
-        Path inputFile = createInputFileFromArguments(testCase.getArguments());
+        Path inputFile = createInputFileFromArguments(resolution.getPath(), testCase.getArguments());
         Collection<String> commands = buildExecutionCommand(Language.PYTHON, codeFilesPath, inputFile);
         String result = commandRunnerService.execute(commands);
 
@@ -71,9 +69,8 @@ public class PythonExecutionerService implements ExecutionerService {
         return commandList;
     }
 
-    private Path createInputFileFromArguments(Collection<Argument> arguments) throws FileNotFoundException, UnsupportedEncodingException {
-        //TODO: ver bien donde se guarda este file
-        Path filePath = Paths.get(System.getProperty("user.home"), "input.txt");
+    private Path createInputFileFromArguments(String resolutionDir, Collection<Argument> arguments) throws FileNotFoundException, UnsupportedEncodingException {
+        Path filePath = Paths.get(resolutionDir, UUID.randomUUID().toString() + ".txt");
         PrintWriter writer = new PrintWriter(filePath.toFile(), "UTF-8");
 
         for (Argument argument : arguments) {
