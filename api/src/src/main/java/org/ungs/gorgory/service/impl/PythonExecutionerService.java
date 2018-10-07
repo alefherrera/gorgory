@@ -10,7 +10,7 @@ import org.ungs.gorgory.model.Result;
 import org.ungs.gorgory.model.TestCase;
 import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
-import org.ungs.gorgory.service.Executioner;
+import org.ungs.gorgory.service.ExecutionerService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,12 +25,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PythonExecutioner implements Executioner {
+public class PythonExecutionerService implements ExecutionerService {
 
     private final CommandFactoryService commandFactoryService;
     private final CommandRunnerService commandRunnerService;
 
-    public PythonExecutioner(@Qualifier("local") CommandFactoryService commandFactoryService, CommandRunnerService commandRunnerService) {
+    public PythonExecutionerService(@Qualifier("local") CommandFactoryService commandFactoryService, CommandRunnerService commandRunnerService) {
         this.commandFactoryService = commandFactoryService;
         this.commandRunnerService = commandRunnerService;
     }

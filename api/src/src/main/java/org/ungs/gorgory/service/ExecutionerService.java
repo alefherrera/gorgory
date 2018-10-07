@@ -8,6 +8,6 @@ import org.ungs.gorgory.model.TestCase;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
-public interface Executioner {
+public interface ExecutionerService {
     Result runTestCaseOnResolution(Resolution resolution, TestCase testCase) throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException;
 }
