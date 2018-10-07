@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 
 import { store } from '../../store';
 import AppHeader from '../AppHeader';
 import Body from '../Body';
-import CodeEditor from '../CodeEditor';
+// import CodeEditor from '../CodeEditor';
+import Login from '../Login';
 
-class App extends Component {
-  state = { age: 2 };
-  render() {
-    return (
-      <Provider store={store}>
-        <div>
-          <AppHeader>
-            <Body>
-              <CodeEditor />
-            </Body>
-          </AppHeader>
-        </div>
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <AppHeader>
+      <Body>
+        <Login />
+      </Body>
+    </AppHeader>
+  </Provider>
+);
 
 export default App;

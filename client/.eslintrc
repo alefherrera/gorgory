@@ -4,7 +4,8 @@
     "react/forbid-prop-types": "off",
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/destructuring-assignment": "off"
   },
   "parser": "babel-eslint"
 }

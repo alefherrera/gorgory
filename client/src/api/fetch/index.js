@@ -21,23 +21,28 @@ const fetchInternal = (headers, transformer, method, endpoint) => args => fetch(
   method,
   headers,
   body: transformer(args),
-}).then((res) => {
-  if (!res.ok) {
-    if (res.status === 401) {
-      // dispatch(logout());
-      // dispatch(push('/login', locationSelector(getState())));
+})
+  .then((res) => {
+    if (!res.ok) {
+      if (res.status === 401) {
+        // dispatch(logout());
+        // dispatch(push('/login', locationSelector(getState())));
+        // eslint-disable-next-line
+          return Promise.reject({ title: 'ERROR.PERMISSION_DENIED' });
+      }
+      // if (res.bodyUsed) {
       // eslint-disable-next-line
-        return Promise.reject({ title: 'ERROR.PERMISSION_DENIED' });
+        //   return res.text().then(x => Promise.reject({ title: x }));
+      // }
+      // eslint-disable-next-line
+        // return Promise.reject({ title: res.statusText });
     }
-    // if (res.bodyUsed) {
-    // eslint-disable-next-line
-      return res.text().then(x => Promise.reject({ title: x }));
-    // }
-    // eslint-disable-next-line
-      // return Promise.reject({ title: res.statusText });
-  }
-  return getBody(res);
-});
+    return getBody(res);
+  })
+  .then(
+    json => json,
+    error => Promise.reject(error),
+  );
 
 const getJsonHeader = () => ({
   Accept: 'application/json',
