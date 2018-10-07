@@ -1,4 +1,10 @@
-import { handleAction } from 'redux-actions';
-import { COMPILE } from '../constants';
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import { routerReducer } from 'react-router-redux';
+import session from './session';
 
-export default handleAction(COMPILE, state => state, {});
+export default combineReducers({
+  session,
+  form: formReducer,
+  router: routerReducer,
+});

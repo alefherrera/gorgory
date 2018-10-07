@@ -1,40 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import { FormControl, InputLabel, Button } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import { store } from '../../store';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ConnectedRouter } from 'react-router-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import Route from 'react-router/Route';
+import { store, persistor } from '../../store';
+import history from '../../history';
+import AppHeader from '../AppHeader';
+import Body from '../Body';
+import CodeEditor from '../CodeEditor';
+import Login from '../Login';
 
-class App extends Component {
-  state = { age: 2 };
-  render() {
-    return (
-      <Provider store={store}>
-        <div>
-          <form>
-            <TextField />
-            <FormControl>
-              <InputLabel htmlFor="age-simple">Lenguaje</InputLabel>
-              <Select
-                value={this.state.age}
-                onChange={this.handleChange}
-                inputProps={{
-                  name: 'age',
-                  id: 'age-simple',
-                }}
-              >
-                <MenuItem value="">Ninguno</MenuItem>
-                <MenuItem value="java">Java</MenuItem>
-                <MenuItem value="python">Python</MenuItem>
-              </Select>
-            </FormControl>
-            <Button onClick={this.handleClick}>Boton</Button>
-          </form>
-        </div>
-      </Provider>
-    );
-  }
-}
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      light: '#FFCCBC',
+      main: '#FF5722',
+      dark: '#E64A19',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      light: '#F5F5F5',
+      main: '#9E9E9E',
+      dark: '#616161',
+      contrastText: '#000000',
+    },
+  },
+});
+
+const App = () => (
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <MuiThemeProvider theme={theme}>
+        <ConnectedRouter history={history}>
+          <AppHeader>
+            <Body>
+              {/* <Route path="/" exact component={CodeEditor} />
+              <Route path="/login" component={Login} /> */}
+              <div style={{ display: 'flex' }}>
+                <Login />
+                <CodeEditor />
+              </div>
+            </Body>
+          </AppHeader>
+        </ConnectedRouter>
+      </MuiThemeProvider>
+    </PersistGate>
+  </Provider>
+);
 
 export default App;
