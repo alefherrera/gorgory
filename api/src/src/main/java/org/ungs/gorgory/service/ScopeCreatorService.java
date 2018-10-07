@@ -1,6 +1,6 @@
 package org.ungs.gorgory.service;
 
-import org.ungs.gorgory.model.ScopePath;
+import org.ungs.gorgory.bean.ScopePath;
 
 public interface ScopeCreatorService {
 

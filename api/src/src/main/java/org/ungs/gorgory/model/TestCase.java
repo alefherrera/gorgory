@@ -2,6 +2,7 @@ package org.ungs.gorgory.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class TestCase extends BaseEntity {
@@ -15,9 +16,11 @@ public class TestCase extends BaseEntity {
     private Exercise exercise;
 
     @OneToMany(mappedBy = "testCase")
-    private Collection<Argument> arguments;
+    private List<Argument> arguments;
 
     private String expected;
+
+    private String functionToTest;
 
     public Long getId() {
         return id;
@@ -31,11 +34,11 @@ public class TestCase extends BaseEntity {
         this.exercise = exercise;
     }
 
-    public Collection<Argument> getArguments() {
+    public List<Argument> getArguments() {
         return arguments;
     }
 
-    public void setArguments(Collection<Argument> arguments) {
+    public void setArguments(List<Argument> arguments) {
         this.arguments = arguments;
     }
 
@@ -45,5 +48,13 @@ public class TestCase extends BaseEntity {
 
     public void setExpected(String expected) {
         this.expected = expected;
+    }
+
+    public String getFunctionToTest() {
+        return functionToTest;
+    }
+
+    public void setFunctionToTest(String functionToTest) {
+        this.functionToTest = functionToTest;
     }
 }

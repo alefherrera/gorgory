@@ -1,4 +1,4 @@
-package org.ungs.gorgory.model;
+package org.ungs.gorgory.bean;
 
 public class ScopePath {
 

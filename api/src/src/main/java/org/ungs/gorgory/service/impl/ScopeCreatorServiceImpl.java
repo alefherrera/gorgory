@@ -1,7 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.model.ScopePath;
+import org.ungs.gorgory.bean.ScopePath;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
 import java.io.BufferedWriter;

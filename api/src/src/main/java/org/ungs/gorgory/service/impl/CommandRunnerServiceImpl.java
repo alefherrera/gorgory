@@ -14,6 +14,11 @@ public class CommandRunnerServiceImpl implements CommandRunnerService {
         return command.stream().map(this::execute).collect(Collectors.joining(":"));
     }
 
+    @Override
+    public String executeSingleCommand(String command) {
+        return execute(command);
+    }
+
     private String execute(String command) {
         System.out.println(command);
         try {
