@@ -27,7 +27,7 @@ public class CodeEvaluationController {
 
         TestCase t = new TestCase();
         t.setExpected("12");
-        t.setFunctionToTest("int;suma;int;int:Sumador");
+        t.setFunctionToTest("int;sumar;int;int:Sumador");
         List<Argument> args = new ArrayList<>();
 
         Argument a1 = new Argument();
@@ -40,7 +40,7 @@ public class CodeEvaluationController {
 
         t.setArguments(args);
 
-        javaExecutioner.execute("/home/leandro/javatest", t);
+        javaExecutioner.execute("/scope/javatest", t);
 
 
 

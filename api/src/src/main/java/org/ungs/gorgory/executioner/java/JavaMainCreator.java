@@ -14,7 +14,7 @@ public class JavaMainCreator implements MainCreator {
 
 
     @Override
-    public File createMain(String nameOfTestCase, JavaFileToTest toTest, Collection<Argument> arguments){
+    public File createMain(String parentPath, String nameOfTestCase, JavaFileToTest toTest, Collection<Argument> arguments){
         String mainInString = toTest.getImportStatment();
 
         mainInString += "public class " + nameOfTestCase + "{ public static void main(String[] args){";
@@ -28,11 +28,12 @@ public class JavaMainCreator implements MainCreator {
 
         mainInString += "}}";
 
-        File main = new File(toTest.getToTest().getParent() + File.separator + nameOfTestCase + ".java");
-
+        File main = new File(parentPath + File.separator + nameOfTestCase + ".java");
 
         try {
             main.delete();
+        }catch (Exception ignored){}
+        try {
             main.createNewFile();
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(main.getAbsolutePath(), true));
             bufferedWriter.write(mainInString);

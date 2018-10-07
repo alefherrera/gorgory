@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface CommandFactoryService {
 
-    List<String> getCommands(String lang, List<String> paths, String mainPath);
+    //Habria que separarlos a los comandos >:|
+    List<String> getCommands(String lang, List<String> files, String mainPath);
 
 }

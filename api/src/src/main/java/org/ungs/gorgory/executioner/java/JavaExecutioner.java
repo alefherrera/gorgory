@@ -32,18 +32,20 @@ public class JavaExecutioner {
     //Funcion que testea cosas sin main
     public void execute(String path, TestCase testCase){
 
+        String pwd = System.getProperty("user.dir");
+
         //Dame la lista de todos los .java
-        List<File> javaFiles = javaFileFetcher.getAllFilesWithExtension(path, ".java");
+        List<File> javaFiles = javaFileFetcher.getAllFilesWithExtension(pwd + path, ".java");
         JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getFunctionToTest());
 
         //Crearme el main
-        File main = javaMainCreator.createMain("main" + testCase.getId(), javaFileToTest, testCase.getArguments());
+        File main = javaMainCreator.createMain(pwd + path, "Main" + testCase.getId(), javaFileToTest, testCase.getArguments());
 
         javaFiles.add(main);
 
         List<String> pathsStr = javaFiles.stream().map(x -> x.getAbsolutePath()).collect(Collectors.toList());
 
-        List<String> commands = commandFactoryService.getCommands("java", pathsStr, main.getAbsolutePath());
+        List<String> commands = commandFactoryService.getCommands("java", pathsStr, main.getAbsolutePath().replace(".java", ""));
         String compileCommand = commands.get(0);
         String rumCommand = commands.get(1);
 

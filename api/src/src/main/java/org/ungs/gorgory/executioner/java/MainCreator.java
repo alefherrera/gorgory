@@ -6,5 +6,5 @@ import java.io.File;
 import java.util.Collection;
 
 public interface MainCreator {
-    File createMain(String nameOfTestCase, JavaFileToTest toTest, Collection<Argument> arguments);
+    File createMain(String parentPath, String nameOfTestCase, JavaFileToTest toTest, Collection<Argument> arguments);
 }

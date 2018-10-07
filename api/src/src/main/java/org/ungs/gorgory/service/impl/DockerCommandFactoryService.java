@@ -24,16 +24,18 @@ public class DockerCommandFactoryService implements CommandFactoryService {
     }
 
     private List<String> buildJavaCommand(List<String> path, String mainPath) {
+        String pwd = System.getProperty("user.dir");
+
         File filePath = new File(path.get(0));
-        String folder = filePath.getParent();
+        String folder = filePath.getParent().substring(pwd.length() + 1);
         String dockerCommand = getDockerCommand(folder);
 
-
+        String dockerPwd = filePath.getParent();
         String compile = dockerCommand + " openjdk:8-alpine javac ";
         for (String javaFile : path){
-            compile += javaFile + " ";
+            compile += javaFile.substring(dockerPwd.length() + 1) + " ";
         }
-        String run = dockerCommand + " openjdk:8-alpine java " + mainPath;
+        String run = dockerCommand + " openjdk:8-alpine java " + mainPath.substring(dockerPwd.length() + 1) ;
         return Arrays.asList(compile, run);
     }
 
