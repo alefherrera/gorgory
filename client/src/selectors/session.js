@@ -1,9 +1,7 @@
 import { createSelector } from 'reselect';
 import isAuthorized from '../util/isAuthorized';
 
-const baseSelector = createSelector(state => state.session, session => session);
-
-export const accessTokenSelector = createSelector(baseSelector, session => session.accessToken);
+export const baseSelector = createSelector(state => state.session, session => session);
 
 export const isAuthenticatedSelector = createSelector(
   baseSelector,

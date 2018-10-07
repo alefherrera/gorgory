@@ -1,12 +1,15 @@
 import fetch from 'isomorphic-fetch';
+import { push } from 'react-router-redux';
 import toFormData from './toFormData';
+import { baseSelector } from '../../selectors/session';
+import { locationSelector } from '../../selectors/router';
+import { apiLoading, apiSuccess, apiFail } from '../../actions/loading';
+import { logout } from '../../actions/login';
 
 // eslint-disable-next-line
 const HOST = process.env.NODE_ENV === 'production' ? location.hostname : 'localhost';
 const PORT = process.env.NODE_ENV === 'production' ? 80 : 8080;
 const API_ENDPOINT = `http://${HOST}:${PORT}/api`;
-
-const accessToken = 'token';
 
 const getBody = (res) => {
   const contentType = res.headers.get('content-type');
@@ -17,41 +20,51 @@ const getBody = (res) => {
   return res.text();
 };
 
-const fetchInternal = (headers, transformer, method, endpoint) => args => fetch(`${API_ENDPOINT}/${endpoint}`, {
-  method,
-  headers,
-  body: transformer(args),
-})
-  .then((res) => {
-    if (!res.ok) {
-      if (res.status === 401) {
-        // dispatch(logout());
-        // dispatch(push('/login', locationSelector(getState())));
-        // eslint-disable-next-line
-          return Promise.reject({ title: 'ERROR.PERMISSION_DENIED' });
-      }
-      // if (res.bodyUsed) {
-      // eslint-disable-next-line
-        //   return res.text().then(x => Promise.reject({ title: x }));
-      // }
-      // eslint-disable-next-line
-        // return Promise.reject({ title: res.statusText });
-    }
-    return getBody(res);
+const fetchInternal = (headers, transformer, method, endpoint, dispatch, state) => (args) => {
+  dispatch(apiLoading());
+  return fetch(`${API_ENDPOINT}/${endpoint}`, {
+    method,
+    headers,
+    body: transformer(args),
   })
-  .then(
-    json => json,
-    error => Promise.reject(error),
-  );
+    .then((res) => {
+      if (!res.ok) {
+        if (res.status === 401) {
+          dispatch(logout());
+          dispatch(push('/login', locationSelector(state)));
+          // eslint-disable-next-line
+          return Promise.reject({ title: 'ERROR.PERMISSION_DENIED' });
+        }
+        // if (res.bodyUsed) {
+        // eslint-disable-next-line
+        return res.text().then(x => Promise.reject({ title: x }));
+        // }
+        // eslint-disable-next-line
+        // return Promise.reject({ title: res.statusText });
+      }
+      return getBody(res);
+    })
+    .then(
+      (json) => {
+        dispatch(apiSuccess());
+        return json;
+      },
+      (error) => {
+        dispatch(apiFail(error.title || 'ERROR.API_CONNECTION'));
+        return Promise.reject(error);
+      },
+    );
+};
 
 const getJsonHeader = () => ({
   Accept: 'application/json',
   'Content-Type': 'application/json',
 });
 
-const getBearerHeader = () => ({
-  Authorization: `Bearer ${accessToken}`,
-});
+const getBearerHeader = (state) => {
+  const { tokenType, accessToken } = baseSelector(state);
+  return { Authorization: `${tokenType} ${accessToken}` };
+};
 
 const mergeHeaders = (headers, state) => headers.reduce(
   (p, c) => ({
