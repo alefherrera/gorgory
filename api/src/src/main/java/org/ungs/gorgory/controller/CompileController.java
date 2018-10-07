@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RestController
+@RequestMapping("/api")
 public class CompileController {
 
     private final CommandRunnerService commandRunnerService;
