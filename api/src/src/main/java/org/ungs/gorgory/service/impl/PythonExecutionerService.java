@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.ungs.gorgory.Language;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
+import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
 import org.ungs.gorgory.model.Argument;
 import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.model.Result;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 public class PythonExecutionerService implements ExecutionerService {
 
+    private static final String MAIN_FILENAME_DEFINITION = "main.py";
     private final CommandFactoryService commandFactoryService;
     private final CommandRunnerService commandRunnerService;
 
@@ -34,11 +36,12 @@ public class PythonExecutionerService implements ExecutionerService {
     }
 
     @Override
-    public Result runTestCaseOnResolution(Resolution resolution, TestCase testCase) throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException {
+    public Result runTestCaseOnResolution(Resolution resolution, TestCase testCase) throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
         Collection<String> codeFilesPath = obtainCodeFiles(resolution.getPath());
         Path inputFile = createInputFileFromArguments(resolution.getPath(), testCase.getArguments());
         Collection<String> commands = buildExecutionCommand(Language.PYTHON, codeFilesPath, inputFile);
         String result = commandRunnerService.execute(commands);
+        eraseInputFile(inputFile);
 
         Result resolutionResult = new Result();
         resolutionResult.setResolution(resolution);
@@ -48,13 +51,28 @@ public class PythonExecutionerService implements ExecutionerService {
         return resolutionResult;
     }
 
-    private Collection<String> obtainCodeFiles(String resolutionPath) throws NoCodeFilesToCompileException {
-        File dir = new File(resolutionPath);
-        final File[] fileList = dir.listFiles((d, name) -> name.endsWith(".py"));
-        if (fileList != null)
-            return Arrays.stream(fileList).map(File::toString).collect(Collectors.toList());
+    private void eraseInputFile(Path inputFile) {
+        if (inputFile != null) {
+            inputFile.toFile().delete();
+        }
+    }
 
-        throw new NoCodeFilesToCompileException();
+    private Collection<String> obtainCodeFiles(String resolutionPath) throws NoCodeFilesToCompileException, NoMainCodeFilePresentException {
+        File dir = new File(resolutionPath);
+        final File[] filesArray = dir.listFiles((d, name) -> name.endsWith(".py"));
+        if (filesArray == null || filesArray.length <= 0)
+            throw new NoCodeFilesToCompileException();
+
+        List<File> files = new ArrayList<>(Arrays.asList(filesArray));
+        Optional<File> mainFile = files.stream().filter(file -> file.getName().toLowerCase().equals(MAIN_FILENAME_DEFINITION)).findFirst();
+
+        if (!mainFile.isPresent())
+            throw new NoMainCodeFilePresentException();
+
+        files.remove(mainFile.get());
+        files.add(0, mainFile.get());
+
+        return files.stream().map(File::toString).collect(Collectors.toList());
     }
 
     private Collection<String> buildExecutionCommand(Language lang, Collection<String> codeFilesPath, Path inputFilePath) {
@@ -63,6 +81,10 @@ public class PythonExecutionerService implements ExecutionerService {
             filesString.append(codeFilePath).append(" ");
 
         Collection<String> commands = commandFactoryService.getCommands(lang, filesString.toString());
+
+        if (inputFilePath == null)
+            return commands;
+
         List<String> commandList = new ArrayList<>(commands);
         String command = String.format("%s %s %s", commandList.get(0), " < ", inputFilePath.toString());
         commandList.set(0, command);
@@ -70,6 +92,9 @@ public class PythonExecutionerService implements ExecutionerService {
     }
 
     private Path createInputFileFromArguments(String resolutionDir, Collection<Argument> arguments) throws FileNotFoundException, UnsupportedEncodingException {
+        if (arguments.isEmpty())
+            return null;
+
         Path filePath = Paths.get(resolutionDir, UUID.randomUUID().toString() + ".txt");
         PrintWriter writer = new PrintWriter(filePath.toFile(), "UTF-8");
 
