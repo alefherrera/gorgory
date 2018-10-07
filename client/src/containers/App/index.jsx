@@ -8,7 +8,7 @@ import { store, persistor } from '../../store';
 import history from '../../history';
 import AppHeader from '../AppHeader';
 import Body from '../Body';
-// import CodeEditor from '../CodeEditor';
+import CodeEditor from '../CodeEditor';
 import Login from '../Login';
 
 const theme = createMuiTheme({
@@ -36,7 +36,12 @@ const App = () => (
         <ConnectedRouter history={history}>
           <AppHeader>
             <Body>
-              <Route path="/login" component={Login} />
+              {/* <Route path="/" exact component={CodeEditor} />
+              <Route path="/login" component={Login} /> */}
+              <div style={{ display: 'flex' }}>
+                <Login />
+                <CodeEditor />
+              </div>
             </Body>
           </AppHeader>
         </ConnectedRouter>

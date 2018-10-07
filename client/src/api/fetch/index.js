@@ -4,7 +4,7 @@ import toFormData from './toFormData';
 import { baseSelector } from '../../selectors/session';
 import { locationSelector } from '../../selectors/router';
 import { apiLoading, apiSuccess, apiFail } from '../../actions/loading';
-import { logout } from '../../actions/login';
+import { logout } from '../../actions/logout';
 
 // eslint-disable-next-line
 const HOST = process.env.NODE_ENV === 'production' ? location.hostname : 'localhost';
@@ -22,11 +22,12 @@ const getBody = (res) => {
 
 const fetchInternal = (headers, transformer, method, endpoint, dispatch, state) => (args) => {
   dispatch(apiLoading());
-  return fetch(`${API_ENDPOINT}/${endpoint}`, {
+  const request = {
     method,
     headers,
     body: transformer(args),
-  })
+  };
+  return fetch(`${API_ENDPOINT}/${endpoint}`, request)
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
@@ -86,7 +87,7 @@ const executeRest = execute(getJsonHeader, getBearerHeader)(jsonTransformer);
 const executeLogin = execute(getJsonHeader)(jsonTransformer);
 const executeUpload = execute(getBearerHeader)(toFormData);
 
-export default {
+const apiClient = {
   get: executeRest('GET'),
   put: executeRest('PUT'),
   post: executeRest('POST'),
@@ -94,3 +95,5 @@ export default {
   login: executeLogin('POST'),
   file: executeUpload('POST'),
 };
+
+export default apiClient;
