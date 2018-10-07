@@ -1,5 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.ungs.gorgory.Language;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
 import org.ungs.gorgory.model.Argument;
@@ -22,12 +24,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class PythonExecutioner implements Executioner {
 
     private final CommandFactoryService commandFactoryService;
     private final CommandRunnerService commandRunnerService;
 
-    public PythonExecutioner(CommandFactoryService commandFactoryService, CommandRunnerService commandRunnerService) {
+    public PythonExecutioner(@Qualifier("local") CommandFactoryService commandFactoryService, CommandRunnerService commandRunnerService) {
         this.commandFactoryService = commandFactoryService;
         this.commandRunnerService = commandRunnerService;
     }
@@ -37,8 +40,7 @@ public class PythonExecutioner implements Executioner {
         Collection<String> codeFilesPath = obtainCodeFiles(resolution.getPath());
         Path inputFile = createInputFileFromArguments(testCase.getArguments());
         Collection<String> commands = buildExecutionCommand(Language.PYTHON, codeFilesPath, inputFile);
-
-
+        commandRunnerService.execute(commands);
         return null;
     }
 
