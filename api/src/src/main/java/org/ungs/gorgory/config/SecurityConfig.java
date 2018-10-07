@@ -2,7 +2,6 @@ package org.ungs.gorgory.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 import org.ungs.gorgory.security.CustomUserDetailsService;
 import org.ungs.gorgory.security.JwtAuthenticationEntryPoint;
 import org.ungs.gorgory.security.JwtAuthenticationFilter;
@@ -56,11 +56,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    CorsFilter corsFilter() {
+        CorsFilter filter = new CorsFilter();
+        return filter;
+    }
+
+    boolean enableCors() {
+        return true;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
-                .cors()
-                .and()
                 .csrf()
                 .disable()
                 .exceptionHandling()
@@ -85,6 +94,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated();
 
+        if (enableCors()) {
+            http.addFilterBefore(corsFilter(), SessionManagementFilter.class); //adds your custom CorsFilter
+        } else {
+            http.cors().disable();
+        }
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
