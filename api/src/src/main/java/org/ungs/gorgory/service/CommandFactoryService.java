@@ -1,9 +1,10 @@
 package org.ungs.gorgory.service;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface CommandFactoryService {
 
-    Collection<String> getCommands(String lang, String path);
+    List<String> getCommands(String lang, List<String> paths, String mainPath);
 
 }
