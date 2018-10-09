@@ -3,12 +3,14 @@ package org.ungs.gorgory.service.impl;
 import org.springframework.stereotype.Service;
 import org.ungs.gorgory.service.CompressionService;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 @Service
