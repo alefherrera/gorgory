@@ -7,6 +7,8 @@ import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,9 +45,10 @@ public class JavaExecutioner {
 
         javaFiles.add(main);
 
-        List<String> pathsStr = javaFiles.stream().map(x -> x.getAbsolutePath()).collect(Collectors.toList());
+        List<String> pathsStr = javaFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList());
 
-        List<String> commands = commandFactoryService.getCommands("java", pathsStr, main.getAbsolutePath().replace(".java", ""));
+//        List<String> commands = commandFactoryService.getCommands("java", pathsStr, main.getAbsolutePath().replace(".java", ""));
+        List<String> commands = Collections.emptyList();
         String compileCommand = commands.get(0);
         String rumCommand = commands.get(1);
 

@@ -29,9 +29,6 @@ public class CompileController {
 
     @PostMapping("/compile")
     public CompileResponse compile(@RequestBody CompilePayload payload) {
-        /*ScopePath path = scopeCreatorService.getPath(payload.getLang(), payload.getCode());
-        Collection<String> commands = commandFactoryService.getCommands(payload.getLang(), path.getPath());
-        String output = commandRunnerService.execute(commands);*/
         return null;
     }
 
