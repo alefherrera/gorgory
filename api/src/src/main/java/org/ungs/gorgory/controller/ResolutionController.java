@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.ungs.gorgory.service.CompressionService;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

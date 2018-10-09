@@ -8,7 +8,8 @@ import { store, persistor } from '../../store';
 import history from '../../history';
 import AppHeader from '../AppHeader';
 import Body from '../Body';
-import CodeEditor from '../CodeEditor';
+// import CodeEditor from '../CodeEditor';
+import CodeEditor from '../CodeUploader';
 import Login from '../Login';
 
 const theme = createMuiTheme({
