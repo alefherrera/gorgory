@@ -11,9 +11,13 @@ public class Argument {
     private Long id;
 
     private String value;
-
     @ManyToOne
     private TestCase testCase;
+
+    @Override
+    public String toString() {
+        return value;
+    }
 
     public Long getId() {
         return id;

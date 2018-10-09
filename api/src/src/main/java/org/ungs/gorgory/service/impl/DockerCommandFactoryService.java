@@ -1,6 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.ungs.gorgory.Language;
 import org.ungs.gorgory.service.CommandFactoryService;
 
 import java.io.File;
@@ -10,15 +11,15 @@ import java.util.function.Function;
 @Service("docker")
 public class DockerCommandFactoryService implements CommandFactoryService {
 
-    private final Map<String, Function<String, Collection<String>>> commandMap;
+    private final Map<Language, Function<String, Collection<String>>> commandMap;
 
     public DockerCommandFactoryService() {
         commandMap = new HashMap<>();
-        commandMap.put("java", this::buildJavaCommand);
-        commandMap.put("python", this::buildPythonCommand);
+        commandMap.put(Language.JAVA, this::buildJavaCommand);
+        commandMap.put(Language.PYTHON, this::buildPythonCommand);
     }
 
-    public Collection<String> getCommands(String lang, String path) {
+    public Collection<String> getCommands(Language lang, String path) {
         return commandMap.get(lang).apply(path);
     }
 

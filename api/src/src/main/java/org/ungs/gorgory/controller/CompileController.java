@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.ungs.gorgory.Language;
 import org.ungs.gorgory.bean.CompilePayload;
 import org.ungs.gorgory.bean.CompileResponse;
 import org.ungs.gorgory.service.CommandFactoryService;
@@ -34,7 +35,7 @@ public class CompileController {
     @PostMapping("/compile")
     public CompileResponse compile(@RequestBody CompilePayload payload) {
         String path = scopeCreatorService.getPath(payload.getLang(), payload.getCode());
-        Collection<String> commands = commandFactoryService.getCommands(payload.getLang(), path);
+        Collection<String> commands = commandFactoryService.getCommands(Language.valueOf(payload.getLang().toUpperCase()), path);
         String output = commandRunnerService.execute(commands);
         return new CompileResponse(output);
     }
