@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.ungs.gorgory.service.CompressionService;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,18 +21,24 @@ import java.nio.file.StandardCopyOption;
 public class ResolutionController {
 
     private final ScopeCreatorService scopeCreatorService;
+    private final CompressionService compressionService;
 
     @Autowired
-    public ResolutionController(ScopeCreatorService scopeCreatorService, HttpServletRequest request) {
+    public ResolutionController(ScopeCreatorService scopeCreatorService, CompressionService compressionService) {
         this.scopeCreatorService = scopeCreatorService;
+        this.compressionService = compressionService;
     }
 
     @PostMapping("/upload")
     public void upload(@RequestParam("file") MultipartFile file) throws IOException {
         String pathname = scopeCreatorService.createScope(file.getOriginalFilename());
+        File newFile = new File(pathname);
         try (InputStream inputStream = file.getInputStream()) {
-            Files.copy(inputStream, new File(pathname).toPath(),
+            Files.copy(inputStream, newFile.toPath(),
                     StandardCopyOption.REPLACE_EXISTING);
+        }
+        if (newFile.getName().endsWith(".zip")) {
+            compressionService.unzip(newFile.getPath(), newFile.getParent());
         }
     }
 
