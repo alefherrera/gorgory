@@ -4,32 +4,52 @@ import org.springframework.stereotype.Service;
 import org.ungs.gorgory.service.CompressionService;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 @Service
 public class CompressionServiceImpl implements CompressionService {
+
+    @Override
     public void unzip(String source, String destination) {
-        try {
-            ZipInputStream zis = new ZipInputStream(new FileInputStream(source));
-            byte[] buffer = new byte[1024];
-            ZipEntry zipEntry = zis.getNextEntry();
-            while (zipEntry != null) {
-                String fileName = zipEntry.getName();
-                File newFile = new File(destination + File.separator + fileName);
-                FileOutputStream fos = new FileOutputStream(newFile);
-                int len;
-                while ((len = zis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
-                }
-                fos.close();
-                zipEntry = zis.getNextEntry();
+        if (!(Files.exists(Paths.get(destination)))) {
+            try {
+                Files.createDirectories(Paths.get(destination));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            zis.closeEntry();
-            zis.close();
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(source))) {
+            ZipEntry entry = zipInputStream.getNextEntry();
+            while (entry != null) {
+                Path filePath = Paths.get(destination, entry.getName());
+                if (!entry.isDirectory()) {
+                    unzipFiles(zipInputStream, filePath);
+                } else {
+                    Files.createDirectories(filePath);
+                }
+
+                zipInputStream.closeEntry();
+                entry = zipInputStream.getNextEntry();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private void unzipFiles(final ZipInputStream zipInputStream, final Path unzipFilePath) throws IOException {
+
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(unzipFilePath.toAbsolutePath().toString()))) {
+            byte[] bytesIn = new byte[1024];
+            int read;
+            while ((read = zipInputStream.read(bytesIn)) != -1) {
+                bos.write(bytesIn, 0, read);
+            }
+        }
+
     }
 }
