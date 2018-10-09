@@ -19,14 +19,11 @@ import java.nio.file.StandardCopyOption;
 @RequestMapping("/api/resolution")
 public class ResolutionController {
 
-    private final HttpServletRequest request;
-
     private final ScopeCreatorService scopeCreatorService;
 
     @Autowired
     public ResolutionController(ScopeCreatorService scopeCreatorService, HttpServletRequest request) {
         this.scopeCreatorService = scopeCreatorService;
-        this.request = request;
     }
 
     @PostMapping("/upload")
