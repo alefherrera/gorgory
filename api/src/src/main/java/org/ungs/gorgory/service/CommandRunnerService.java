@@ -5,5 +5,6 @@ import java.util.Collection;
 public interface CommandRunnerService {
 
     String execute(Collection<String> command);
+    String executeSingleCommand(String command);
 
 }

@@ -1,11 +1,10 @@
 package org.ungs.gorgory.service;
 
 import org.ungs.gorgory.Language;
-
-import java.util.Collection;
+import java.util.List;
 
 public interface CommandFactoryService {
 
-    Collection<String> getCommands(Language lang, String path);
+    List<String> getCommands(Language lang, String path);
 
 }

@@ -11,7 +11,7 @@ import java.util.function.Function;
 @Service("docker")
 public class DockerCommandFactoryService implements CommandFactoryService {
 
-    private final Map<Language, Function<String, Collection<String>>> commandMap;
+    private final Map<Language, Function<String, List<String>>> commandMap;
 
     public DockerCommandFactoryService() {
         commandMap = new HashMap<>();
@@ -19,11 +19,11 @@ public class DockerCommandFactoryService implements CommandFactoryService {
         commandMap.put(Language.PYTHON, this::buildPythonCommand);
     }
 
-    public Collection<String> getCommands(Language lang, String path) {
+    public List<String> getCommands(Language lang, String path) {
         return commandMap.get(lang).apply(path);
     }
 
-    private Collection<String> buildJavaCommand(String path) {
+    private List<String> buildJavaCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
         String dockerCommand = getDockerCommand(folder);
@@ -32,7 +32,7 @@ public class DockerCommandFactoryService implements CommandFactoryService {
         return Arrays.asList(compile, run);
     }
 
-    private Collection<String> buildPythonCommand(String path) {
+    private List<String> buildPythonCommand(String path) {
         File filePath = new File(path);
         String folder = filePath.getParent();
         String run = getDockerCommand(folder) + " python:2-alpine python script.py";
