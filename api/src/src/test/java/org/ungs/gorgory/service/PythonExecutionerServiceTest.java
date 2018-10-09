@@ -33,7 +33,6 @@ public class PythonExecutionerServiceTest {
 
     @Test
     public void runTestCaseOnResolution_BasicPythonProgram() throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
-
         CommandFactoryService commandFactoryService = new LocalCommandFactoryService();
         CommandRunnerService commandRunnerService = new CommandRunnerServiceImpl();
 
@@ -55,7 +54,6 @@ public class PythonExecutionerServiceTest {
 
     @Test(expected = NoCodeFilesToCompileException.class)
     public void runTestCaseOnResolution_NoCodeFiles() throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
-
         CommandFactoryService commandFactoryService = new LocalCommandFactoryService();
         CommandRunnerService commandRunnerService = new CommandRunnerServiceImpl();
 
@@ -74,7 +72,6 @@ public class PythonExecutionerServiceTest {
 
     @Test()
     public void runTestCaseOnResolution_MultipleCodeFiles() throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
-
         CommandFactoryService commandFactoryService = new LocalCommandFactoryService();
         CommandRunnerService commandRunnerService = new CommandRunnerServiceImpl();
 
@@ -96,7 +93,6 @@ public class PythonExecutionerServiceTest {
 
     @Test()
     public void runTestCaseOnResolution_CodeFilesWithInput() throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
-
         CommandFactoryService commandFactoryService = new LocalCommandFactoryService();
         CommandRunnerService commandRunnerService = new CommandRunnerServiceImpl();
 
