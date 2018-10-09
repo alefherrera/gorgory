@@ -1,7 +1,6 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.bean.ScopePath;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
 import java.io.BufferedWriter;
@@ -15,6 +14,7 @@ import java.util.UUID;
 @Service
 public class ScopeCreatorServiceImpl implements ScopeCreatorService {
 
+    private static final String SCOPE_BASE = "scope";
     private final Map<String, String> fileNameMap;
 
     public ScopeCreatorServiceImpl() {
@@ -23,14 +23,20 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
         fileNameMap.put("python", "script.py");
     }
 
-    public ScopePath getPath(String lang, String code) {
+    public String createScope(String filename) {
+        String newScope = getNewScope();
+        String dirPath = SCOPE_BASE + File.separator + newScope + File.separator + filename;
+        createScopeFolder(dirPath);
+        return dirPath;
+    }
+
+    public String getPath(String lang, String code) {
 
         String fileName = fileNameMap.get(lang);
-        String uuid = UUID.randomUUID().toString();
-        String fullPath = "scope/" + uuid + "/" + fileName;
+        String uuid = getNewScope();
+        String fullPath = SCOPE_BASE +  File.separator + uuid +  File.separator + fileName;
 
-        File file = new File(fullPath);
-        file.getParentFile().mkdirs();
+        File file = createScopeFolder(fullPath);
 
         try {
             file.createNewFile();
@@ -41,6 +47,16 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
             throw new RuntimeException(e);
         }
 
-        return new ScopePath(uuid, fullPath);
+        return fullPath;
+    }
+
+    private File createScopeFolder(String fullPath) {
+        File file = new File(fullPath);
+        file.getParentFile().mkdirs();
+        return file;
+    }
+
+    private String getNewScope() {
+        return UUID.randomUUID().toString();
     }
 }
