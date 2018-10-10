@@ -1,4 +1,4 @@
 package org.ungs.gorgory.exceptions;
 
-public class NoMainCodeFilePresentException extends Throwable {
+public class NoMainCodeFilePresentException extends Exception {
 }

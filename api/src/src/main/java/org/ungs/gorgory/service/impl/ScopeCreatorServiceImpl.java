@@ -1,6 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.ungs.gorgory.Language;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
 import java.io.BufferedWriter;
@@ -15,12 +16,12 @@ import java.util.UUID;
 public class ScopeCreatorServiceImpl implements ScopeCreatorService {
 
     private static final String SCOPE_BASE = "scope";
-    private final Map<String, String> fileNameMap;
+    private final Map<Language, String> fileNameMap;
 
     public ScopeCreatorServiceImpl() {
         this.fileNameMap = new HashMap<>();
-        fileNameMap.put("java", "Script.java");
-        fileNameMap.put("python", "script.py");
+        fileNameMap.put(Language.JAVA, "Script.java");
+        fileNameMap.put(Language.PYTHON, "script.py");
     }
 
     public String createScope(String filename) {
@@ -30,7 +31,7 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
         return dirPath;
     }
 
-    public String getPath(String lang, String code) {
+    public String getPath(Language lang, String code) {
 
         String fileName = fileNameMap.get(lang);
         String uuid = getNewScope();

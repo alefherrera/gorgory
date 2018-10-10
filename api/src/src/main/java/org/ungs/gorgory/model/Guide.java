@@ -1,5 +1,7 @@
 package org.ungs.gorgory.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -14,6 +16,7 @@ public class Guide extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "guide")
+    @JsonBackReference
     private Collection<Exercise> exercises;
 
     public Long getId() {

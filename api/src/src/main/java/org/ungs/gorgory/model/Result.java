@@ -1,22 +1,34 @@
 package org.ungs.gorgory.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Result implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+
     @ManyToOne
+    @JsonBackReference
     private Resolution resolution;
 
-    @Id
     @ManyToOne
+    @JsonManagedReference
     private TestCase testCase;
 
     private Boolean passed;
+
+    private String output;
+
+    public Long getId() {
+        return id;
+    }
 
     public Resolution getResolution() {
         return resolution;
@@ -40,5 +52,13 @@ public class Result implements Serializable {
 
     public void setPassed(Boolean passed) {
         this.passed = passed;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
     }
 }

@@ -1,19 +1,31 @@
 package org.ungs.gorgory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.ungs.gorgory.Language;
+import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
+import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
+import org.ungs.gorgory.executioner.java.JavaExecutioner;
+import org.ungs.gorgory.model.Exercise;
+import org.ungs.gorgory.model.Resolution;
+import org.ungs.gorgory.model.Result;
+import org.ungs.gorgory.repository.ExerciseRepository;
+import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.service.CompressionService;
+import org.ungs.gorgory.service.ExecutionerService;
 import org.ungs.gorgory.service.ScopeCreatorService;
+import org.ungs.gorgory.service.impl.JavaExecutionerService;
+import org.ungs.gorgory.service.impl.PythonExecutionerService;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/resolution")
@@ -21,15 +33,30 @@ public class ResolutionController {
 
     private final ScopeCreatorService scopeCreatorService;
     private final CompressionService compressionService;
+    private ExerciseRepository exerciseRepository;
+    private JavaExecutionerService javaExecutionerService;
+    private PythonExecutionerService pythonExecutionerService;
+    private ResolutionRepository resolutionRepository;
 
     @Autowired
-    public ResolutionController(ScopeCreatorService scopeCreatorService, CompressionService compressionService) {
+    public ResolutionController(ScopeCreatorService scopeCreatorService, CompressionService compressionService,
+                                ExerciseRepository exerciseRepository, JavaExecutionerService javaExecutionerService,
+                                PythonExecutionerService pythonExecutionerService, ResolutionRepository resolutionRepository) {
         this.scopeCreatorService = scopeCreatorService;
         this.compressionService = compressionService;
+        this.exerciseRepository = exerciseRepository;
+        this.javaExecutionerService = javaExecutionerService;
+        this.pythonExecutionerService = pythonExecutionerService;
+        this.resolutionRepository = resolutionRepository;
     }
 
-    @PostMapping("/upload")
-    public void upload(@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping("/upload/{exerciseId}")
+    public ResponseEntity<Resolution> upload(@RequestParam("file") MultipartFile file, @PathVariable("exerciseId") Long exerciseId) throws IOException {
+        Optional<Exercise> optionalExercise = exerciseRepository.findById(exerciseId);
+        if (!optionalExercise.isPresent())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        Exercise selectedExercise = optionalExercise.get();
         String pathname = scopeCreatorService.createScope(file.getOriginalFilename());
         File newFile = new File(pathname);
         try (InputStream inputStream = file.getInputStream()) {
@@ -39,6 +66,49 @@ public class ResolutionController {
         if (newFile.getName().endsWith(".zip")) {
             compressionService.unzip(newFile.getPath(), newFile.getParent());
         }
+
+        Resolution newResolution = new Resolution();
+        newResolution.setExercise(selectedExercise);
+        newResolution.setPath(pathname);
+        newResolution.setStudent(null);
+        resolutionRepository.save(newResolution);
+
+        //TODO: pero mira este codigo repetido papá
+        if (selectedExercise.getLanguage().equals(Language.JAVA)) {
+            List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
+                try {
+                    return javaExecutionerService.runTestCaseOnResolution(newResolution, testCase);
+                } catch (Exception e) {
+                    Result result = new Result();
+                    result.setPassed(false);
+                    result.setOutput(e.toString());
+                    result.setResolution(newResolution);
+                    result.setTestCase(testCase);
+                    return result;
+                }
+            }).collect(Collectors.toList());
+
+            newResolution.setResults(results);
+        } else if (selectedExercise.getLanguage().equals(Language.PYTHON)) {
+            List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
+                try {
+                    return pythonExecutionerService.runTestCaseOnResolution(newResolution, testCase);
+                } catch (Exception e) {
+                    Result result = new Result();
+                    result.setPassed(false);
+                    result.setOutput(e.toString());
+                    result.setResolution(newResolution);
+                    result.setTestCase(testCase);
+                    return result;
+                }
+            }).collect(Collectors.toList());
+            newResolution.setResults(results);
+        }
+
+        resolutionRepository.save(newResolution);
+
+        //TODO: deberiamos devolver un DTO
+        return ResponseEntity.ok(newResolution);
     }
 
 }
