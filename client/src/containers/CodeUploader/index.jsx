@@ -10,7 +10,9 @@ import { uploadResolution } from '../../actions/resolution';
 
 class CodeUploader extends Component {
   handleSubmit = (values) => {
-    values.file = values.file[0];
+    const [file] = values.file;
+    // eslint-disable-next-line
+    values.file = file;
     this.props.uploadResolution(values);
   };
 

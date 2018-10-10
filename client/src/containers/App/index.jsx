@@ -37,12 +37,8 @@ const App = () => (
         <ConnectedRouter history={history}>
           <AppHeader>
             <Body>
-              {/* <Route path="/" exact component={CodeEditor} />
-              <Route path="/login" component={Login} /> */}
-              <div style={{ display: 'flex' }}>
-                <Login />
-                <CodeEditor />
-              </div>
+              <Route path="/editor" exact component={CodeEditor} />
+              <Route path="/login" component={Login} />
             </Body>
           </AppHeader>
         </ConnectedRouter>

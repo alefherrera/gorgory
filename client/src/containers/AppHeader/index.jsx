@@ -6,8 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import { mailFolderListItems, otherMailFolderListItems } from './data';
+import { menuItems } from './data';
 
 const drawerWidth = 240;
 
@@ -55,9 +54,7 @@ function ClippedDrawer(props) {
         }}
       >
         <div className={classes.toolbar} />
-        <List>{mailFolderListItems}</List>
-        <Divider />
-        <List>{otherMailFolderListItems}</List>
+        <List>{menuItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
@@ -69,6 +66,7 @@ function ClippedDrawer(props) {
 
 ClippedDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
+  children: PropTypes.any,
 };
 
 export default withStyles(styles)(ClippedDrawer);
