@@ -17,6 +17,7 @@ import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.service.CompressionService;
 import org.ungs.gorgory.service.ExecutionerService;
 import org.ungs.gorgory.service.ScopeCreatorService;
+import org.ungs.gorgory.service.impl.JavaExecutionerService;
 import org.ungs.gorgory.service.impl.PythonExecutionerService;
 
 import java.io.*;
@@ -33,18 +34,18 @@ public class ResolutionController {
     private final ScopeCreatorService scopeCreatorService;
     private final CompressionService compressionService;
     private ExerciseRepository exerciseRepository;
-    private JavaExecutioner javaExecutioner;
+    private JavaExecutionerService javaExecutionerService;
     private PythonExecutionerService pythonExecutionerService;
     private ResolutionRepository resolutionRepository;
 
     @Autowired
     public ResolutionController(ScopeCreatorService scopeCreatorService, CompressionService compressionService,
-                                ExerciseRepository exerciseRepository, JavaExecutioner javaExecutioner,
+                                ExerciseRepository exerciseRepository, JavaExecutionerService javaExecutionerService,
                                 PythonExecutionerService pythonExecutionerService, ResolutionRepository resolutionRepository) {
         this.scopeCreatorService = scopeCreatorService;
         this.compressionService = compressionService;
         this.exerciseRepository = exerciseRepository;
-        this.javaExecutioner = javaExecutioner;
+        this.javaExecutionerService = javaExecutionerService;
         this.pythonExecutionerService = pythonExecutionerService;
         this.resolutionRepository = resolutionRepository;
     }
@@ -72,12 +73,22 @@ public class ResolutionController {
         newResolution.setStudent(null);
         resolutionRepository.save(newResolution);
 
+        //TODO: pero mira este codigo repetido papá
         if (selectedExercise.getLanguage().equals(Language.JAVA)) {
-            selectedExercise.getTestCases().stream().map(testCase -> {
-                javaExecutioner.execute(pathname, testCase);
-                //TODO: @leanfunes QUE MIERDA DEVOLVEMOS ACA?
-                return null;
-            });
+            List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
+                try {
+                    return javaExecutionerService.runTestCaseOnResolution(newResolution, testCase);
+                } catch (Exception e) {
+                    Result result = new Result();
+                    result.setPassed(false);
+                    result.setOutput(e.toString());
+                    result.setResolution(newResolution);
+                    result.setTestCase(testCase);
+                    return result;
+                }
+            }).collect(Collectors.toList());
+
+            newResolution.setResults(results);
         } else if (selectedExercise.getLanguage().equals(Language.PYTHON)) {
             List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
                 try {
@@ -93,8 +104,10 @@ public class ResolutionController {
             }).collect(Collectors.toList());
             newResolution.setResults(results);
         }
+
         resolutionRepository.save(newResolution);
 
+        //TODO: deberiamos devolver un DTO
         return ResponseEntity.ok(newResolution);
     }
 

@@ -1,5 +1,8 @@
 package org.ungs.gorgory.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -13,9 +16,11 @@ public class TestCase extends BaseEntity {
     private Long id;
 
     @ManyToOne
+    @JsonManagedReference
     private Exercise exercise;
 
     @OneToMany(mappedBy = "testCase")
+    @JsonManagedReference
     private List<Argument> arguments;
 
     private String expected;

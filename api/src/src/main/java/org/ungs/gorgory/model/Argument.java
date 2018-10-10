@@ -1,5 +1,8 @@
 package org.ungs.gorgory.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +15,7 @@ public class Argument {
 
     private String value;
     @ManyToOne
+    @JsonBackReference
     private TestCase testCase;
 
     @Override
