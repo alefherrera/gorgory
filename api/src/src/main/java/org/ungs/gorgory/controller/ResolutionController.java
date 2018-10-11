@@ -73,42 +73,32 @@ public class ResolutionController {
         newResolution.setStudent(null);
         resolutionRepository.save(newResolution);
 
-        //TODO: pero mira este codigo repetido papá
         if (selectedExercise.getLanguage().equals(Language.JAVA)) {
-            List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
-                try {
-                    return javaExecutionerService.runTestCaseOnResolution(newResolution, testCase);
-                } catch (Exception e) {
-                    Result result = new Result();
-                    result.setPassed(false);
-                    result.setOutput(e.toString());
-                    result.setResolution(newResolution);
-                    result.setTestCase(testCase);
-                    return result;
-                }
-            }).collect(Collectors.toList());
+            doResolution(javaExecutionerService,selectedExercise, newResolution);
 
-            newResolution.setResults(results);
         } else if (selectedExercise.getLanguage().equals(Language.PYTHON)) {
-            List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
-                try {
-                    return pythonExecutionerService.runTestCaseOnResolution(newResolution, testCase);
-                } catch (Exception e) {
-                    Result result = new Result();
-                    result.setPassed(false);
-                    result.setOutput(e.toString());
-                    result.setResolution(newResolution);
-                    result.setTestCase(testCase);
-                    return result;
-                }
-            }).collect(Collectors.toList());
-            newResolution.setResults(results);
+            doResolution(pythonExecutionerService,selectedExercise, newResolution);
         }
 
         resolutionRepository.save(newResolution);
 
-        //TODO: deberiamos devolver un DTO
         return ResponseEntity.ok(newResolution);
+    }
+
+    private void doResolution(ExecutionerService executionerService, Exercise selectedExercise, Resolution newResolution) {
+        List<Result> results = selectedExercise.getTestCases().stream().map(testCase -> {
+            try {
+                return executionerService.runTestCaseOnResolution(newResolution, testCase);
+            } catch (Exception e) {
+                Result result = new Result();
+                result.setPassed(false);
+                result.setOutput(e.toString());
+                result.setResolution(newResolution);
+                result.setTestCase(testCase);
+                return result;
+            }
+        }).collect(Collectors.toList());
+        newResolution.setResults(results);
     }
 
 }
