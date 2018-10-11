@@ -69,7 +69,7 @@ public class ResolutionController {
 
         Resolution newResolution = new Resolution();
         newResolution.setExercise(selectedExercise);
-        newResolution.setPath(pathname);
+        newResolution.setPath(newFile.getParent());
         newResolution.setStudent(null);
         resolutionRepository.save(newResolution);
 

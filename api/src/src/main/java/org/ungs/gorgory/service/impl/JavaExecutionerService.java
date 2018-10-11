@@ -35,9 +35,7 @@ public class JavaExecutionerService implements ExecutionerService {
 
         Result result = new Result();
 
-        File f = new File(resolution.getPath());
-
-        String output = javaExecutioner.execute(f.getParent(), testCase);
+        String output = javaExecutioner.execute(resolution.getPath(), testCase);
 
         boolean passed = testCase.getExpected().equals(output);
         result.setPassed(passed);
