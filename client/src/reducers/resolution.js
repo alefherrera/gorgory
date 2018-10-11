@@ -9,7 +9,7 @@ export default typeToReducer(
     [UPLOAD_RESOLUTION]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        payload,
+        ...payload,
       }),
     },
   },

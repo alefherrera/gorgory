@@ -1,6 +1,7 @@
 package org.ungs.gorgory.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,11 +16,10 @@ public class Result implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnoreProperties("result")
     private Resolution resolution;
 
     @ManyToOne
-    @JsonManagedReference
     private TestCase testCase;
 
     private Boolean passed;

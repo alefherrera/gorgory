@@ -1,5 +1,5 @@
 import fetch from '../fetch';
 
 export default {
-  upload: fetch.file('resolution/upload'),
+  upload: fetch.file('resolution/upload/1'),
 };

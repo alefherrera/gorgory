@@ -1,6 +1,7 @@
 package org.ungs.gorgory.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class Resolution extends BaseEntity {
     private String path;
 
     @OneToMany(mappedBy = "resolution", cascade=CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnoreProperties("resolution")
     private Collection<Result> results;
 
     public Long getId() {
