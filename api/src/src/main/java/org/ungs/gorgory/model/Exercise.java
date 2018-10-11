@@ -1,6 +1,6 @@
 package org.ungs.gorgory.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.ungs.gorgory.Language;
 
 import javax.persistence.*;
@@ -17,11 +17,11 @@ public class Exercise extends BaseEntity {
     private Language language;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnoreProperties("exercises")
     private Guide guide;
 
     @OneToMany(mappedBy = "exercise", cascade=CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnoreProperties("exercise")
     private Collection<TestCase> testCases;
 
     public Long getId() {
