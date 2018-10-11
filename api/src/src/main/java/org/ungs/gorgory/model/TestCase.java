@@ -19,7 +19,7 @@ public class TestCase extends BaseEntity {
     @JsonManagedReference
     private Exercise exercise;
 
-    @OneToMany(mappedBy = "testCase")
+    @OneToMany(mappedBy = "testCase", cascade=CascadeType.ALL)
     @JsonManagedReference
     private List<Argument> arguments;
 

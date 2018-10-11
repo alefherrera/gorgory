@@ -20,7 +20,7 @@ public class Exercise extends BaseEntity {
     @JsonBackReference
     private Guide guide;
 
-    @OneToMany(mappedBy = "exercise")
+    @OneToMany(mappedBy = "exercise", cascade=CascadeType.ALL)
     @JsonBackReference
     private Collection<TestCase> testCases;
 

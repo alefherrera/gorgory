@@ -15,7 +15,7 @@ public class Guide extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "guide")
+    @OneToMany(mappedBy = "guide", cascade=CascadeType.ALL)
     @JsonBackReference
     private Collection<Exercise> exercises;
 
