@@ -20,7 +20,7 @@ public class Exercise extends BaseEntity {
     @JsonIgnoreProperties("exercises")
     private Guide guide;
 
-    @OneToMany(mappedBy = "exercise", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("exercise")
     private Collection<TestCase> testCases;
 

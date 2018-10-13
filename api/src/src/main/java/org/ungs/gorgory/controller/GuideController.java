@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ungs.gorgory.bean.GuideDto;
+import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.model.Guide;
-import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.service.GuideService;
 
 @RestController
@@ -21,17 +20,15 @@ public class GuideController {
         this.guideService = guideService;
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Guide> newGuide(@RequestBody GuideDto newGuide){
+    @PostMapping
+    public ResponseEntity<Guide> newGuide(@RequestBody GuideDTO newGuide) {
 
         try {
             Guide guide = guideService.saveNewGuide(newGuide);
             return ResponseEntity.ok(guide);
-        }catch (IllegalArgumentException ex){
-
+        } catch (IllegalArgumentException ex) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
 
     }
 
