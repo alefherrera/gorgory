@@ -22,5 +22,11 @@ export const menuItems = (
       </ListItemIcon>
       <ListItemText primary="Resolucion" />
     </ListItem>
+    <ListItem button component={NavLink} to="/guide">
+      <ListItemIcon>
+        <CloudUploadIcon />
+      </ListItemIcon>
+      <ListItemText primary="Guia" />
+    </ListItem>
   </div>
 );

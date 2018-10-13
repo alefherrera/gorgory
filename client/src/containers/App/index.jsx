@@ -11,6 +11,7 @@ import Body from '../Body';
 // import CodeEditor from '../CodeEditor';
 import CodeEditor from '../CodeUploader';
 import Login from '../Login';
+import AddGuidePage from '../Guide/AddGuidePage';
 
 const theme = createMuiTheme({
   palette: {
@@ -39,6 +40,7 @@ const App = () => (
             <Body>
               <Route path="/editor" exact component={CodeEditor} />
               <Route path="/login" component={Login} />
+              <Route path="/guide" component={AddGuidePage} />
             </Body>
           </AppHeader>
         </ConnectedRouter>
