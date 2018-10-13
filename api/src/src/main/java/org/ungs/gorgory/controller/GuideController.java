@@ -1,35 +1,54 @@
 package org.ungs.gorgory.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.service.GuideService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/guide")
 public class GuideController {
 
+    private final ModelMapper modelmapper;
     private GuideService guideService;
 
-    public GuideController(GuideService guideService) {
+    public GuideController(ModelMapper modelmapper, GuideService guideService) {
+        this.modelmapper = modelmapper;
         this.guideService = guideService;
     }
 
     @PostMapping
-    public ResponseEntity<Guide> newGuide(@RequestBody GuideDTO newGuide) {
+    public GuideDTO create(@RequestBody GuideDTO guideDTO) {
+        Guide map = modelmapper.map(guideDTO, Guide.class);
+        Guide guide = guideService.save(map);
+        return getMap(guide);
+    }
 
-        try {
-            Guide guide = guideService.saveNewGuide(newGuide);
-            return ResponseEntity.ok(guide);
-        } catch (IllegalArgumentException ex) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("/{id}")
+    public GuideDTO update(@PathVariable Long id, @RequestBody GuideDTO guideDTO) {
+        Guide guide = guideService.get(id);
+        modelmapper.map(guideDTO, guide);
+        guideService.save(guide);
+        return getMap(guide);
+    }
 
+    @GetMapping
+    public List<GuideDTO> getAll() {
+        return guideService.getAll().stream().map(this::getMap).collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public GuideDTO getAll(@PathVariable Long id) {
+        Guide guide = guideService.get(id);
+        return getMap(guide);
+    }
+
+    private GuideDTO getMap(Guide guide) {
+        return modelmapper.map(guide, GuideDTO.class);
     }
 
 }

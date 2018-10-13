@@ -9,11 +9,22 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExerciseDTO {
 
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("language")
     private Language language;
 
     @JsonProperty("testCases")
     private List<TestCaseDTO> testCases;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Language getLanguage() {
         return language;

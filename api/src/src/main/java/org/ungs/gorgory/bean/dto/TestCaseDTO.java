@@ -8,20 +8,31 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TestCaseDTO {
 
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("arguments")
-    private List<String> arguments;
+    private List<ArgumentDTO> arguments;
 
     @JsonProperty("expected")
-    public String expected;
+    private String expected;
 
     @JsonProperty("signature")
-    public String signature;
+    private String signature;
 
-    public List<String> getArguments() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<ArgumentDTO> getArguments() {
         return arguments;
     }
 
-    public void setArguments(List<String> arguments) {
+    public void setArguments(List<ArgumentDTO> arguments) {
         this.arguments = arguments;
     }
 
