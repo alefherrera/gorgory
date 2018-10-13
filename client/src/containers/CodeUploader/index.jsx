@@ -12,7 +12,7 @@ class CodeUploader extends Component {
     const [file] = values.file;
     // eslint-disable-next-line
     values.file = file;
-    this.props.uploadResolution(values);
+    this.props.uploadResolution(values, { id: 1 });
   };
 
   render() {
