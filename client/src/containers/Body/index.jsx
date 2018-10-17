@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   padding: 20px;
   height: 80vh;
+  overflow-y: auto;
 `;
 
 const Body = ({ children }) => (

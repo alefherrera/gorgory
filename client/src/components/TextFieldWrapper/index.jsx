@@ -7,7 +7,7 @@ const TextFieldWrapper = ({
   input, label, meta: { touched, error }, ...custom
 }) => (
   <FieldContainer>
-    <TextField label={label} error={touched && error} {...input} {...custom} />
+    <TextField fullWidth label={label} error={touched && error} {...input} {...custom} />
   </FieldContainer>
 );
 

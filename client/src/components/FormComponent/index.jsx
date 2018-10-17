@@ -23,6 +23,10 @@ const ButtonRow = styled.div`
   justify-content: center;
 `;
 
+const Form = styled.form`
+  width: 100%;
+`;
+
 const FormComponent = ({
   title, buttonText, onSubmit, children,
 }) => (
@@ -31,14 +35,14 @@ const FormComponent = ({
       {title}
     </Typography>
     <Container>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <Row>{children}</Row>
         <ButtonRow>
           <Button type="submit" variant="raised" color="primary">
             {buttonText}
           </Button>
         </ButtonRow>
-      </form>
+      </Form>
     </Container>
   </div>
 );
