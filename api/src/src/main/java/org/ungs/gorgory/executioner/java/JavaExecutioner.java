@@ -39,7 +39,7 @@ public class JavaExecutioner {
 
         //Dame la lista de todos los .java
         List<File> javaFiles = javaFileFetcher.getAllFilesWithExtension(path, ".java");
-        JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getFunctionToTest());
+        JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getSignature());
 
         //Crearme el main
         File main = javaMainCreator.createMain(path, "Main" + testCase.getId(), javaFileToTest, testCase.getArguments());

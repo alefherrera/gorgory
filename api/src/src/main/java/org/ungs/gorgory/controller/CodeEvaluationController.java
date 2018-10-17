@@ -27,7 +27,7 @@ public class CodeEvaluationController {
 
         TestCase t = new TestCase();
         t.setExpected("12");
-        t.setFunctionToTest("int;sumar;int;int:Sumador");
+        t.setSignature("int;sumar;int;int:Sumador");
         List<Argument> args = new ArrayList<>();
 
         Argument a1 = new Argument();

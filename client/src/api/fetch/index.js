@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { push } from 'react-router-redux';
+import template from 'lodash/template';
 import toFormData from './toFormData';
 import { baseSelector } from '../../selectors/session';
 import { locationSelector } from '../../selectors/router';
@@ -20,14 +21,17 @@ const getBody = (res) => {
   return res.text();
 };
 
-const fetchInternal = (headers, transformer, method, endpoint, dispatch, state) => (args) => {
+const fetchInternal = (headers, transformer, method, endpoint, dispatch, state) => (
+  args,
+  templateArgs,
+) => {
   dispatch(apiLoading());
   const request = {
     method,
     headers,
     body: transformer(args),
   };
-  return fetch(`${API_ENDPOINT}/${endpoint}`, request)
+  return fetch(`${API_ENDPOINT}/${template(endpoint)(templateArgs)}`, request)
     .then((res) => {
       if (!res.ok) {
         if (res.status === 401) {
