@@ -17,7 +17,7 @@ public class TestCase extends BaseEntity {
     @JsonIgnoreProperties("testCases")
     private Exercise exercise;
 
-    @OneToMany(mappedBy = "testCase", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "testCase", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("testCase")
     private List<Argument> arguments;
 
@@ -42,6 +42,7 @@ public class TestCase extends BaseEntity {
     }
 
     public void setArguments(List<Argument> arguments) {
+        arguments.forEach(argument -> argument.setTestCase(this));
         this.arguments = arguments;
     }
 

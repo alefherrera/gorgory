@@ -2,6 +2,7 @@ package org.ungs.gorgory.bean.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.ungs.gorgory.Language;
 
 import java.util.Collection;
 
@@ -13,6 +14,9 @@ public class GuideDTO {
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("language")
+    private Language language;
 
     @JsonProperty("exercises")
     private Collection<ExerciseDTO> exercises;
@@ -31,6 +35,14 @@ public class GuideDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public Collection<ExerciseDTO> getExercises() {
