@@ -128,7 +128,7 @@ class AddGuidePage extends Component {
         buttonText="Crear"
         onSubmit={this.props.handleSubmit(this.handleSubmit)}
       >
-        <Field name="lang" label="Lenguaje" component={SelectWrapper}>
+        <Field name="language" label="Lenguaje" component={SelectWrapper}>
           <MenuItem value="JAVA">Java</MenuItem>
           <MenuItem value="PYTHON">Python</MenuItem>
         </Field>
