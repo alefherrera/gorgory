@@ -22,9 +22,8 @@ public class GuideController {
     }
 
     @PostMapping
-    public GuideDTO create(@RequestBody GuideDTO guideDTO) {
-        Guide map = modelmapper.map(guideDTO, Guide.class);
-        Guide guide = guideService.save(map);
+    public GuideDTO create(@RequestBody Guide dto) {
+        Guide guide = guideService.save(dto);
         return getMap(guide);
     }
 

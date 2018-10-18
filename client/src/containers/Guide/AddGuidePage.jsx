@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import FormComponent from '../../components/FormComponent';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
 import SelectWrapper from '../../components/SelectWrapper';
+import { addGuide } from '../../actions/guide';
 
 const Container = styled.div`
   display: flex;
@@ -116,13 +117,15 @@ const Exercise = ({ fields }) => (
 );
 
 class AddGuidePage extends Component {
-  handleSubmit = () => {};
+  handleSubmit = (values) => {
+    this.props.addGuide(values);
+  };
 
   render() {
     return (
       <FormComponent
         title="Guia"
-        buttonText="Guardar"
+        buttonText="Crear"
         onSubmit={this.props.handleSubmit(this.handleSubmit)}
       >
         <Field name="lang" label="Lenguaje" component={SelectWrapper}>
@@ -138,9 +141,10 @@ class AddGuidePage extends Component {
 
 AddGuidePage.propTypes = {
   handleSubmit: PropTypes.func,
+  addGuide: PropTypes.func,
 };
 
 export default connect(
   null,
-  null,
+  { addGuide },
 )(reduxForm({ form: 'addGuide' })(AddGuidePage));
