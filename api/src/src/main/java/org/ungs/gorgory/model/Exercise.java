@@ -20,7 +20,7 @@ public class Exercise extends BaseEntity {
     @JsonIgnoreProperties("exercises")
     private Guide guide;
 
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("exercise")
     private Collection<TestCase> testCases;
 
@@ -49,6 +49,7 @@ public class Exercise extends BaseEntity {
     }
 
     public void setTestCases(Collection<TestCase> testCases) {
+        testCases.forEach(testCase -> testCase.setExercise(this));
         this.testCases = testCases;
     }
 }

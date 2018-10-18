@@ -21,7 +21,7 @@ public class Resolution extends BaseEntity {
 
     private String path;
 
-    @OneToMany(mappedBy = "resolution", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "resolution", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("resolution")
     private Collection<Result> results;
 

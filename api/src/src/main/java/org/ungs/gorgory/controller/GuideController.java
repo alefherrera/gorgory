@@ -3,9 +3,13 @@ package org.ungs.gorgory.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.dto.GuideDTO;
+import org.ungs.gorgory.model.Argument;
+import org.ungs.gorgory.model.Exercise;
 import org.ungs.gorgory.model.Guide;
+import org.ungs.gorgory.model.TestCase;
 import org.ungs.gorgory.service.GuideService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,9 +26,14 @@ public class GuideController {
     }
 
     @PostMapping
-    public GuideDTO create(@RequestBody GuideDTO guideDTO) {
-        Guide map = modelmapper.map(guideDTO, Guide.class);
-        Guide guide = guideService.save(map);
+    public GuideDTO create(@RequestBody GuideDTO dto) {
+        Guide guide = modelmapper.map(dto, Guide.class);
+        guide.getExercises().forEach(exercise -> {
+            if (exercise.getLanguage() == null) {
+                exercise.setLanguage(guide.getLanguage());
+            }
+        });
+        guideService.save(guide);
         return getMap(guide);
     }
 
