@@ -13,6 +13,7 @@ import FormComponent from '../../components/FormComponent';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
 import SelectWrapper from '../../components/SelectWrapper';
 import { addGuide } from '../../actions/guide';
+import { displayNotification } from '../../actions/notification';
 
 const Container = styled.div`
   display: flex;
@@ -118,7 +119,9 @@ const Exercise = ({ fields }) => (
 
 class AddGuidePage extends Component {
   handleSubmit = (values) => {
-    this.props.addGuide(values);
+    this.props.addGuide(values).then(() => {
+      this.props.displayNotification('Guia creada correctamente');
+    });
   };
 
   render() {
@@ -142,9 +145,10 @@ class AddGuidePage extends Component {
 AddGuidePage.propTypes = {
   handleSubmit: PropTypes.func,
   addGuide: PropTypes.func,
+  displayNotification: PropTypes.func,
 };
 
 export default connect(
   null,
-  { addGuide },
+  { addGuide, displayNotification },
 )(reduxForm({ form: 'addGuide' })(AddGuidePage));
