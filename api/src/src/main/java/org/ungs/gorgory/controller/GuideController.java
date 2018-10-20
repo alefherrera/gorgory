@@ -1,15 +1,13 @@
 package org.ungs.gorgory.controller;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.dto.GuideDTO;
-import org.ungs.gorgory.model.Argument;
-import org.ungs.gorgory.model.Exercise;
 import org.ungs.gorgory.model.Guide;
-import org.ungs.gorgory.model.TestCase;
+import org.ungs.gorgory.security.IAuthenticatedUserRetriever;
 import org.ungs.gorgory.service.GuideService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +15,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/guide")
 public class GuideController {
 
+    @Autowired
+    private IAuthenticatedUserRetriever userRetriever;
     private final ModelMapper modelmapper;
     private GuideService guideService;
 
@@ -33,6 +33,7 @@ public class GuideController {
                 exercise.setLanguage(guide.getLanguage());
             }
         });
+        guide.setUser(userRetriever.getAuthenticatedUser());
         guideService.save(guide);
         return getMap(guide);
     }

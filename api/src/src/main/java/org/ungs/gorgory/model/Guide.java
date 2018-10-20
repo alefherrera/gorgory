@@ -22,6 +22,9 @@ public class Guide extends BaseEntity {
     @JsonIgnoreProperties("guide")
     private Collection<Exercise> exercises;
 
+    @OneToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -49,5 +52,13 @@ public class Guide extends BaseEntity {
     public void setExercises(Collection<Exercise> exercises) {
         exercises.forEach(exercise -> exercise.setGuide(this));
         this.exercises = exercises;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -14,6 +14,7 @@ import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.model.Result;
 import org.ungs.gorgory.repository.ExerciseRepository;
 import org.ungs.gorgory.repository.ResolutionRepository;
+import org.ungs.gorgory.security.IAuthenticatedUserRetriever;
 import org.ungs.gorgory.service.CompressionService;
 import org.ungs.gorgory.service.ExecutionerService;
 import org.ungs.gorgory.service.ScopeCreatorService;
@@ -31,6 +32,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/resolution")
 public class ResolutionController {
 
+    @Autowired
+    private IAuthenticatedUserRetriever userRetriever;
     private final ScopeCreatorService scopeCreatorService;
     private final CompressionService compressionService;
     private ExerciseRepository exerciseRepository;
@@ -70,7 +73,7 @@ public class ResolutionController {
         Resolution newResolution = new Resolution();
         newResolution.setExercise(selectedExercise);
         newResolution.setPath(newFile.getParent());
-        newResolution.setStudent(null);
+        newResolution.setStudent(userRetriever.getAuthenticatedUser());
         resolutionRepository.save(newResolution);
 
         if (selectedExercise.getLanguage().equals(Language.JAVA)) {
