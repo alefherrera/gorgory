@@ -1,6 +1,13 @@
 export const API_LOADING = 'API_LOADING';
 export const API_SUCCESS = 'API_SUCCESS';
 export const API_FAIL = 'API_FAIL';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
+
+export const DISMISS_NOTIFICATION = 'DISMISS_NOTIFICATION';
+export const DISPLAY_NOTIFICATION = 'DISPLAY_NOTIFICATION';
+
+export const OPEN_MENU = 'OPEN_MENU';
+export const CLOSE_MENU = 'CLOSE_MENU';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
