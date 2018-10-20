@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import template from 'lodash/template';
 import toFormData from './toFormData';
 import { baseSelector } from '../../selectors/session';
