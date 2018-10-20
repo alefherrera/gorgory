@@ -12,6 +12,7 @@ import Body from '../Body';
 import CodeEditor from '../CodeUploader';
 import Login from '../Login';
 import AddGuidePage from '../Guide/AddGuidePage';
+import DisplayNotification from '../DisplayNotification';
 
 const theme = createMuiTheme({
   palette: {
@@ -36,13 +37,16 @@ const App = () => (
     <PersistGate persistor={persistor}>
       <MuiThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
-          <AppHeader>
-            <Body>
-              <Route path="/editor" exact component={CodeEditor} />
-              <Route path="/login" component={Login} />
-              <Route path="/guide" component={AddGuidePage} />
-            </Body>
-          </AppHeader>
+          <div>
+            <AppHeader>
+              <Body>
+                <Route path="/editor" exact component={CodeEditor} />
+                <Route path="/login" component={Login} />
+                <Route path="/guide" component={AddGuidePage} />
+              </Body>
+            </AppHeader>
+            <DisplayNotification />
+          </div>
         </ConnectedRouter>
       </MuiThemeProvider>
     </PersistGate>
