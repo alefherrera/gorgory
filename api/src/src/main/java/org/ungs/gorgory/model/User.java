@@ -21,6 +21,12 @@ public class User {
     @OneToOne
     private Role role;
 
+    public User() {}
+
+    public User(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
