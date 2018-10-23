@@ -6,6 +6,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import LoadingIndicator from '../LoadingIndicator';
 import { menuItems } from './data';
 
 const drawerWidth = 240;
@@ -47,6 +50,7 @@ function ClippedDrawer(props) {
           </Typography>
         </Toolbar>
       </AppBar>
+      <LoadingIndicator show />
       <Drawer
         variant="permanent"
         classes={{
@@ -69,4 +73,9 @@ ClippedDrawer.propTypes = {
   children: PropTypes.any,
 };
 
-export default withStyles(styles)(ClippedDrawer);
+export default withRouter(
+  connect(
+    null,
+    null,
+  )(withStyles(styles)(ClippedDrawer)),
+);
