@@ -1,8 +1,8 @@
-import Typography from '@material-ui/core/Typography';
-import PropTypes, { object } from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes, { object } from 'prop-types';
+import { connect } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 import GuideTable from '../../components/GuideTable';
 import { guideSelector } from '../../selectors/entities/guide';
 

@@ -23,7 +23,7 @@ const GuideTable = ({ guides = [] }) => (
           <TableCell>Nombre</TableCell>
           <TableCell>Ejercicios</TableCell>
           <TableCell>Fecha Modificación</TableCell>
-          <TableCell align="right" />
+          <TableCell />
         </TableRow>
       </TableHead>
       <TableBody>
@@ -32,7 +32,7 @@ const GuideTable = ({ guides = [] }) => (
             <TableCell>{guide.name}</TableCell>
             <TableCell>{guide.exercicesCount}</TableCell>
             <TableCell>{guide.modifiedDate}</TableCell>
-            <TableCell align="right">
+            <TableCell>
               <IconButton>
                 <Icon style={{ color: '#00897b' }}>edit</Icon>
               </IconButton>
