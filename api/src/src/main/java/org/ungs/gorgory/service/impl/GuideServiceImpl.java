@@ -27,4 +27,8 @@ public class GuideServiceImpl implements GuideService {
     public List<Guide> getAll() {
         return guideRepository.findAll();
     }
+
+    public List<Guide> getByQuery(String query) {
+        return guideRepository.findAllByNameContaining(query);
+    }
 }

@@ -12,6 +12,7 @@ import LoadingIndicator from '../LoadingIndicator';
 import Menu from './Menu';
 import { logout } from '../../actions/logout';
 import { isAuthenticatedSelector } from '../../selectors/session';
+import gorgory from './header.png';
 
 const styles = theme => ({
   root: {
@@ -72,6 +73,7 @@ class AppHeader extends Component {
       <div className={classes.root}>
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
+            <img src={gorgory} alt="img" style={{ height: 40, marginRight: 10 }} />
             <Typography style={{ width: 200 }} variant="title" color="inherit" noWrap>
               Gorgory
             </Typography>

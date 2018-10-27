@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/guide")
 public class GuideController {
 
-    @Autowired
-    private IAuthenticatedUserRetriever userRetriever;
     private final ModelMapper modelmapper;
-    private GuideService guideService;
+    private final GuideService guideService;
+    private final IAuthenticatedUserRetriever userRetriever;
 
-    public GuideController(ModelMapper modelmapper, GuideService guideService) {
+    public GuideController(ModelMapper modelmapper, GuideService guideService, IAuthenticatedUserRetriever userRetriever) {
         this.modelmapper = modelmapper;
         this.guideService = guideService;
+        this.userRetriever = userRetriever;
     }
 
     @PostMapping
@@ -47,8 +47,14 @@ public class GuideController {
     }
 
     @GetMapping
-    public List<GuideDTO> getAll() {
-        return guideService.getAll().stream().map(this::getMap).collect(Collectors.toList());
+    public List<GuideDTO> getAll(@RequestParam("q") String query) {
+        List<Guide> guides;
+        if (query != null) {
+            guides = guideService.getByQuery(query);
+        } else {
+            guides = guideService.getAll();
+        }
+        return guides.stream().map(this::getMap).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
