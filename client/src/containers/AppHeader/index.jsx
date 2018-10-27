@@ -79,9 +79,11 @@ class AppHeader extends Component {
           </Toolbar>
         </AppBar>
         <div className={classes.toolbar} />
-        <Menu>
-          <div className={classes.toolbar} />
-        </Menu>
+        {this.props.isAuth && (
+          <Menu>
+            <div className={classes.toolbar} />
+          </Menu>
+        )}
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <LoadingIndicator />
