@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-10-27T17:14:11.485Z",
+	"__export_date": "2018-10-27T19:03:58.143Z",
 	"__export_source": "insomnia.desktop.app:v6.0.2",
 	"resources": [
 		{
@@ -50,6 +50,28 @@
 			"_type": "cookie_jar"
 		},
 		{
+			"_id": "fld_b3e59388f7e84b7d8d5d855920709580",
+			"created": 1540666785897,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1540666785898,
+			"modified": 1540666785897,
+			"name": "Sign Up",
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_ad88fb94b0cd47ab9b5c953ee388a291",
+			"created": 1540666813522,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1540570190410,
+			"modified": 1540666828282,
+			"name": "Login",
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"_type": "request_group"
+		},
+		{
 			"_id": "req_c2bb62ff2e8e44fc9bfc61da928066a7",
 			"authentication": {},
 			"body": {
@@ -74,7 +96,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1537747756974,
 			"method": "POST",
-			"modified": 1538878450892,
+			"modified": 1540666979904,
 			"name": "Compile Python",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -103,7 +125,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1537790958568,
 			"method": "GET",
-			"modified": 1539041090916,
+			"modified": 1540666982226,
 			"name": "Echo",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -140,7 +162,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1537655349766,
 			"method": "POST",
-			"modified": 1538850797478,
+			"modified": 1540666981130,
 			"name": "Compile Java",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -151,168 +173,6 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ scope  }}/compile",
-			"_type": "request"
-		},
-		{
-			"_id": "req_6f170cd20c244a17925ca319a30577cb",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"username\": \"user\",\n\t\"password\": \"pass\"\n}"
-			},
-			"created": 1538335719226,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
-					"name": "Content-Type",
-					"value": "application/json"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1538335719226,
-			"method": "POST",
-			"modified": 1540660304150,
-			"name": "SignUp",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/api/auth/signup",
-			"_type": "request"
-		},
-		{
-			"_id": "req_b7472e1c1bbd47c6bbca33cc6e37f0c4",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"username\": \"user\",\n\t\"password\": \"pass\"\n}"
-			},
-			"created": 1538343102455,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
-					"name": "Content-Type",
-					"value": "application/json"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1538335719276,
-			"method": "POST",
-			"modified": 1539869173270,
-			"name": "Login",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/api/auth/login",
-			"_type": "request"
-		},
-		{
-			"_id": "req_626bc0ab32d545c6b7a37c90646f80a6",
-			"authentication": {},
-			"body": {},
-			"created": 1538410901008,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_e000966130be4e00a177cdcd0f2312b5",
-					"name": "Authorization",
-					"value": "Bearer {{ token  }}"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1538410901008,
-			"method": "GET",
-			"modified": 1538850801366,
-			"name": "Get Users",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/users",
-			"_type": "request"
-		},
-		{
-			"_id": "req_33c8baa6a7e545e2b3c7d9af2a69e9b6",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"testCases\": [{\n\t\t\"inputParameters\": [1,2],\n\t\t\"expectedOutput\": 3\n\t}]\n}"
-			},
-			"created": 1538430393701,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_4c9e64ac1e4b4b79afef6fb98b151a09",
-					"name": "Content-Type",
-					"value": "application/json"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1538430393701,
-			"method": "POST",
-			"modified": 1538850799329,
-			"name": "Test",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/test/fa71c993-2d61-4b41-9d64-a921e82d6cb2",
-			"_type": "request"
-		},
-		{
-			"_id": "req_70b61eedbdf64f20a9fbbf18de4f2826",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"lang\": \"python\",\n\t\"code\": \"print(\\\"Hello, World\\\")\"\n}"
-			},
-			"created": 1538878415527,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_17fb19f190644023b54b597cfdc5d086",
-					"name": "Authorization",
-					"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTM4ODc4MzcxLCJleHAiOjE1Mzk0ODMxNzF9.KBfQvECj0aM2AURUY7lExdSXect1rVxI5zDPDhu-r2POMSccx5QC47Kizw-UtFufZlVoanY5IK2EwHatfc0yjg"
-				},
-				{
-					"id": "pair_43d9c9e72925442c97d1dd25d42b0e8e",
-					"name": "Content-Type",
-					"value": "application/json"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1538878415527,
-			"method": "POST",
-			"modified": 1539221155536,
-			"name": "compile test",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/api/compile",
 			"_type": "request"
 		},
 		{
@@ -347,7 +207,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1539040951315,
 			"method": "POST",
-			"modified": 1539221158012,
+			"modified": 1540666987525,
 			"name": "Upload File",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -358,117 +218,6 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ scope  }}/api/resolution/upload",
-			"_type": "request"
-		},
-		{
-			"_id": "req_31ab4efaf9374973a321f6171772371d",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"name\": \"guia 1\"\n}"
-			},
-			"created": 1539221152711,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_eec6bfa91b574c3c8d3af028f6f527c7",
-					"name": "Content-Type",
-					"value": "application/json"
-				},
-				{
-					"id": "pair_b0fb98145aca45e0a6a7e53878cc34d2",
-					"name": "Authorization",
-					"value": "Bearer {{ token  }}"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1539221152711,
-			"method": "POST",
-			"modified": 1539461817723,
-			"name": "Create Guide",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/api/guides",
-			"_type": "request"
-		},
-		{
-			"_id": "req_4a992e0c9bb545aa9b0dab5af26697ba",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"language\": \"JAVA\",\n\t\"guide\": {\n\t\t\"id\": 1\n\t},\n\t\"testCases\": [\n\t\t{\n\t\t\t\"arguments\": [\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"5\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"8\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"expected\": \"13\",\n\t\t\t\"functionToTest\": \"int;sumar;int;int:Sumador\"\n\t\t}\n\t]\n}"
-			},
-			"created": 1539221409690,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_eec6bfa91b574c3c8d3af028f6f527c7",
-					"name": "Content-Type",
-					"value": "application/json"
-				},
-				{
-					"id": "pair_b0fb98145aca45e0a6a7e53878cc34d2",
-					"name": "Authorization",
-					"value": "Bearer {{ token  }}"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1539206732825.5,
-			"method": "POST",
-			"modified": 1539461682024,
-			"name": "Create Exercise",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/api/exercises",
-			"_type": "request"
-		},
-		{
-			"_id": "req_d67c43a912dc403097ae1779953e850c",
-			"authentication": {},
-			"body": {
-				"mimeType": "application/json",
-				"text": "{\n\t\"arguments\": [\n\t\t{\n\t\t\t\"value\": \"5\"\n\t\t},\n\t\t{\n\t\t\t\"value\": \"8\"\n\t\t}\n\t],\n\t\"expected\": \"13\",\n\t\"functionToTest\": \"int;sumar;int;int:Sumador\"\n}"
-			},
-			"created": 1539222300185,
-			"description": "",
-			"headers": [
-				{
-					"id": "pair_eec6bfa91b574c3c8d3af028f6f527c7",
-					"name": "Content-Type",
-					"value": "application/json"
-				},
-				{
-					"id": "pair_b0fb98145aca45e0a6a7e53878cc34d2",
-					"name": "Authorization",
-					"value": "Bearer {{ token  }}"
-				}
-			],
-			"isPrivate": false,
-			"metaSortKey": -1539199522882.75,
-			"method": "POST",
-			"modified": 1539222863300,
-			"name": "Create Test Case",
-			"parameters": [],
-			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
-			"settingDisableRenderRequestBody": false,
-			"settingEncodeUrl": true,
-			"settingMaxTimelineDataSize": 1000,
-			"settingRebuildPath": true,
-			"settingSendCookies": true,
-			"settingStoreCookies": true,
-			"url": "{{ scope  }}/api/test",
 			"_type": "request"
 		},
 		{
@@ -487,7 +236,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1539222353838,
 			"method": "GET",
-			"modified": 1539222852334,
+			"modified": 1540666988264,
 			"name": "Get Endpoints",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -516,7 +265,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1539222458651,
 			"method": "GET",
-			"modified": 1539458350817,
+			"modified": 1540666989038,
 			"name": "Get Exercise",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -553,8 +302,8 @@
 			"isPrivate": false,
 			"metaSortKey": -1539461698280,
 			"method": "POST",
-			"modified": 1539466721545,
-			"name": "Create Full Guide",
+			"modified": 1540667001358,
+			"name": "Create Java Guide",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
 			"settingDisableRenderRequestBody": false,
@@ -587,7 +336,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1539373763420,
 			"method": "GET",
-			"modified": 1539869233571,
+			"modified": 1540667001824,
 			"name": "Get Guides",
 			"parameters": [],
 			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
@@ -598,6 +347,235 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ scope  }}/api/guide",
+			"_type": "request"
+		},
+		{
+			"_id": "req_96f448b5fe174d6aa77e289dd7b98086",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"guia 2\",\n\t\"exercises\": [\n\t\t{\n\t\t\t\"language\": \"PYTHON\",\n\t\t\t\"testCases\": [\n\t\t\t\t{\n\t\t\t\t\t\"arguments\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"1\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"2\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"expected\": \"1\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+			},
+			"created": 1540667004099,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_f89424aaa154495196f6bd4ceb0c840e",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_da5380e0c7044603be01551903ffb396",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539417730850,
+			"method": "POST",
+			"modified": 1540667020668,
+			"name": "Create Python Guide",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/guide",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6f170cd20c244a17925ca319a30577cb",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"admin\",\n\t\"password\": \"pass\",\n\t\"name\": \"Administrador\",\n\t\"email\": \"admin@ungs.edu.ar\",\n\t\"role\": \"ADMIN\"\n}"
+			},
+			"created": 1538335719226,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719326,
+			"method": "POST",
+			"modified": 1540666906028,
+			"name": "Create Admin",
+			"parameters": [],
+			"parentId": "fld_b3e59388f7e84b7d8d5d855920709580",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/signup",
+			"_type": "request"
+		},
+		{
+			"_id": "req_eab5ffe7b04946daa7e30bf4cef17844",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"profesor\",\n\t\"password\": \"pass\",\n\t\"name\": \"Santiago Montier\",\n\t\"email\": \"smontier@ungs.edu.ar\",\n\t\"role\": \"PROFESOR\"\n}"
+			},
+			"created": 1540666605479,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719276,
+			"method": "POST",
+			"modified": 1540666905093,
+			"name": "Create Profesor",
+			"parameters": [],
+			"parentId": "fld_b3e59388f7e84b7d8d5d855920709580",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/signup",
+			"_type": "request"
+		},
+		{
+			"_id": "req_7d58a8529c45480cbd514e9d60c0b68f",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"alumno\",\n\t\"password\": \"pass\",\n\t\"name\": \"Alejandro Herrera\",\n\t\"email\": \"admin@ungs.edu.ar\",\n\t\"role\": \"ALUMNO\"\n}"
+			},
+			"created": 1540666613980,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719251,
+			"method": "POST",
+			"modified": 1540666904538,
+			"name": "Create Alumno",
+			"parameters": [],
+			"parentId": "fld_b3e59388f7e84b7d8d5d855920709580",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/signup",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b7472e1c1bbd47c6bbca33cc6e37f0c4",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"admin\",\n\t\"password\": \"pass\"\n}"
+			},
+			"created": 1538343102455,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719276,
+			"method": "POST",
+			"modified": 1540666922165,
+			"name": "Login Admin",
+			"parameters": [],
+			"parentId": "fld_ad88fb94b0cd47ab9b5c953ee388a291",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_73b7f7b7d2ba4aeba54d316e39d4dcc0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"alumno\",\n\t\"password\": \"pass\"\n}"
+			},
+			"created": 1540666877402,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719263.5,
+			"method": "POST",
+			"modified": 1540666916437,
+			"name": "Login Alumno",
+			"parameters": [],
+			"parentId": "fld_ad88fb94b0cd47ab9b5c953ee388a291",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8fe317747be948a5969198d496be1057",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"profesor\",\n\t\"password\": \"pass\"\n}"
+			},
+			"created": 1540666879103,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719269.75,
+			"method": "POST",
+			"modified": 1540666921148,
+			"name": "Login Profesor",
+			"parameters": [],
+			"parentId": "fld_ad88fb94b0cd47ab9b5c953ee388a291",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/login",
 			"_type": "request"
 		}
 	]
