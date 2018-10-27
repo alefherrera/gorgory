@@ -1,0 +1,604 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-10-27T17:14:11.485Z",
+	"__export_source": "insomnia.desktop.app:v6.0.2",
+	"resources": [
+		{
+			"_id": "wrk_65225712a0774b18bef3b0c06241f214",
+			"created": 1537747745397,
+			"description": "",
+			"modified": 1537747745397,
+			"name": "Gorgory",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_8c99504545ac455395710f5f6595abd3",
+			"color": null,
+			"created": 1537747745790,
+			"data": {
+				"scope": "http://localhost:8080",
+				"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTM5ODY5MDAzLCJleHAiOjE1NDA0NzM4MDN9.Fw12i2xVEZbyIgKT0RUkXieH33taEtW9sHGeE7FlPTuk115uoJIGtp52QulYGL5SJys9NmbMy_Y_JCf7NKqfxw"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1537747745790,
+			"modified": 1539869013807,
+			"name": "New Environment",
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_5572dba3f2f049898e42467bd7f87b26",
+			"cookies": [
+				{
+					"creation": "2018-09-24T00:10:47.833Z",
+					"domain": "localhost",
+					"hostOnly": true,
+					"httpOnly": true,
+					"id": "5162984372384647",
+					"key": "JSESSIONID",
+					"lastAccessed": "2018-10-07T00:17:34.293Z",
+					"path": "/",
+					"value": "C3FE39F20FEB7E242CC0F19D6DB30356"
+				}
+			],
+			"created": 1537747745794,
+			"modified": 1538871454301,
+			"name": "Default Jar",
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_c2bb62ff2e8e44fc9bfc61da928066a7",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"lang\": \"python\",\n\t\"code\": \"print(\\\"Hello, World\\\")\"\n}"
+			},
+			"created": 1537747756974,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_096eca5d139e4c6a9e7050f83e946084",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"disabled": false,
+					"id": "pair_c50be9652f5644ef975937bac819a0b2",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1537747756974,
+			"method": "POST",
+			"modified": 1538878450892,
+			"name": "Compile Python",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/compile",
+			"_type": "request"
+		},
+		{
+			"_id": "req_60e05c3004ca471da008e1097f5a9aa3",
+			"authentication": {},
+			"body": {},
+			"created": 1537790958568,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_3013c28ade4e46c5aee403de59f165ae",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1537790958568,
+			"method": "GET",
+			"modified": 1539041090916,
+			"name": "Echo",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/echo/$PWD",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6a2baef81a584b0eb155900d2fdb41dc",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"lang\": \"java\",\n\t\"code\": \"public class Script { public int execute(int a, int b) { return a+ b;} }\"\n}"
+			},
+			"created": 1537839342554,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_096eca5d139e4c6a9e7050f83e946084",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_134c07e28aae47ae861bc384d9321d32",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1537655349766,
+			"method": "POST",
+			"modified": 1538850797478,
+			"name": "Compile Java",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/compile",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6f170cd20c244a17925ca319a30577cb",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"user\",\n\t\"password\": \"pass\"\n}"
+			},
+			"created": 1538335719226,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719226,
+			"method": "POST",
+			"modified": 1540660304150,
+			"name": "SignUp",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/signup",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b7472e1c1bbd47c6bbca33cc6e37f0c4",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"user\",\n\t\"password\": \"pass\"\n}"
+			},
+			"created": 1538343102455,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a41be2d292e94628b11a9ba1da69dfb7",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538335719276,
+			"method": "POST",
+			"modified": 1539869173270,
+			"name": "Login",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/auth/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_626bc0ab32d545c6b7a37c90646f80a6",
+			"authentication": {},
+			"body": {},
+			"created": 1538410901008,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_e000966130be4e00a177cdcd0f2312b5",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538410901008,
+			"method": "GET",
+			"modified": 1538850801366,
+			"name": "Get Users",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/users",
+			"_type": "request"
+		},
+		{
+			"_id": "req_33c8baa6a7e545e2b3c7d9af2a69e9b6",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"testCases\": [{\n\t\t\"inputParameters\": [1,2],\n\t\t\"expectedOutput\": 3\n\t}]\n}"
+			},
+			"created": 1538430393701,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4c9e64ac1e4b4b79afef6fb98b151a09",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538430393701,
+			"method": "POST",
+			"modified": 1538850799329,
+			"name": "Test",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/test/fa71c993-2d61-4b41-9d64-a921e82d6cb2",
+			"_type": "request"
+		},
+		{
+			"_id": "req_70b61eedbdf64f20a9fbbf18de4f2826",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"lang\": \"python\",\n\t\"code\": \"print(\\\"Hello, World\\\")\"\n}"
+			},
+			"created": 1538878415527,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_17fb19f190644023b54b597cfdc5d086",
+					"name": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTM4ODc4MzcxLCJleHAiOjE1Mzk0ODMxNzF9.KBfQvECj0aM2AURUY7lExdSXect1rVxI5zDPDhu-r2POMSccx5QC47Kizw-UtFufZlVoanY5IK2EwHatfc0yjg"
+				},
+				{
+					"id": "pair_43d9c9e72925442c97d1dd25d42b0e8e",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1538878415527,
+			"method": "POST",
+			"modified": 1539221155536,
+			"name": "compile test",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/compile",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4f56fa5e1778427baa00f7320920f475",
+			"authentication": {},
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"fileName": "/Users/aherrera/Desktop/prueba.txt.zip",
+						"id": "pair_ea3c1f15b9204dae80a77ed2c651161e",
+						"name": "file",
+						"type": "file",
+						"value": ""
+					}
+				]
+			},
+			"created": 1539040951315,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4474b83a841a4f3d84806ccc04aa19bd",
+					"name": "Content-Type",
+					"value": "multipart/form-data"
+				},
+				{
+					"id": "pair_f80ddeee4d784091935904ab97fd5a76",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539040951315,
+			"method": "POST",
+			"modified": 1539221158012,
+			"name": "Upload File",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/resolution/upload",
+			"_type": "request"
+		},
+		{
+			"_id": "req_31ab4efaf9374973a321f6171772371d",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"guia 1\"\n}"
+			},
+			"created": 1539221152711,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_eec6bfa91b574c3c8d3af028f6f527c7",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_b0fb98145aca45e0a6a7e53878cc34d2",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539221152711,
+			"method": "POST",
+			"modified": 1539461817723,
+			"name": "Create Guide",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/guides",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4a992e0c9bb545aa9b0dab5af26697ba",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"language\": \"JAVA\",\n\t\"guide\": {\n\t\t\"id\": 1\n\t},\n\t\"testCases\": [\n\t\t{\n\t\t\t\"arguments\": [\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"5\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"8\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"expected\": \"13\",\n\t\t\t\"functionToTest\": \"int;sumar;int;int:Sumador\"\n\t\t}\n\t]\n}"
+			},
+			"created": 1539221409690,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_eec6bfa91b574c3c8d3af028f6f527c7",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_b0fb98145aca45e0a6a7e53878cc34d2",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539206732825.5,
+			"method": "POST",
+			"modified": 1539461682024,
+			"name": "Create Exercise",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/exercises",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d67c43a912dc403097ae1779953e850c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"arguments\": [\n\t\t{\n\t\t\t\"value\": \"5\"\n\t\t},\n\t\t{\n\t\t\t\"value\": \"8\"\n\t\t}\n\t],\n\t\"expected\": \"13\",\n\t\"functionToTest\": \"int;sumar;int;int:Sumador\"\n}"
+			},
+			"created": 1539222300185,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_eec6bfa91b574c3c8d3af028f6f527c7",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_b0fb98145aca45e0a6a7e53878cc34d2",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539199522882.75,
+			"method": "POST",
+			"modified": 1539222863300,
+			"name": "Create Test Case",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/test",
+			"_type": "request"
+		},
+		{
+			"_id": "req_21a62c67cf014d289ca6cc4919cfa399",
+			"authentication": {},
+			"body": {},
+			"created": 1539222353838,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_de734f3191e349a8b4132a7cfc63baa3",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539222353838,
+			"method": "GET",
+			"modified": 1539222852334,
+			"name": "Get Endpoints",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api",
+			"_type": "request"
+		},
+		{
+			"_id": "req_17df9a8541f6453fab361e5e25de97c0",
+			"authentication": {},
+			"body": {},
+			"created": 1539222458651,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b3a81c7e5aed441f903f1d375cc2686d",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539222458651,
+			"method": "GET",
+			"modified": 1539458350817,
+			"name": "Get Exercise",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/exercises",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8a2d29b1bec0438f89e2d42365c993c7",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"guia 1\",\n\t\"exercises\": [\n\t\t{\n\t\t\t\"language\": \"JAVA\",\n\t\t\t\"testCases\": [\n\t\t\t\t{\n\t\t\t\t\t\"arguments\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"1\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"value\": \"2\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"expected\": \"1\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}"
+			},
+			"created": 1539461698280,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_f89424aaa154495196f6bd4ceb0c840e",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_da5380e0c7044603be01551903ffb396",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539461698280,
+			"method": "POST",
+			"modified": 1539466721545,
+			"name": "Create Full Guide",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/guide",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c9c5e13eb8c7452c817df879372f48a0",
+			"authentication": {},
+			"body": {},
+			"created": 1539464064749,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_f89424aaa154495196f6bd4ceb0c840e",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_da5380e0c7044603be01551903ffb396",
+					"name": "Authorization",
+					"value": "Bearer {{ token  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1539373763420,
+			"method": "GET",
+			"modified": 1539869233571,
+			"name": "Get Guides",
+			"parameters": [],
+			"parentId": "wrk_65225712a0774b18bef3b0c06241f214",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ scope  }}/api/guide",
+			"_type": "request"
+		}
+	]
+}
