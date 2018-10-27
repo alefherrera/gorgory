@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import LoadingIndicator from '../LoadingIndicator';
 import Menu from './Menu';
@@ -27,6 +26,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     minWidth: 0, // So the Typography noWrap works
   },
+  toolbar: theme.mixins.toolbar,
 });
 
 function ClippedDrawer(props) {
@@ -42,7 +42,10 @@ function ClippedDrawer(props) {
         </Toolbar>
       </AppBar>
       <LoadingIndicator show />
-      <Menu />
+      <div className={classes.toolbar} />
+      <Menu>
+        <div className={classes.toolbar} />
+      </Menu>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}
@@ -56,9 +59,4 @@ ClippedDrawer.propTypes = {
   children: PropTypes.any,
 };
 
-export default withRouter(
-  connect(
-    null,
-    null,
-  )(withStyles(styles)(ClippedDrawer)),
-);
+export default withRouter(withStyles(styles)(ClippedDrawer));

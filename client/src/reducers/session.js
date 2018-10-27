@@ -3,6 +3,8 @@ import { FULFILLED } from 'redux-promise-middleware';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { LOGIN, LOGOUT } from '../constants';
+import { TEACHER, STUDENT } from '../constants/roles';
+import createMenu from '../util/createMenu';
 
 const persistConfig = {
   key: 'login',
@@ -10,14 +12,15 @@ const persistConfig = {
 };
 
 const initialState = {
-  username: '',
-  role: '',
+  user: {},
+  menu: [],
 };
 
 const replaceState = () => ({
   [FULFILLED]: (state, { payload }) => ({
     ...state,
     ...payload,
+    menu: createMenu(payload.user.role.name),
   }),
 });
 
