@@ -49,14 +49,23 @@ const Buttons = styled.div`
   margin: 20px;
 `;
 
-export const StyledForm = ({ onSubmit, children }) => (
+const StyledButton = styled(Button)`
+  && {
+    margin-right: 20px;
+  }
+`;
+
+export const StyledForm = ({ onSubmit, onCancel, children }) => (
   <FormRoot>
     <Form onSubmit={onSubmit}>
       <Content>{children}</Content>
       <Buttons>
-        <Button type="submit" variant="raised" color="primary">
-          Holas
-        </Button>
+        <StyledButton onClick={onCancel} variant="raised" color="secondary">
+          Cancelar
+        </StyledButton>
+        <StyledButton type="submit" variant="raised" color="primary">
+          Aceptar
+        </StyledButton>
       </Buttons>
     </Form>
   </FormRoot>
