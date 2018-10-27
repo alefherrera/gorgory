@@ -23,7 +23,7 @@ const GuideTable = ({ guides = [] }) => (
           <TableCell>Nombre</TableCell>
           <TableCell>Ejercicios</TableCell>
           <TableCell>Fecha Modificación</TableCell>
-          <TableCell />
+          <TableCell align="right" />
         </TableRow>
       </TableHead>
       <TableBody>
