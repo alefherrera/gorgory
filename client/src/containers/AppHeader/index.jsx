@@ -6,10 +6,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import LoadingIndicator from '../LoadingIndicator';
 import { menuItems } from './data';
+import UserAvatar from '../../components/UserAvatar';
 
 const drawerWidth = 240;
 
@@ -58,6 +60,8 @@ function ClippedDrawer(props) {
         }}
       >
         <div className={classes.toolbar} />
+        <UserAvatar userName="Leandro Funes" />
+        <Divider />
         <List>{menuItems}</List>
       </Drawer>
       <main className={classes.content}>
