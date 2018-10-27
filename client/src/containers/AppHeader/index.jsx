@@ -78,13 +78,13 @@ class AppHeader extends Component {
             <ButtonContainer>{this.renderButton()}</ButtonContainer>
           </Toolbar>
         </AppBar>
-        <LoadingIndicator show />
         <div className={classes.toolbar} />
         <Menu>
           <div className={classes.toolbar} />
         </Menu>
         <main className={classes.content}>
           <div className={classes.toolbar} />
+          <LoadingIndicator />
           {children}
         </main>
       </div>
