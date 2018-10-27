@@ -13,6 +13,7 @@ import CodeEditor from '../CodeUploader';
 import Login from '../Login';
 import AddGuidePage from '../Guide/AddGuidePage';
 import DisplayNotification from '../DisplayNotification';
+import GuidesPage from '../Guide/GuidesPage';
 import Home from '../Home';
 
 const theme = createMuiTheme({
@@ -45,6 +46,7 @@ const App = () => (
                 <Route path="/editor" exact component={CodeEditor} />
                 <Route path="/login" component={Login} />
                 <Route path="/guide" component={AddGuidePage} />
+                <Route path="/guides" component={GuidesPage} />
               </Body>
             </AppHeader>
             <DisplayNotification />
