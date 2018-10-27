@@ -15,6 +15,9 @@ public class ExerciseDTO {
     @JsonProperty("language")
     private Language language;
 
+    @JsonProperty("description")
+    private String description;
+
     @JsonProperty("testCases")
     private List<TestCaseDTO> testCases;
 
@@ -32,6 +35,14 @@ public class ExerciseDTO {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<TestCaseDTO> getTestCases() {

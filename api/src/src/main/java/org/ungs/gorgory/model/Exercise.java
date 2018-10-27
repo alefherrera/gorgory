@@ -16,6 +16,8 @@ public class Exercise extends BaseEntity {
 
     private Language language;
 
+    private String description;
+
     @ManyToOne
     @JsonIgnoreProperties("exercises")
     private Guide guide;
@@ -34,6 +36,14 @@ public class Exercise extends BaseEntity {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Guide getGuide() {
