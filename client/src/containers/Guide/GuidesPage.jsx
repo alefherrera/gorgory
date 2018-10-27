@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes, { object } from 'prop-types';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import GuideTable from '../../components/GuideTable';
 import { guideSelector } from '../../selectors/entities/guide';
+import { loadGuides } from '../../actions/guide';
 
 const Container = styled.div`
   width: 100%;
@@ -24,26 +25,36 @@ const Row = styled.div`
   overflow-y: auto;
 `;
 
-const GuidesPage = ({ guides = [] }) => (
-  <Container>
-    <TitleRow>
-      <Typography gutterBottom variant="title" align="left" component="h2">
-        Mis Guias
-      </Typography>
-    </TitleRow>
-    <Row>
-      <GuideTable guides={guides} />
-    </Row>
-  </Container>
-);
+class GuidesPage extends Component {
+  componentDidMount() {
+    this.props.loadGuides();
+  }
+
+  render() {
+    const { guides } = this.props;
+    return (
+      <Container>
+        <TitleRow>
+          <Typography gutterBottom variant="title" align="left" component="h2">
+            Mis Guias
+          </Typography>
+        </TitleRow>
+        <Row>
+          <GuideTable guides={guides} />
+        </Row>
+      </Container>
+    );
+  }
+}
 
 GuidesPage.propTypes = {
   guides: PropTypes.arrayOf(object),
+  loadGuides: PropTypes.func,
 };
 
 export default connect(
   state => ({
     guides: guideSelector(state),
   }),
-  null,
+  { loadGuides },
 )(GuidesPage);

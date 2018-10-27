@@ -30,8 +30,8 @@ const GuideTable = ({ guides = [] }) => (
         {guides.map((guide, index) => (
           <TableRow key={index}>
             <TableCell>{guide.name}</TableCell>
-            <TableCell>{guide.exercicesCount}</TableCell>
-            <TableCell>{guide.modifiedDate}</TableCell>
+            <TableCell>{guide.exercises.length}</TableCell>
+            <TableCell>{guide.updateDateTime}</TableCell>
             <TableCell>
               <IconButton>
                 <Icon style={{ color: '#00897b' }}>edit</Icon>
