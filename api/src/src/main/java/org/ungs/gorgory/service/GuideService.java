@@ -11,4 +11,6 @@ public interface GuideService {
     Guide get(Long id);
 
     List<Guide> getAll();
+
+    List<Guide> getByQuery(String query);
 }
