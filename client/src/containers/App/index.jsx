@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import Route from 'react-router/Route';
 import { store, persistor } from '../../store';
@@ -12,6 +12,8 @@ import Body from '../Body';
 import CodeEditor from '../CodeUploader';
 import Login from '../Login';
 import AddGuidePage from '../Guide/AddGuidePage';
+import DisplayNotification from '../DisplayNotification';
+import Home from '../Home';
 
 const theme = createMuiTheme({
   palette: {
@@ -36,13 +38,17 @@ const App = () => (
     <PersistGate persistor={persistor}>
       <MuiThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
-          <AppHeader>
-            <Body>
-              <Route path="/editor" exact component={CodeEditor} />
-              <Route path="/login" component={Login} />
-              <Route path="/guide" component={AddGuidePage} />
-            </Body>
-          </AppHeader>
+          <div>
+            <AppHeader>
+              <Body>
+                <Route path="/" exact component={Home} />
+                <Route path="/editor" exact component={CodeEditor} />
+                <Route path="/login" component={Login} />
+                <Route path="/guide" component={AddGuidePage} />
+              </Body>
+            </AppHeader>
+            <DisplayNotification />
+          </div>
         </ConnectedRouter>
       </MuiThemeProvider>
     </PersistGate>

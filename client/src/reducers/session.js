@@ -11,7 +11,7 @@ const persistConfig = {
 
 const initialState = {
   username: '',
-  permissions: [],
+  role: '',
 };
 
 const replaceState = () => ({

@@ -13,6 +13,8 @@ import FormComponent from '../../components/FormComponent';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
 import SelectWrapper from '../../components/SelectWrapper';
 import { addGuide } from '../../actions/guide';
+import { displayNotification } from '../../actions/notification';
+import { required } from '../../util/validations';
 
 const Container = styled.div`
   display: flex;
@@ -56,7 +58,7 @@ const Argument = ({ fields }) => (
     {fields.map((argument, index) => (
       <Row key={index}>
         <Header title={`Argumento ${index + 1}`} onClick={() => fields.remove(index)} />
-        <Field name={`${argument}.value`} type="text" component={TextFieldWrapper} label="Valor" />
+        <Field name={`${argument}.value`} type="text" component={TextFieldWrapper} label="Valor" validate={[required]} />
       </Row>
     ))}
   </Row>
@@ -78,13 +80,14 @@ const TestCase = ({ fields }) => (
           component={TextFieldWrapper}
           label="Firma"
         />
-        <FieldArray name={`${testCase}.arguments`} component={Argument} />
         <Field
           name={`${testCase}.expected`}
           type="text"
           component={TextFieldWrapper}
           label="Valor Esperado"
+          validate={[required]}
         />
+        <FieldArray name={`${testCase}.arguments`} component={Argument} />
       </Row>
     ))}
   </Row>
@@ -108,6 +111,7 @@ const Exercise = ({ fields }) => (
             type="text"
             component={TextFieldWrapper}
             label="Enunciado"
+            validate={[required]}
           />
           <FieldArray name={`${exercise}.testCases`} component={TestCase} />
         </Row>
@@ -118,7 +122,9 @@ const Exercise = ({ fields }) => (
 
 class AddGuidePage extends Component {
   handleSubmit = (values) => {
-    this.props.addGuide(values);
+    this.props.addGuide(values).then(() => {
+      this.props.displayNotification('Guia creada correctamente');
+    });
   };
 
   render() {
@@ -128,11 +134,11 @@ class AddGuidePage extends Component {
         buttonText="Crear"
         onSubmit={this.props.handleSubmit(this.handleSubmit)}
       >
-        <Field name="language" label="Lenguaje" component={SelectWrapper}>
+        <Field name="language" label="Lenguaje" component={SelectWrapper} validate={[required]}>
           <MenuItem value="JAVA">Java</MenuItem>
           <MenuItem value="PYTHON">Python</MenuItem>
         </Field>
-        <Field name="name" label="Nombre" component={TextFieldWrapper} />
+        <Field name="name" label="Nombre" component={TextFieldWrapper} validate={[required]} />
         <FieldArray name="exercises" component={Exercise} />
       </FormComponent>
     );
@@ -142,9 +148,10 @@ class AddGuidePage extends Component {
 AddGuidePage.propTypes = {
   handleSubmit: PropTypes.func,
   addGuide: PropTypes.func,
+  displayNotification: PropTypes.func,
 };
 
 export default connect(
   null,
-  { addGuide },
+  { addGuide, displayNotification },
 )(reduxForm({ form: 'addGuide' })(AddGuidePage));
