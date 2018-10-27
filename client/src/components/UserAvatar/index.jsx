@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -24,13 +25,17 @@ const BigAvatar = styled(Avatar)`
   }
 `;
 
-const UserAvatar = ({ userName }) => (
+const UserAvatar = ({ username }) => (
   <Root>
-    <BigAvatar>{userName && userName.charAt(0).toUpperCase()}</BigAvatar>
-    <UserNameText variant="h6" gutterBottom>
-      {userName}
+    <BigAvatar>{username && username.charAt(0).toUpperCase()}</BigAvatar>
+    <UserNameText variant="subtitle1" noWrap>
+      {username}
     </UserNameText>
   </Root>
 );
+
+UserAvatar.propTypes = {
+  username: PropTypes.string,
+};
 
 export default UserAvatar;
