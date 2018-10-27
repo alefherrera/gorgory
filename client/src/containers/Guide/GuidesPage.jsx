@@ -7,6 +7,7 @@ import GuideTable from '../../components/GuideTable';
 
 const Container = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -88,11 +89,53 @@ const MockGuides = [
     exercicesCount: 54,
     modifiedDate: '05/01/2018',
   },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
+  {
+    id: 5,
+    name: 'Test5',
+    exercicesCount: 54,
+    modifiedDate: '05/01/2018',
+  },
 ];
 
 export default connect(
   state => ({
-    guides: MockGuides,
+    guides: guidesSelector(state),
   }),
   null,
 )(GuidesPage);
