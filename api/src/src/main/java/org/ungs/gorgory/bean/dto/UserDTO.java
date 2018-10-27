@@ -12,12 +12,8 @@ public class UserDTO {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("email")
-    private String email;
-
     @JsonProperty("role")
     private RoleDTO role;
-
 
     public String getUsername() {
         return username;
@@ -33,14 +29,6 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public RoleDTO getRole() {
