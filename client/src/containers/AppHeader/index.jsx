@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router';
+import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
 import LoadingIndicator from '../LoadingIndicator';
 import Menu from './Menu';
+import { logout } from '../../actions/logout';
+import { isAuthenticatedSelector } from '../../selectors/session';
 
 const styles = theme => ({
   root: {
@@ -29,34 +34,77 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
 });
 
-function ClippedDrawer(props) {
-  const { classes, children } = props;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="absolute" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="title" color="inherit" noWrap>
-            Gorgory
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <LoadingIndicator show />
-      <div className={classes.toolbar} />
-      <Menu>
+class AppHeader extends Component {
+  handleLoginClick = () => {
+    this.props.history.push('/login');
+  };
+
+  handleLogoutClick = () => {
+    this.props.logout();
+    this.handleLoginClick();
+  };
+
+  renderButton = () => {
+    if (!this.props.isAuth) {
+      return (
+        <Button color="inherit" onClick={this.handleLoginClick}>
+          Login
+        </Button>
+      );
+    }
+    return (
+      <Button color="inherit" onClick={this.handleLogoutClick}>
+        Salir
+      </Button>
+    );
+  };
+
+  render() {
+    const { classes, children } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="absolute" className={classes.appBar}>
+          <Toolbar>
+            <Typography style={{ width: 200 }} variant="title" color="inherit" noWrap>
+              Gorgory
+            </Typography>
+            <ButtonContainer>{this.renderButton()}</ButtonContainer>
+          </Toolbar>
+        </AppBar>
+        <LoadingIndicator show />
         <div className={classes.toolbar} />
-      </Menu>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {children}
-      </main>
-    </div>
-  );
+        <Menu>
+          <div className={classes.toolbar} />
+        </Menu>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
+      </div>
+    );
+  }
 }
 
-ClippedDrawer.propTypes = {
+AppHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   children: PropTypes.any,
+  history: PropTypes.object,
+  isAuth: PropTypes.bool,
+  logout: PropTypes.func,
 };
 
-export default withRouter(withStyles(styles)(ClippedDrawer));
+export default withRouter(
+  connect(
+    state => ({
+      isAuth: isAuthenticatedSelector(state),
+    }),
+    { logout },
+  )(withStyles(styles)(AppHeader)),
+);
