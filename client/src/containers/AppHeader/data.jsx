@@ -4,22 +4,22 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { NavLink } from 'react-router-dom';
+import { Icon } from '@material-ui/core';
 
 export const menuItems = (
   <div>
-    <ListItem button component={NavLink} to="/editor">
+    <ListItem button component={NavLink} to="/guide/add">
       <ListItemIcon>
-        <CloudUploadIcon />
+        <Icon>add-circle-outline</Icon>
       </ListItemIcon>
-      <ListItemText primary="Resolucion" />
+      <ListItemText primary="Nueva Guia" />
     </ListItem>
-    <ListItem button component={NavLink} to="/guide">
+    <ListItem button component={NavLink} to="/guide/list">
       <ListItemIcon>
-        <CloudUploadIcon />
+        <Icon>assignment</Icon>
       </ListItemIcon>
-      <ListItemText primary="Guia" />
+      <ListItemText primary="Mis Guias" />
     </ListItem>
   </div>
 );

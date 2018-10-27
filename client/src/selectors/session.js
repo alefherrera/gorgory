@@ -10,10 +10,12 @@ export const isAuthenticatedSelector = createSelector(
 
 export const usernameSelector = createSelector(baseSelector, session => session.username);
 
-export const accessSelector = createSelector(baseSelector, session => session.role);
+export const nameSelector = createSelector(baseSelector, session => session.name);
+
+export const roleSelector = createSelector(baseSelector, session => session.role.name);
 
 export const hasAccessSelector = createSelector(
-  accessSelector,
+  roleSelector,
   (state, props) => props,
   (owned, needed) => isAuthorized(owned, needed),
 );
