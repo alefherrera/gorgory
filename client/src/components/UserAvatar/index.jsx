@@ -27,7 +27,7 @@ const BigAvatar = styled(Avatar)`
 const UserAvatar = ({ userName }) => (
   <Root>
     <BigAvatar>{userName.charAt(0).toUpperCase()}</BigAvatar>
-    <UserNameText variant="subtitle1" noWrap>
+    <UserNameText variant="h6" gutterBottom>
       {userName}
     </UserNameText>
   </Root>
