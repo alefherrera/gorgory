@@ -12,7 +12,7 @@ export const RootFlexColumn = styled.div`
 `;
 
 const TitleTextStyle = styled(Typography)`
-  padding-left: 128px;
+  padding-left: 32px;
   margin-bottom: 12px;
 `;
 
@@ -45,7 +45,7 @@ const Content = styled.div`
 const Buttons = styled.div`
   display: flex;
   justify-content: right;
-  align-self: flex-end;
+  align-self: flex-start;
   margin: 20px;
 `;
 
