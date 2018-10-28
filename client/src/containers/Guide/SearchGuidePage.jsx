@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import SearchBoxWrapper from '../../components/SearchBoxWrapper';
+import { searchSelector } from '../../selectors/entities/guide';
+import { searchGuides } from '../../actions/guide';
+import GuideTable from '../../components/GuideTable';
 
 class SearchGuidePage extends Component {
   handleSubmit = (values) => {
-    console.log('values', values);
+    this.props.searchGuides(undefined, values.q ? values : { q: '' });
   };
 
   render() {
@@ -16,7 +19,9 @@ class SearchGuidePage extends Component {
         <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="q" component={SearchBoxWrapper} />
         </form>
-        <div>{JSON.stringify(guides)}</div>
+        <div>
+          <GuideTable guides={guides} />
+        </div>
       </div>
     );
   }
@@ -25,9 +30,12 @@ class SearchGuidePage extends Component {
 SearchGuidePage.propTypes = {
   guides: PropTypes.array,
   handleSubmit: PropTypes.func,
+  searchGuides: PropTypes.func,
 };
 
 export default connect(
-  null,
-  null,
+  state => ({
+    guides: searchSelector(state),
+  }),
+  { searchGuides },
 )(reduxForm({ form: 'searchGuide' })(SearchGuidePage));
