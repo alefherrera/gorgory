@@ -3,7 +3,6 @@ import { FULFILLED } from 'redux-promise-middleware';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { LOGIN, LOGOUT } from '../constants';
-import { TEACHER, STUDENT } from '../constants/roles';
 import createMenu from '../util/createMenu';
 
 const persistConfig = {
