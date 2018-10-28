@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
-import SearchBox from '../../components/SearchBox';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import SearchBoxWrapper from '../../components/SearchBoxWrapper';
 
 class SearchGuidePage extends Component {
-  state = {};
+  handleSubmit = (values) => {
+    console.log('values', values);
+  };
 
   render() {
+    const { guides } = this.props;
     return (
       <div>
-        <SearchBox />
+        <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+          <Field name="q" component={SearchBoxWrapper} />
+        </form>
+        <div>{JSON.stringify(guides)}</div>
       </div>
     );
   }
 }
 
-export default SearchGuidePage;
+SearchGuidePage.propTypes = {
+  guides: PropTypes.array,
+  handleSubmit: PropTypes.func,
+};
+
+export default connect(
+  null,
+  null,
+)(reduxForm({ form: 'searchGuide' })(SearchGuidePage));
