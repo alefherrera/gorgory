@@ -19,6 +19,7 @@ export const EDIT_GUIDE = 'EDIT_GUIDE';
 export const GET_GUIDES = 'GET_GUIDES';
 export const GET_GUIDE = 'GET_GUIDE';
 export const DELETE_GUIDE = 'DELETE_GUIDE';
+export const SEARCH_GUIDES = 'SEARCH_GUIDES';
 
 export const ADD_EXERCISE = 'ADD_EXERCISE';
 export const EDIT_EXERCISE = 'EDIT_EXERCISE';
