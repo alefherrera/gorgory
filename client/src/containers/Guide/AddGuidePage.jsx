@@ -18,6 +18,7 @@ class AddGuidePage extends Component {
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
           <NewExercisesTable
             label="Ejercicios"
+            // TODO: harcodeado
             exercisesRows={[{ number: 1, tests: 8 }, { number: 2, tests: 20 }]}
           />
         </StyledForm>

@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import styled from "styled-components";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 export const RootFlexColumn = styled.div`
   width: 100%;
