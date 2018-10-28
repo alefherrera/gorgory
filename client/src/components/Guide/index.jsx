@@ -26,10 +26,23 @@ const StyledButton = styled(Button)``;
 const StyledCardActions = styled(CardActions)`
   display: flex;
   flex-direction: row-reverse;
-  margin: 12px;
+  margin: 6px;
 `;
 
-export const NewExercisesTable = ({ label, exercisesRows }) => (
+const ScroleableTableBody = styled.div`
+  && {
+    background-color: red;
+    overflow-y: scroll;
+  }
+`;
+
+export const NewExercisesTable = ({
+  label,
+  exercisesRows,
+  buttonComponent,
+  buttonTo,
+  onClick
+}) => (
   <StyledCard>
     <StyledCardContent>
       <Table>
@@ -60,14 +73,21 @@ export const NewExercisesTable = ({ label, exercisesRows }) => (
       </Table>
     </StyledCardContent>
     <StyledCardActions>
-      <StyledButton variant="fab" color="primary" aria-label="Add">
+      <StyledButton
+        onClick={onClick}
+        component={buttonComponent}
+        to={buttonTo}
+        variant="fab"
+        color="primary"
+        aria-label="Add"
+      >
         <AddIcon />
       </StyledButton>
     </StyledCardActions>
   </StyledCard>
 );
 
-export const NewTestTable = ({ label, testRows }) => (
+export const NewTestTable = ({ label, testRows, onClick }) => (
   <StyledCard>
     <StyledCardContent>
       <Table>
@@ -98,7 +118,12 @@ export const NewTestTable = ({ label, testRows }) => (
       </Table>
     </StyledCardContent>
     <StyledCardActions>
-      <StyledButton variant="fab" color="primary" aria-label="Add">
+      <StyledButton
+        onClick={onClick}
+        variant="fab"
+        color="primary"
+        aria-label="Add"
+      >
         <AddIcon />
       </StyledButton>
     </StyledCardActions>

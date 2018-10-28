@@ -19,7 +19,7 @@ import { NewExercisesTable } from "../../components/Guide";
 
 class AddTestDialog extends Component {
   state = {
-    open: true
+    open: false
   };
 
   handleClickOpen = () => {
@@ -33,34 +33,30 @@ class AddTestDialog extends Component {
     return (
       <Dialog
         fullWidth
-        open={this.state.open}
+        open={this.props.open}
         onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Agregar Test</DialogTitle>
-        <DialogContent>
-          <Field name="name" label="Nombre" component={TextFieldWrapper} />
-          <Field
-            name="input"
-            label="Input"
-            rows="10"
-            maxRows="5"
-            component={AreaTextWrapper}
-          />
-          <Field
-            name="output"
-            label="Output"
-            rows="10"
-            maxRows="5"
-            component={AreaTextWrapper}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button color="secondary">Cancelar</Button>
-          <Button type="submit" color="primary">
-            Aceptar
-          </Button>
-        </DialogActions>
+        <StyledForm flat onCancel={this.handleClose}>
+          <DialogTitle id="form-dialog-title">Agregar Test</DialogTitle>
+          <DialogContent>
+            <Field name="name" label="Nombre" component={TextFieldWrapper} />
+            <Field
+              name="input"
+              label="Input"
+              rows="10"
+              maxRows="5"
+              component={AreaTextWrapper}
+            />
+            <Field
+              name="output"
+              label="Output"
+              rows="10"
+              maxRows="5"
+              component={AreaTextWrapper}
+            />
+          </DialogContent>
+        </StyledForm>
       </Dialog>
     );
   }

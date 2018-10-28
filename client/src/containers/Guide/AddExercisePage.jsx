@@ -13,25 +13,31 @@ import { NewTestTable } from "../../components/Guide";
 import AddTestDialog from "./AddTestDialog";
 
 class AddExercisePage extends Component {
-  state = {};
+  state = {
+    dialog: false
+  };
+
+  showTestDialog = () => {
+    this.setState(state => ({ ...state, dialog: true }));
+  };
 
   render() {
     return (
       <RootFlexColumn>
-        <AddTestDialog />
-        <TitleText text="Nuevo Ejercicio" />
+        <AddTestDialog open={this.state.dialog} />
+        <TitleText text={"Nuevo Ejercicio" + this.props.match.params.id} />
         <Divider />
         <StyledForm>
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
           <Field
-            rows="10"
-            maxRows="5"
+            rows="8"
             name="description"
             label="Enunciado"
             component={AreaTextWrapper}
           />
           <NewTestTable
             label="Tests"
+            onClick={this.showTestDialog}
             testRows={[
               { number: 1, name: "Tests Megadificil" },
               { number: 2, name: "P=NP?" }

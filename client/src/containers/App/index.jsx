@@ -11,6 +11,7 @@ import Body from "../Body";
 // import CodeEditor from '../CodeEditor';
 import CodeEditor from "../CodeUploader";
 import Login from "../Login";
+import AddGuidePage from "../Guide/AddGuidePage";
 import AddExercisePage from "../Guide/AddExercisePage";
 import DisplayNotification from "../DisplayNotification";
 import Home from "../Home";
@@ -45,8 +46,14 @@ const App = () => (
                 <Route path="/" exact component={Home} />
                 <Route path="/editor" exact component={CodeEditor} />
                 <Route path="/login" component={Login} />
-                <Route path="/guide/add" component={AddExercisePage} />
-                <Route path="/guide/list" component={AddExercisePage} />
+                <Route path="/guide/add" exact component={AddGuidePage} />
+
+                <Route
+                  path="/guide/add/exercise/:id"
+                  exact
+                  component={AddExercisePage}
+                />
+                <Route path="/guide/list" component={AddGuidePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
               </Body>
             </AppHeader>

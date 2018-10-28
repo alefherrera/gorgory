@@ -55,15 +55,23 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export const StyledForm = ({ onSubmit, onCancel, children }) => (
+export const StyledForm = ({ onSubmit, flat, onCancel, children }) => (
   <FormRoot>
     <Form onSubmit={onSubmit}>
       <Content>{children}</Content>
       <Buttons>
-        <StyledButton onClick={onCancel} variant="raised" color="secondary">
+        <StyledButton
+          onClick={onCancel}
+          variant={flat ? "flat" : "raised"}
+          color="secondary"
+        >
           Cancelar
         </StyledButton>
-        <StyledButton type="submit" variant="raised" color="primary">
+        <StyledButton
+          type="submit"
+          variant={flat ? "flat" : "raised"}
+          color="primary"
+        >
           Aceptar
         </StyledButton>
       </Buttons>
