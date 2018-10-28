@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { guideSelector } from '../../selectors/entities/guide';
 import { getGuide } from '../../actions/guide';
+import Exercise from '../../components/Exercise';
 
 class GuidePage extends Component {
   componentDidMount() {
@@ -14,10 +15,13 @@ class GuidePage extends Component {
     const { guide } = this.props;
     return (
       <div>
-        <Typography gutterBottom variant="title" align="left" component="h2">
-          Guia tanto
+        <Typography gutterBottom variant="h2" align="left" component="h2">
+          {guide.name}
         </Typography>
-        {JSON.stringify(guide)}
+        {guide.exercises
+          && guide.exercises.map((exercise, i) => (
+            <Exercise key={i} title={`Ejercicio ${i + 1}`} exercise={exercise} />
+          ))}
       </div>
     );
   }
