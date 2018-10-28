@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom';
 import GuideTable from '../../components/GuideTable';
 import { guideSelector } from '../../selectors/entities/guide';
 import { loadGuides } from '../../actions/guide';
@@ -32,10 +33,10 @@ class MyGuidesPage extends Component {
     this.props.loadGuides();
   }
 
-  renderIcons = () => (
+  renderIcons = guide => (
     <div>
-      <IconButton>
-        <Icon style={{ color: '#00897b' }}>play-circle-filled</Icon>
+      <IconButton component={Link} to={`view/${guide.id}`}>
+        <Icon style={{ color: '#00897b' }}>play_circle_filled</Icon>
       </IconButton>
     </div>
   );
