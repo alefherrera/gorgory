@@ -48,7 +48,7 @@ const App = () => (
                 <Route path="/login" component={Login} />
                 <Route path="/guide/add" exact component={AddGuidePage} />
 
-                <Route path="/guide/add/exercise/:id" component={AddExercisePage} />
+                <Route path="/guide/add/exercise/" component={AddExercisePage} />
                 <Route path="/guide/list" component={AddGuidePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
               </Body>

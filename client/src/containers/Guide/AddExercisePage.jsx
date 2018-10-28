@@ -1,20 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Divider from "@material-ui/core/Divider";
-import { Field, reduxForm } from "redux-form";
-import TextFieldWrapper from "../../components/TextFieldWrapper";
-import AreaTextWrapper from "../../components/AreaTextWrapper";
-import {
-  RootFlexColumn,
-  TitleText,
-  StyledForm
-} from "../../components/Generic";
-import { NewTestTable } from "../../components/Guide";
-import AddTestDialog from "./AddTestDialog";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Divider from '@material-ui/core/Divider';
+import { Field, reduxForm } from 'redux-form';
+import TextFieldWrapper from '../../components/TextFieldWrapper';
+import AreaTextWrapper from '../../components/AreaTextWrapper';
+import { RootFlexColumn, TitleText, StyledForm } from '../../components/Generic';
+import { NewTestTable } from '../../components/Guide';
+import AddTestDialog from './AddTestDialog';
+import { newExercise } from '../../actions/exercise';
+import { lastExerciseSelector } from '../../selectors/guide';
 
 class AddExercisePage extends Component {
   state = {
-    dialog: false
+    dialog: false,
+  };
+
+  componentDidMount = () => {
+    // Creo la guia cuando se esta por crear el componente
+    this.props.newExercise();
   };
 
   showTestDialog = () => {
@@ -25,23 +28,15 @@ class AddExercisePage extends Component {
     return (
       <RootFlexColumn>
         <AddTestDialog open={this.state.dialog} />
-        <TitleText text={"Nuevo Ejercicio" + this.props.match.params.id} />
+        <TitleText text="Nuevo Ejercicio" />
         <Divider />
         <StyledForm>
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
-          <Field
-            rows="8"
-            name="description"
-            label="Enunciado"
-            component={AreaTextWrapper}
-          />
+          <Field rows="8" name="description" label="Enunciado" component={AreaTextWrapper} />
           <NewTestTable
             label="Tests"
             onClick={this.showTestDialog}
-            testRows={[
-              { number: 1, name: "Tests Megadificil" },
-              { number: 2, name: "P=NP?" }
-            ]}
+            testRows={[{ number: 1, name: 'Tests Megadificil' }, { number: 2, name: 'P=NP?' }]}
           />
         </StyledForm>
       </RootFlexColumn>
@@ -50,6 +45,8 @@ class AddExercisePage extends Component {
 }
 
 export default connect(
-  null,
-  {}
-)(reduxForm({ form: "addExercise" })(AddExercisePage));
+  state => ({
+    lastExercise: lastExerciseSelector(state),
+  }),
+  { newExercise },
+)(reduxForm({ form: 'addExercise' })(AddExercisePage));

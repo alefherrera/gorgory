@@ -1,60 +1,55 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Divider from "@material-ui/core/Divider";
-import { Field, reduxForm } from "redux-form";
-import TextFieldWrapper from "../../components/TextFieldWrapper";
-import AreaTextWrapper from "../../components/AreaTextWrapper";
-import {
-  RootFlexColumn,
-  TitleText,
-  StyledForm
-} from "../../components/Generic";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
-import { NewExercisesTable } from "../../components/Guide";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { StyledForm } from '../../components/Generic';
+import AreaTextWrapper from '../../components/AreaTextWrapper';
+import TextFieldWrapper from '../../components/TextFieldWrapper';
+import { newTest } from '../../actions/guide';
 
 class AddTestDialog extends Component {
   state = {
-    open: false
+    open: false,
+  };
+
+  componentWillReceiveProps = (nextProps, prevState) => {
+    this.setState({ open: nextProps.open });
   };
 
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
+  handleOnSubmit = (values) => {
+    this.props.newTest(values);
+
+    this.handleClose();
+  };
+
   handleClose = () => {
     this.setState({ open: false });
   };
+
   render() {
     return (
       <Dialog
         fullWidth
-        open={this.props.open}
+        open={this.state.open}
         onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <StyledForm flat onCancel={this.handleClose}>
+        <StyledForm
+          flat
+          onSubmit={this.props.handleSubmit(this.handleOnSubmit)}
+          onCancel={this.handleClose}
+        >
           <DialogTitle id="form-dialog-title">Agregar Test</DialogTitle>
           <DialogContent>
             <Field name="name" label="Nombre" component={TextFieldWrapper} />
-            <Field
-              name="input"
-              label="Input"
-              rows="10"
-              maxRows="5"
-              component={AreaTextWrapper}
-            />
-            <Field
-              name="output"
-              label="Output"
-              rows="10"
-              maxRows="5"
-              component={AreaTextWrapper}
-            />
+            <Field name="input" label="Input" rows="10" maxRows="5" component={AreaTextWrapper} />
+            <Field name="output" label="Output" rows="10" maxRows="5" component={AreaTextWrapper} />
           </DialogContent>
         </StyledForm>
       </Dialog>
@@ -64,5 +59,5 @@ class AddTestDialog extends Component {
 
 export default connect(
   null,
-  {}
-)(reduxForm({ form: "addTest" })(AddTestDialog));
+  { newTest },
+)(reduxForm({ form: 'addTest' })(AddTestDialog));
