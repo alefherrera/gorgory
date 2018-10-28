@@ -7,7 +7,7 @@ import { getGuide } from '../../actions/guide';
 
 class GuidePage extends Component {
   componentDidMount() {
-    this.props.getGuide(this.props.match.params.guideId);
+    this.props.getGuide(undefined, { id: this.props.match.params.guideId });
   }
 
   render() {

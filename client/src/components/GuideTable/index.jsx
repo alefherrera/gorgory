@@ -40,7 +40,7 @@ const GuideTable = ({ guides = [], iconsRenderer = () => {} }) => (
 );
 
 GuideTable.propTypes = {
-  guides: PropTypes.object,
+  guides: PropTypes.arrayOf(PropTypes.object),
   iconsRenderer: PropTypes.func,
 };
 

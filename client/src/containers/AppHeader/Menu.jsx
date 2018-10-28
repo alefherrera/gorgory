@@ -22,7 +22,7 @@ const styles = () => ({
 
 class Menu extends Component {
   renderMenu = menu => menu.map(item => (
-    <ListItem button component={NavLink} to={item.link}>
+    <ListItem key={item.link} button component={NavLink} to={item.link}>
       <ListItemIcon>
         <Icon>{item.icon}</Icon>
       </ListItemIcon>
