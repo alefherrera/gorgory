@@ -16,6 +16,10 @@ import SearchGuidePage from '../Guide/SearchGuidePage';
 import GuidesPage from '../Guide/GuidesPage';
 import Home from '../Home';
 import Login from '../Login';
+import authWrapper from '../HOC/authWrapper';
+import { TEACHER, STUDENT } from '../../constants/roles';
+import MyGuidesPage from '../Guide/MyGuidesPage';
+import GuidePage from '../Guide/GuidePage';
 
 const theme = createMuiTheme({
   palette: {
@@ -47,7 +51,10 @@ const App = () => (
                 <Route path="/editor" exact component={CodeEditor} />
                 <Route path="/login" component={Login} />
                 <Route path="/guide/add" component={AddGuidePage} />
-                <Route path="/guide/list" component={GuidesPage} />
+                <Route path="/guide/list" component={authWrapper(() => [TEACHER])(GuidesPage)} />
+                <Route path="/guide/list" component={authWrapper(() => [STUDENT])(MyGuidesPage)} />
+                <Route path="/guide/view/:guide_id" component={GuidePage} />
+                <Route path="/guide/view/:guide_id/exercise/:exercise_id" component={GuidePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
               </Body>
             </AppHeader>

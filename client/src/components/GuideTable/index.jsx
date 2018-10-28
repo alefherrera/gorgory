@@ -6,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-import { Icon, IconButton } from '@material-ui/core';
 
 const Container = styled.div`
   width: 100%;
@@ -15,7 +14,7 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
-const GuideTable = ({ guides = [] }) => (
+const GuideTable = ({ guides = [], iconsRenderer = () => {} }) => (
   <Container>
     <Table>
       <TableHead>
@@ -32,14 +31,7 @@ const GuideTable = ({ guides = [] }) => (
             <TableCell>{guide.name}</TableCell>
             <TableCell>{guide.exercises.length}</TableCell>
             <TableCell>{guide.updateDateTime}</TableCell>
-            <TableCell>
-              <IconButton>
-                <Icon style={{ color: '#00897b' }}>edit</Icon>
-              </IconButton>
-              <IconButton>
-                <Icon style={{ color: '#ff511b' }}>delete</Icon>
-              </IconButton>
-            </TableCell>
+            <TableCell>{iconsRenderer(guide)}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -49,6 +41,7 @@ const GuideTable = ({ guides = [] }) => (
 
 GuideTable.propTypes = {
   guides: PropTypes.object,
+  iconsRenderer: PropTypes.func,
 };
 
 export default GuideTable;

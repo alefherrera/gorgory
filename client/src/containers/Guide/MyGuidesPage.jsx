@@ -27,7 +27,7 @@ const Row = styled.div`
   overflow-y: auto;
 `;
 
-class GuidesPage extends Component {
+class MyGuidesPage extends Component {
   componentDidMount() {
     this.props.loadGuides();
   }
@@ -35,10 +35,7 @@ class GuidesPage extends Component {
   renderIcons = () => (
     <div>
       <IconButton>
-        <Icon style={{ color: '#00897b' }}>edit</Icon>
-      </IconButton>
-      <IconButton>
-        <Icon style={{ color: '#ff511b' }}>delete</Icon>
+        <Icon style={{ color: '#00897b' }}>play-circle-filled</Icon>
       </IconButton>
     </div>
   );
@@ -60,7 +57,7 @@ class GuidesPage extends Component {
   }
 }
 
-GuidesPage.propTypes = {
+MyGuidesPage.propTypes = {
   guides: PropTypes.arrayOf(object),
   loadGuides: PropTypes.func,
 };
@@ -70,4 +67,4 @@ export default connect(
     guides: guideSelector(state),
   }),
   { loadGuides },
-)(GuidesPage);
+)(MyGuidesPage);

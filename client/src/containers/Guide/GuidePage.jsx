@@ -27,7 +27,7 @@ const Row = styled.div`
   overflow-y: auto;
 `;
 
-class GuidesPage extends Component {
+class GuidePage extends Component {
   componentDidMount() {
     this.props.loadGuides();
   }
@@ -49,7 +49,7 @@ class GuidesPage extends Component {
       <Container>
         <TitleRow>
           <Typography gutterBottom variant="title" align="left" component="h2">
-            Mis Guias
+            Guia tanto
           </Typography>
         </TitleRow>
         <Row>
@@ -60,7 +60,7 @@ class GuidesPage extends Component {
   }
 }
 
-GuidesPage.propTypes = {
+GuidePage.propTypes = {
   guides: PropTypes.arrayOf(object),
   loadGuides: PropTypes.func,
 };
@@ -70,4 +70,4 @@ export default connect(
     guides: guideSelector(state),
   }),
   { loadGuides },
-)(GuidesPage);
+)(GuidePage);

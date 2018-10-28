@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { accessSelector } from '../../selectors/session';
+import { roleSelector } from '../../selectors/session';
 import isAuthorized from '../../util/isAuthorized';
 
 export default (getPermissions = () => []) => (ChildComponent) => {
   const displayName = ChildComponent.displayName || ChildComponent.name || 'Component';
 
   const AuthWrapper = ({ ownedPermissions, ...rest }) => {
-    const neededPermissions = getPermissions(...rest);
+    const neededPermissions = getPermissions(rest);
     if (isAuthorized(ownedPermissions, neededPermissions)) {
       return <ChildComponent {...rest} />;
     }
@@ -22,7 +22,7 @@ export default (getPermissions = () => []) => (ChildComponent) => {
 
   return connect(
     state => ({
-      ownedPermissions: accessSelector(state),
+      ownedPermissions: [roleSelector(state)],
     }),
     null,
   )(AuthWrapper);
