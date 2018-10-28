@@ -7,8 +7,8 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 import GuideTable from '../../components/GuideTable';
-import { guideSelector } from '../../selectors/entities/guide';
-import { loadGuides } from '../../actions/guide';
+import { guidesSelector } from '../../selectors/entities/guide';
+import { getGuides } from '../../actions/guide';
 
 const Container = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ const Row = styled.div`
 
 class MyGuidesPage extends Component {
   componentDidMount() {
-    this.props.loadGuides();
+    this.props.getGuides();
   }
 
   renderIcons = guide => (
@@ -60,12 +60,12 @@ class MyGuidesPage extends Component {
 
 MyGuidesPage.propTypes = {
   guides: PropTypes.arrayOf(object),
-  loadGuides: PropTypes.func,
+  getGuides: PropTypes.func,
 };
 
 export default connect(
   state => ({
-    guides: guideSelector(state),
+    guides: guidesSelector(state),
   }),
-  { loadGuides },
+  { getGuides },
 )(MyGuidesPage);
