@@ -47,7 +47,7 @@ public class GuideController {
     }
 
     @GetMapping
-    public List<GuideDTO> getAll(@RequestParam("q") String query) {
+    public List<GuideDTO> getAll(@RequestParam(value = "q", required = false) String query) {
         List<Guide> guides;
         if (query != null) {
             guides = guideService.getByQuery(query);
