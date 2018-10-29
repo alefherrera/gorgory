@@ -34,9 +34,14 @@ class AddTestDialog extends Component {
         >
           <DialogTitle id="form-dialog-title">Agregar Test</DialogTitle>
           <DialogContent>
-            <Field name="name" label="Nombre" component={TextFieldWrapper} />
             <Field name="input" label="Input" rows="10" maxRows="5" component={AreaTextWrapper} />
-            <Field name="output" label="Output" rows="10" maxRows="5" component={AreaTextWrapper} />
+            <Field
+              name="expected"
+              label="Output"
+              rows="10"
+              maxRows="5"
+              component={AreaTextWrapper}
+            />
           </DialogContent>
         </StyledForm>
       </Dialog>

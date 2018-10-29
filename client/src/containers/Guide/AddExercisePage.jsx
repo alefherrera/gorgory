@@ -30,7 +30,7 @@ class AddExercisePage extends Component {
   };
 
   handleDialogSubmit = (testCase) => {
-    this.setState({ tests: [...this.state.tests, testCase] });
+    this.setState({ tests: [...this.state.tests, testCase], dialog: false });
   };
 
   render() {
@@ -46,11 +46,7 @@ class AddExercisePage extends Component {
         <StyledForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
           <Field rows="8" name="description" label="Enunciado" component={AreaTextWrapper} />
-          <NewTestTable
-            label="Tests"
-            onClick={this.showTestDialog}
-            testRows={[{ number: 1, name: 'Tests Megadificil' }, { number: 2, name: 'P=NP?' }]}
-          />
+          <NewTestTable label="Tests" onClick={this.showTestDialog} testRows={this.state.tests} />
         </StyledForm>
       </RootFlexColumn>
     );

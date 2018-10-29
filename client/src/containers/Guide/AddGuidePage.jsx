@@ -6,12 +6,15 @@ import Divider from '@material-ui/core/Divider';
 import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
 import { RootFlexColumn, TitleText, StyledForm } from '../../components/Generic';
 import { NewExercisesTable } from '../../components/Guide';
 import { addGuide, createGuide } from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
 import { createdGuideSelector } from '../../selectors/createGuide';
+import SelectWrapper from '../../components/SelectWrapper';
+import { required } from '../../util/validations';
 
 class AddGuidePage extends Component {
   componentDidMount = () => {
@@ -31,10 +34,14 @@ class AddGuidePage extends Component {
         <Divider />
         <StyledForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
+          <Field name="language" label="Lenguaje" component={SelectWrapper} validate={[required]}>
+            <MenuItem value="JAVA">Java</MenuItem>
+            <MenuItem value="PYTHON">Python</MenuItem>
+          </Field>
           <NewExercisesTable
             label="Ejercicios"
             // TODO: harcodeado
-            exercisesRows={[{ number: 1, tests: 8 }, { number: 2, tests: 20 }]}
+            exercisesRows={this.props.created.exercises}
           >
             <Button
               component={Link}

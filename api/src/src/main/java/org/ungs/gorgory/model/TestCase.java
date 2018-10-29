@@ -42,7 +42,9 @@ public class TestCase extends BaseEntity {
     }
 
     public void setArguments(List<Argument> arguments) {
-        arguments.forEach(argument -> argument.setTestCase(this));
+        if (arguments != null) {
+            arguments.forEach(argument -> argument.setTestCase(this));
+        }
         this.arguments = arguments;
     }
 

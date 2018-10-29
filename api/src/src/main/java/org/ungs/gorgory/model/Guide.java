@@ -50,7 +50,9 @@ public class Guide extends BaseEntity {
     }
 
     public void setExercises(Collection<Exercise> exercises) {
-        exercises.forEach(exercise -> exercise.setGuide(this));
+        if (exercises != null) {
+            exercises.forEach(exercise -> exercise.setGuide(this));
+        }
         this.exercises = exercises;
     }
 

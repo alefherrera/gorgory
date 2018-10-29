@@ -44,16 +44,8 @@ export const NewExercisesTable = ({ label, exercisesRows, children }) => (
         <TableBody>
           {exercisesRows.map((ex, index) => (
             <TableRow key={index}>
-              <TableCell>{ex.number}</TableCell>
-              <TableCell>{ex.tests}</TableCell>
-              <TableCell>
-                <IconButton onClick={ex.edit}>
-                  <Icon style={{ color: '#00897b' }}>edit</Icon>
-                </IconButton>
-                <IconButton onClick={ex.delete}>
-                  <Icon style={{ color: '#ff511b' }}>delete</Icon>
-                </IconButton>
-              </TableCell>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{ex.testCases.length}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -78,7 +70,7 @@ export const NewTestTable = ({ label, testRows, onClick }) => (
         <TableBody>
           {testRows.map((ex, index) => (
             <TableRow key={index}>
-              <TableCell>{index}</TableCell>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{ex.name}</TableCell>
               <TableCell>
                 <IconButton onClick={ex.edit}>
