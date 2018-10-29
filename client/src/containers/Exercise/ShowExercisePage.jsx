@@ -34,7 +34,7 @@ class ShowExercisePage extends Component {
   componentDidMount = () => {
     const { exerciseId } = this.props.match.params;
     this.props.getExercise(undefined, { id: exerciseId });
-    this.props.getLastResolution();
+    this.props.getLastResolution(undefined, { exerciseId });
   };
 
   handleSubmit = (values) => {

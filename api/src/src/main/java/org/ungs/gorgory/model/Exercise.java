@@ -26,6 +26,12 @@ public class Exercise extends BaseEntity {
     @JsonIgnoreProperties("exercise")
     private Collection<TestCase> testCases;
 
+    public Exercise() {}
+
+    public Exercise(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
