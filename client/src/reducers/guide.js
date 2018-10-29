@@ -1,6 +1,8 @@
 import typeToReducer from 'type-to-reducer';
 import { FULFILLED } from 'redux-promise-middleware';
-import { GET_GUIDES, SEARCH_GUIDES, GET_GUIDE } from '../constants';
+import {
+  GET_GUIDES, SEARCH_GUIDES, GET_GUIDE, DELETE_GUIDE,
+} from '../constants';
 
 const initialState = {
   all: [],
@@ -26,6 +28,12 @@ export default typeToReducer(
       [FULFILLED]: (state, { payload }) => ({
         ...state,
         current: payload,
+      }),
+    },
+    [DELETE_GUIDE]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        all: state.all.filter(x => x.id !== payload),
       }),
     },
   },

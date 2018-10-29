@@ -13,4 +13,6 @@ public interface GuideService {
     List<Guide> getAll();
 
     List<Guide> getByQuery(String query);
+
+    Long delete(Long id);
 }

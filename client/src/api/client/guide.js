@@ -7,4 +7,6 @@ export default {
   search: fetch.get('guide?q=${q}'),
   // eslint-disable-next-line
   get: fetch.get('guide/${id}'),
+  // eslint-disable-next-line
+  delete: fetch.delete('guide/${id}'),
 };

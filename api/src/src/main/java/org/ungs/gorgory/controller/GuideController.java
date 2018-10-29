@@ -63,6 +63,12 @@ public class GuideController {
         return getMap(guide);
     }
 
+    @DeleteMapping("/{id}")
+    public Long delete(@PathVariable Long id) {
+        return guideService.delete(id);
+    }
+
+
     private GuideDTO getMap(Guide guide) {
         return modelmapper.map(guide, GuideDTO.class);
     }

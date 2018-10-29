@@ -31,4 +31,9 @@ public class GuideServiceImpl implements GuideService {
     public List<Guide> getByQuery(String query) {
         return guideRepository.findAllByNameContaining(query);
     }
+
+    public Long delete(Long id) {
+        guideRepository.deleteById(id);
+        return id;
+    }
 }
