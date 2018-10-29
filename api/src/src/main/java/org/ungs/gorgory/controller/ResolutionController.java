@@ -56,7 +56,7 @@ public class ResolutionController {
 
     @GetMapping("/last/{exerciseId}")
     public ResponseEntity<Resolution> getResolution(@PathVariable Long exerciseId) {
-        return ResponseEntity.ok(resolutionRepository.findFirstByExerciseAndStudentOrderByCreateDateTimeDesc(new Exercise(exerciseId), userRetriever.getAuthenticatedUser()).get());
+        return ResponseEntity.ok(resolutionRepository.findFirstByExerciseAndStudentOrderByCreateDateTimeDesc(new Exercise(exerciseId), userRetriever.getAuthenticatedUser()).orElse(null));
     }
 
     @PostMapping("/upload/{exerciseId}")
