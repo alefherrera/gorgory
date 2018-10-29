@@ -24,6 +24,7 @@ import org.ungs.gorgory.service.impl.PythonExecutionerService;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,6 +52,11 @@ public class ResolutionController {
         this.javaExecutionerService = javaExecutionerService;
         this.pythonExecutionerService = pythonExecutionerService;
         this.resolutionRepository = resolutionRepository;
+    }
+
+    @GetMapping("/last")
+    public ResponseEntity<Resolution> getResolution() {
+        return ResponseEntity.ok(resolutionRepository.findFirstByStudentOrderByCreateDateTimeDesc(userRetriever.getAuthenticatedUser()).get());
     }
 
     @PostMapping("/upload/{exerciseId}")

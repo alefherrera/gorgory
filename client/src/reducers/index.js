@@ -5,6 +5,7 @@ import resolution from './resolution';
 import ui from './ui';
 import createGuide from './createGuide';
 import guide from './guide';
+import exercise from './exercise';
 
 export default combineReducers({
   session,
@@ -13,4 +14,5 @@ export default combineReducers({
   ui,
   createGuide,
   guide,
+  exercise,
 });

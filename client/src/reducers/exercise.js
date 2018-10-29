@@ -1,9 +1,10 @@
 import typeToReducer from 'type-to-reducer';
 import { FULFILLED } from 'redux-promise-middleware';
-import { GET_EXERCISES } from '../constants';
+import { GET_EXERCISES, GET_EXERCISE } from '../constants';
 
 const initialState = {
   all: [],
+  current: {},
 };
 
 export default typeToReducer(
@@ -12,6 +13,12 @@ export default typeToReducer(
       [FULFILLED]: (state, { payload }) => ({
         ...state,
         all: [...state.all, payload],
+      }),
+    },
+    [GET_EXERCISE]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        current: payload,
       }),
     },
   },

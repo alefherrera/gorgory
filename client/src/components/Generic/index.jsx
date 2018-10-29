@@ -49,7 +49,7 @@ const Buttons = styled.div`
   margin: 20px;
 `;
 
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   && {
     margin-right: 20px;
   }

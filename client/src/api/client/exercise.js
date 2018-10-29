@@ -1,5 +1,6 @@
 import fetch from '../fetch';
 
 export default {
-  getAll: fetch.get('exercises'),
+  getAll: fetch.get('exercise'),
+  get: fetch.get('exercise/${id}'),
 };
