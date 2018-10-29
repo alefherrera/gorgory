@@ -47,7 +47,7 @@ public class PythonExecutionerService implements ExecutionerService {
         resolutionResult.setResolution(resolution);
         resolutionResult.setTestCase(testCase);
         resolutionResult.setOutput(result);
-        resolutionResult.setPassed(testCase.getExpected().equals(result));
+        resolutionResult.setPassed(testCase.getExpected().trim().equals(result.trim()));
 
         return resolutionResult;
     }
