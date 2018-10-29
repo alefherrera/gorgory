@@ -58,7 +58,6 @@ const App = () => (
                 <Route path="/guide/view/:guideId" component={GuidePage} />
                 <Route path="/guide/view/exercise/:exerciseId" component={ShowExercisePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
-                <Route path="/guide/exercice/:exerciceId" component={ShowExercicePage} />
               </Body>
             </AppHeader>
             <DisplayNotification />
