@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
@@ -26,24 +26,37 @@ const style = {
   width: 200,
 };
 
-const TextFieldWrapper = ({ input, label, ...custom }) => (
-  <FieldContainer>
-    <Container>
-      <Dropzone multiple={false} onDrop={input.onChange} {...input} {...custom} style={style}>
-        <TextContainer>
-          <Typography gutterBottom variant="body1">
-            {label}
-          </Typography>
-        </TextContainer>
-      </Dropzone>
-    </Container>
-  </FieldContainer>
-);
+class DropZoneWrapper extends Component {
+  state = {
+    label: this.props.label,
+  };
 
-TextFieldWrapper.propTypes = {
+  handleDrop = (...args) => {
+    this.props.input.onChange(...args);
+  };
+
+  render() {
+    const { input, label, ...custom } = this.props;
+    return (
+      <FieldContainer>
+        <Container>
+          <Dropzone multiple={false} onDrop={input.onChange} {...input} {...custom} style={style}>
+            <TextContainer>
+              <Typography gutterBottom variant="body1">
+                {this.state.label}
+              </Typography>
+            </TextContainer>
+          </Dropzone>
+        </Container>
+      </FieldContainer>
+    );
+  }
+}
+
+DropZoneWrapper.propTypes = {
   input: PropTypes.any,
   label: PropTypes.any,
   meta: PropTypes.object,
 };
 
-export default TextFieldWrapper;
+export default DropZoneWrapper;
