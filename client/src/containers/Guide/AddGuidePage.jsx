@@ -72,4 +72,4 @@ export default connect(
     created: createdGuideSelector(state),
   }),
   { addGuide, createGuide, displayNotification },
-)(reduxForm({ form: 'addGuide' })(AddGuidePage));
+)(reduxForm({ form: 'addGuide', destroyOnUnmount: false })(AddGuidePage));

@@ -14,10 +14,12 @@ class AddTestDialog extends Component {
       ...values,
       arguments: values.input && values.input.split(',').map(x => ({ value: x })),
     });
+    this.props.reset();
   };
 
   handleClose = () => {
     this.props.onClose();
+    this.props.reset();
   };
 
   render() {
@@ -55,6 +57,7 @@ AddTestDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onSubmit: PropTypes.func,
+  reset: PropTypes.func,
 };
 
 export default connect(
