@@ -12,7 +12,7 @@ export const RootFlexColumn = styled.div`
 `;
 
 const TitleTextStyle = styled(Typography)`
-  padding-left: 128px;
+  padding-left: 32px;
   margin-bottom: 12px;
 `;
 
@@ -45,7 +45,7 @@ const Content = styled.div`
 const Buttons = styled.div`
   display: flex;
   justify-content: right;
-  align-self: flex-end;
+  align-self: flex-start;
   margin: 20px;
 `;
 
@@ -55,15 +55,17 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export const StyledForm = ({ onSubmit, onCancel, children }) => (
+export const StyledForm = ({
+  onSubmit, flat, onCancel, children,
+}) => (
   <FormRoot>
     <Form onSubmit={onSubmit}>
       <Content>{children}</Content>
       <Buttons>
-        <StyledButton onClick={onCancel} variant="raised" color="secondary">
+        <StyledButton onClick={onCancel} variant={flat ? 'flat' : 'contained'} color="secondary">
           Cancelar
         </StyledButton>
-        <StyledButton type="submit" variant="raised" color="primary">
+        <StyledButton type="submit" variant={flat ? 'flat' : 'contained'} color="primary">
           Aceptar
         </StyledButton>
       </Buttons>

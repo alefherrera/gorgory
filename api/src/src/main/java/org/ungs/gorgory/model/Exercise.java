@@ -59,7 +59,9 @@ public class Exercise extends BaseEntity {
     }
 
     public void setTestCases(Collection<TestCase> testCases) {
-        testCases.forEach(testCase -> testCase.setExercise(this));
+        if (testCases != null) {
+            testCases.forEach(testCase -> testCase.setExercise(this));
+        }
         this.testCases = testCases;
     }
 }

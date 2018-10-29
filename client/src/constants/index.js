@@ -21,6 +21,9 @@ export const GET_GUIDE = 'GET_GUIDE';
 export const DELETE_GUIDE = 'DELETE_GUIDE';
 export const SEARCH_GUIDES = 'SEARCH_GUIDES';
 
+export const CREATE_GUIDE = 'CREATE_GUIDE';
+export const ADD_EXERCISE_TO_GUIDE = 'ADD_EXERCISE_TO_GUIDE';
+
 export const ADD_EXERCISE = 'ADD_EXERCISE';
 export const EDIT_EXERCISE = 'EDIT_EXERCISE';
 export const GET_EXERCISES = 'GET_EXERCISES';

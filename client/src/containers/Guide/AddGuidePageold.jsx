@@ -42,7 +42,7 @@ const Header = ({ title, onClick }) => (
         <DeleteIcon />
       </IconButton>
     </DeleteButton>
-    <Typography variant="subheading" gutterBottom>
+    <Typography variant="h6" gutterBottom>
       {title}
     </Typography>
   </Col>
@@ -51,7 +51,7 @@ const Header = ({ title, onClick }) => (
 const Argument = ({ fields }) => (
   <Row>
     <Container>
-      <Button variant="raised" color="primary" onClick={() => fields.push({})}>
+      <Button variant="contained" color="primary" onClick={() => fields.push({})}>
         Agregar argumento
       </Button>
     </Container>
@@ -73,7 +73,7 @@ const Argument = ({ fields }) => (
 const TestCase = ({ fields }) => (
   <Row>
     <Container>
-      <Button variant="raised" color="primary" onClick={() => fields.push({})}>
+      <Button variant="contained" color="primary" onClick={() => fields.push({})}>
         Agregar caso de prueba
       </Button>
     </Container>
@@ -103,7 +103,7 @@ const Exercise = ({ fields }) => (
   <Row>
     <Row>
       <Container>
-        <Button variant="raised" color="primary" onClick={() => fields.push({})}>
+        <Button variant="contained" color="primary" onClick={() => fields.push({})}>
           Agregar ejercicio
         </Button>
       </Container>

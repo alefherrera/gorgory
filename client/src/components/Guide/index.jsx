@@ -8,10 +8,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-import Divider from '@material-ui/core/Divider';
 import AddIcon from '@material-ui/icons/Add';
 import { Icon, IconButton } from '@material-ui/core';
 import styled from 'styled-components';
+import Divider from '@material-ui/core/Divider';
 
 export const ExerciseRows = ({ number, tests }) => (
   <div>
@@ -34,15 +34,15 @@ const StyledButton = styled(Button)``;
 const StyledCardActions = styled(CardActions)`
   display: flex;
   flex-direction: row-reverse;
-  margin: 12px;
+  margin: 6px;
 `;
 
-export const NewExercisesTable = ({ label, exercisesRows }) => (
+export const NewExercisesTable = ({ label, exercisesRows, children }) => (
   <StyledCard>
     <StyledCardContent>
+      {label}
       <Table>
         <TableHead>
-          {label}
           <TableRow>
             <TableCell>Numero</TableCell>
             <TableCell># Tests</TableCell>
@@ -52,8 +52,34 @@ export const NewExercisesTable = ({ label, exercisesRows }) => (
         <TableBody>
           {exercisesRows.map((ex, index) => (
             <TableRow key={index}>
-              <TableCell>{ex.number}</TableCell>
-              <TableCell>{ex.tests}</TableCell>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{ex.testCases.length}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </StyledCardContent>
+    <StyledCardActions>{children}</StyledCardActions>
+  </StyledCard>
+);
+
+export const NewTestTable = ({ label, testRows, onClick }) => (
+  <StyledCard>
+    <StyledCardContent>
+      {label}
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Test #</TableCell>
+            <TableCell>Nombre</TableCell>
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {testRows.map((ex, index) => (
+            <TableRow key={index}>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{ex.name}</TableCell>
               <TableCell>
                 <IconButton onClick={ex.edit}>
                   <Icon style={{ color: '#00897b' }}>edit</Icon>
@@ -68,7 +94,7 @@ export const NewExercisesTable = ({ label, exercisesRows }) => (
       </Table>
     </StyledCardContent>
     <StyledCardActions>
-      <StyledButton variant="fab" color="primary" aria-label="Add">
+      <StyledButton onClick={onClick} variant="fab" color="primary" aria-label="Add">
         <AddIcon />
       </StyledButton>
     </StyledCardActions>
