@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+import { Icon, IconButton } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Divider from '@material-ui/core/Divider';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-import Divider from '@material-ui/core/Divider';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import AddIcon from '@material-ui/icons/Add';
-import { Icon, IconButton } from '@material-ui/core';
+import React from 'react';
 import styled from 'styled-components';
-
-const Row = styled.div``;
 
 export const ExerciseRows = ({ number, tests }) => (
   <div>

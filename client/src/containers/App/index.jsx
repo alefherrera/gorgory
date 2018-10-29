@@ -11,9 +11,10 @@ import Body from '../Body';
 // import CodeEditor from '../CodeEditor';
 import CodeEditor from '../CodeUploader';
 import DisplayNotification from '../DisplayNotification';
+import ShowExercicePage from '../Exercice/ShowExercisePage';
 import AddGuidePage from '../Guide/AddGuidePage';
-import SearchGuidePage from '../Guide/SearchGuidePage';
 import GuidesPage from '../Guide/GuidesPage';
+import SearchGuidePage from '../Guide/SearchGuidePage';
 import Home from '../Home';
 import Login from '../Login';
 
@@ -49,6 +50,7 @@ const App = () => (
                 <Route path="/guide/add" component={AddGuidePage} />
                 <Route path="/guide/list" component={GuidesPage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
+                <Route path="/guide/exercice/:exerciceId" component={ShowExercicePage} />
               </Body>
             </AppHeader>
             <DisplayNotification />
