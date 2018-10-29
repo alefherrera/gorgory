@@ -29,43 +29,39 @@ const StyledCardActions = styled(CardActions)`
   margin: 6px;
 `;
 
-export const NewExercisesTable = ({
-  label, exercisesRows, children
-}) => (
-    <StyledCard>
-      <StyledCardContent>
-        <Table>
-          <TableHead>
-            {label}
-            <TableRow>
-              <TableCell>Numero</TableCell>
-              <TableCell># Tests</TableCell>
-              <TableCell />
+export const NewExercisesTable = ({ label, exercisesRows, children }) => (
+  <StyledCard>
+    <StyledCardContent>
+      <Table>
+        <TableHead>
+          {label}
+          <TableRow>
+            <TableCell>Numero</TableCell>
+            <TableCell># Tests</TableCell>
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {exercisesRows.map((ex, index) => (
+            <TableRow key={index}>
+              <TableCell>{ex.number}</TableCell>
+              <TableCell>{ex.tests}</TableCell>
+              <TableCell>
+                <IconButton onClick={ex.edit}>
+                  <Icon style={{ color: '#00897b' }}>edit</Icon>
+                </IconButton>
+                <IconButton onClick={ex.delete}>
+                  <Icon style={{ color: '#ff511b' }}>delete</Icon>
+                </IconButton>
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {exercisesRows.map((ex, index) => (
-              <TableRow key={index}>
-                <TableCell>{ex.number}</TableCell>
-                <TableCell>{ex.tests}</TableCell>
-                <TableCell>
-                  <IconButton onClick={ex.edit}>
-                    <Icon style={{ color: '#00897b' }}>edit</Icon>
-                  </IconButton>
-                  <IconButton onClick={ex.delete}>
-                    <Icon style={{ color: '#ff511b' }}>delete</Icon>
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </StyledCardContent>
-      <StyledCardActions>
-        {children}
-      </StyledCardActions>
-    </StyledCard>
-  );
+          ))}
+        </TableBody>
+      </Table>
+    </StyledCardContent>
+    <StyledCardActions>{children}</StyledCardActions>
+  </StyledCard>
+);
 
 export const NewTestTable = ({ label, testRows, onClick }) => (
   <StyledCard>

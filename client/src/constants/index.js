@@ -20,9 +20,8 @@ export const GET_GUIDES = 'GET_GUIDES';
 export const GET_GUIDE = 'GET_GUIDE';
 export const DELETE_GUIDE = 'DELETE_GUIDE';
 
-export const NEW_GUIDE = 'NEW_GUIDE';
-export const NEW_EXERCISE = 'NEW_EXERCISE';
-export const NEW_TEST = 'NEW_TEST';
+export const CREATE_GUIDE = 'CREATE_GUIDE';
+export const ADD_EXERCISE_TO_GUIDE = 'ADD_EXERCISE_TO_GUIDE';
 
 export const ADD_EXERCISE = 'ADD_EXERCISE';
 export const EDIT_EXERCISE = 'EDIT_EXERCISE';

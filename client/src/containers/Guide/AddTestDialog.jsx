@@ -1,42 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { StyledForm } from '../../components/Generic';
 import AreaTextWrapper from '../../components/AreaTextWrapper';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
-import { newTest } from '../../actions/guide';
+// import { newTest } from '../../actions/guide';
 
 class AddTestDialog extends Component {
-  state = {
-    open: false,
-  };
-
-  componentWillReceiveProps = (nextProps, prevState) => {
-    this.setState({ open: nextProps.open });
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
   handleOnSubmit = (values) => {
-    this.props.newTest(values);
-
-    this.handleClose();
+    this.props.onSubmit(values);
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.props.onClose();
   };
 
   render() {
     return (
       <Dialog
         fullWidth
-        open={this.state.open}
+        open={this.props.open}
         onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
@@ -57,7 +44,14 @@ class AddTestDialog extends Component {
   }
 }
 
+AddTestDialog.propTypes = {
+  handleSubmit: PropTypes.func,
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
+  onSubmit: PropTypes.func,
+};
+
 export default connect(
   null,
-  { newTest },
+  null,
 )(reduxForm({ form: 'addTest' })(AddTestDialog));

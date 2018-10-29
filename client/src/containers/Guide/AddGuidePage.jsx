@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
@@ -8,17 +9,27 @@ import AddIcon from '@material-ui/icons/Add';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
 import { RootFlexColumn, TitleText, StyledForm } from '../../components/Generic';
 import { NewExercisesTable } from '../../components/Guide';
+import { addGuide, createGuide } from '../../actions/guide';
+import { displayNotification } from '../../actions/notification';
+import { createdGuideSelector } from '../../selectors/createGuide';
 
 class AddGuidePage extends Component {
-  state = {};
+  componentDidMount = () => {
+    this.props.createGuide();
+  };
+
+  handleSubmit = (values) => {
+    this.props.addGuide({ ...values, ...this.props.created }).then(() => {
+      this.props.displayNotification('Guia creada correctamente');
+    });
+  };
 
   render() {
     return (
       <RootFlexColumn>
         <TitleText text="Nueva Guia" />
-
         <Divider />
-        <StyledForm>
+        <StyledForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
           <NewExercisesTable
             label="Ejercicios"
@@ -41,7 +52,17 @@ class AddGuidePage extends Component {
   }
 }
 
+AddGuidePage.propTypes = {
+  handleSubmit: PropTypes.func,
+  addGuide: PropTypes.func,
+  createGuide: PropTypes.func,
+  displayNotification: PropTypes.func,
+  created: PropTypes.object,
+};
+
 export default connect(
-  null,
-  {},
+  state => ({
+    created: createdGuideSelector(state),
+  }),
+  { addGuide, createGuide, displayNotification },
 )(reduxForm({ form: 'addGuide' })(AddGuidePage));
