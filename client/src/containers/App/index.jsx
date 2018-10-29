@@ -54,7 +54,7 @@ const App = () => (
                 <Route path="/guide/add" component={AddGuidePage} />
                 <Route path="/guide/list" component={authWrapper(() => [TEACHER])(GuidesPage)} />
                 <Route path="/guide/list" component={authWrapper(() => [STUDENT])(MyGuidesPage)} />
-                <Route path="/guide/view/:guideId" component={GuidePage} />
+                <Route path="/guide/view/:guideId" exact component={GuidePage} />
                 <Route path="/guide/view/exercise/:exerciseId" component={ShowExercisePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
               </Body>
