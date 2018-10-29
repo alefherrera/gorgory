@@ -35,9 +35,6 @@ class GuidesPage extends Component {
   renderIcons = () => (
     <div>
       <IconButton>
-        <Icon style={{ color: '#00897b' }}>edit</Icon>
-      </IconButton>
-      <IconButton>
         <Icon style={{ color: '#ff511b' }}>delete</Icon>
       </IconButton>
     </div>
