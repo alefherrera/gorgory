@@ -16,6 +16,7 @@ public class Exercise extends BaseEntity {
 
     private Language language;
 
+    @Column(columnDefinition="TEXT")
     private String description;
 
     @ManyToOne
