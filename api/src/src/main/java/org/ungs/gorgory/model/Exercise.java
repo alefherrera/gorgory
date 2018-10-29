@@ -1,5 +1,6 @@
 package org.ungs.gorgory.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.ungs.gorgory.Language;
 
 import javax.persistence.*;
@@ -15,11 +16,22 @@ public class Exercise extends BaseEntity {
 
     private Language language;
 
+    @Column(columnDefinition="TEXT")
+    private String description;
+
     @ManyToOne
+    @JsonIgnoreProperties("exercises")
     private Guide guide;
 
-    @OneToMany(mappedBy = "exercise")
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("exercise")
     private Collection<TestCase> testCases;
+
+    public Exercise() {}
+
+    public Exercise(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -31,6 +43,14 @@ public class Exercise extends BaseEntity {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Guide getGuide() {
@@ -46,6 +66,9 @@ public class Exercise extends BaseEntity {
     }
 
     public void setTestCases(Collection<TestCase> testCases) {
+        if (testCases != null) {
+            testCases.forEach(testCase -> testCase.setExercise(this));
+        }
         this.testCases = testCases;
     }
 }

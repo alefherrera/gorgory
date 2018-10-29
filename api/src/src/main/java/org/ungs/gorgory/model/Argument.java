@@ -1,5 +1,7 @@
 package org.ungs.gorgory.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,14 @@ public class Argument {
     private Long id;
 
     private String value;
-
     @ManyToOne
+    @JsonIgnoreProperties("arguments")
     private TestCase testCase;
+
+    @Override
+    public String toString() {
+        return value;
+    }
 
     public Long getId() {
         return id;

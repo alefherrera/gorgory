@@ -1,6 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.ungs.gorgory.Language;
 import org.ungs.gorgory.service.ScopeCreatorService;
 
 import java.io.BufferedWriter;
@@ -14,22 +15,29 @@ import java.util.UUID;
 @Service
 public class ScopeCreatorServiceImpl implements ScopeCreatorService {
 
-    private final Map<String, String> fileNameMap;
+    private static final String SCOPE_BASE = "scope";
+    private final Map<Language, String> fileNameMap;
 
     public ScopeCreatorServiceImpl() {
         this.fileNameMap = new HashMap<>();
-        fileNameMap.put("java", "Script.java");
-        fileNameMap.put("python", "script.py");
+        fileNameMap.put(Language.JAVA, "Script.java");
+        fileNameMap.put(Language.PYTHON, "script.py");
     }
 
-    public String getPath(String lang, String code) {
+    public String createScope(String filename) {
+        String newScope = getNewScope();
+        String dirPath = SCOPE_BASE + File.separator + newScope + File.separator + filename;
+        createScopeFolder(dirPath);
+        return dirPath;
+    }
+
+    public String getPath(Language lang, String code) {
 
         String fileName = fileNameMap.get(lang);
-        String uuid = UUID.randomUUID().toString();
-        String fullPath = "scope/" + uuid + "/" + fileName;
+        String uuid = getNewScope();
+        String fullPath = SCOPE_BASE +  File.separator + uuid +  File.separator + fileName;
 
-        File file = new File(fullPath);
-        file.getParentFile().mkdirs();
+        File file = createScopeFolder(fullPath);
 
         try {
             file.createNewFile();
@@ -41,5 +49,15 @@ public class ScopeCreatorServiceImpl implements ScopeCreatorService {
         }
 
         return fullPath;
+    }
+
+    private File createScopeFolder(String fullPath) {
+        File file = new File(fullPath);
+        file.getParentFile().mkdirs();
+        return file;
+    }
+
+    private String getNewScope() {
+        return UUID.randomUUID().toString();
     }
 }

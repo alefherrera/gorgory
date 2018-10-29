@@ -1,9 +1,8 @@
 package org.ungs.gorgory.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.ungs.gorgory.model.Role;
 import org.ungs.gorgory.model.User;
 
 import java.util.Collection;
@@ -24,9 +23,9 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection<Role> authorities;
 
-    private UserPrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    private UserPrincipal(Long id, String name, String username, String email, String password, Collection<Role> authorities) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -36,7 +35,7 @@ public class UserPrincipal implements UserDetails {
     }
 
     static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities = user.getRole() == null ? null : Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName()));
+        List<Role> authorities = user.getRole() == null ? null : Collections.singletonList(user.getRole());
 
         return new UserPrincipal(
                 user.getId(),
@@ -46,6 +45,16 @@ public class UserPrincipal implements UserDetails {
                 user.getPassword(),
                 authorities
         );
+    }
+
+    static User toUser(UserPrincipal principal) {
+        User user = new User(principal.getId());
+        user.setName(principal.name);
+        user.setUsername(principal.username);
+        user.setEmail(principal.email);
+        user.setPassword(principal.password);
+        user.setRole(principal.getAuthorities().iterator().next());
+        return user;
     }
 
     public Long getId() {
@@ -71,7 +80,7 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<Role> getAuthorities() {
         return authorities;
     }
 
@@ -105,7 +114,6 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
     }
 }

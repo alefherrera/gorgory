@@ -1,4 +1,18 @@
-import { handleAction } from 'redux-actions';
-import { COMPILE } from '../constants';
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import session from './session';
+import resolution from './resolution';
+import ui from './ui';
+import createGuide from './createGuide';
+import guide from './guide';
+import exercise from './exercise';
 
-export default handleAction(COMPILE, state => state, {});
+export default combineReducers({
+  session,
+  resolution,
+  form: formReducer,
+  ui,
+  createGuide,
+  guide,
+  exercise,
+});

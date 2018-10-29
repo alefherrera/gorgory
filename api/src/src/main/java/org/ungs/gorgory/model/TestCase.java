@@ -1,7 +1,9 @@
 package org.ungs.gorgory.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class TestCase extends BaseEntity {
@@ -12,12 +14,16 @@ public class TestCase extends BaseEntity {
     private Long id;
 
     @ManyToOne
+    @JsonIgnoreProperties("testCases")
     private Exercise exercise;
 
-    @OneToMany(mappedBy = "testCase")
-    private Collection<Argument> arguments;
+    @OneToMany(mappedBy = "testCase", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("testCase")
+    private List<Argument> arguments;
 
     private String expected;
+
+    private String signature;
 
     public Long getId() {
         return id;
@@ -31,11 +37,14 @@ public class TestCase extends BaseEntity {
         this.exercise = exercise;
     }
 
-    public Collection<Argument> getArguments() {
+    public List<Argument> getArguments() {
         return arguments;
     }
 
-    public void setArguments(Collection<Argument> arguments) {
+    public void setArguments(List<Argument> arguments) {
+        if (arguments != null) {
+            arguments.forEach(argument -> argument.setTestCase(this));
+        }
         this.arguments = arguments;
     }
 
@@ -45,5 +54,13 @@ public class TestCase extends BaseEntity {
 
     public void setExpected(String expected) {
         this.expected = expected;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

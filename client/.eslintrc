@@ -1,3 +1,13 @@
 {
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "react/forbid-prop-types": "off",
+    "linebreak-style": "off",
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "react/destructuring-assignment": "off",
+    "no-template-curly-in-string": "off",
+    "react/no-array-index-key": "off"
+  },
+  "parser": "babel-eslint"
 }
