@@ -7,8 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { StyledForm } from '../../components/Generic';
 import AreaTextWrapper from '../../components/AreaTextWrapper';
-import TextFieldWrapper from '../../components/TextFieldWrapper';
-// import { newTest } from '../../actions/guide';
 
 class AddTestDialog extends Component {
   handleOnSubmit = (values) => {

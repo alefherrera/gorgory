@@ -1,11 +1,11 @@
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { ConnectedRouter } from 'connected-react-router';
-import { PersistGate } from 'redux-persist/integration/react';
 import Route from 'react-router/Route';
-import { store, persistor } from '../../store';
+import { PersistGate } from 'redux-persist/integration/react';
 import history from '../../history';
+import { persistor, store } from '../../store';
 import AppHeader from '../AppHeader';
 import Body from '../Body';
 // import CodeEditor from '../CodeEditor';
@@ -14,8 +14,13 @@ import Login from '../Login';
 import AddGuidePage from '../Guide/AddGuidePage';
 import AddExercisePage from '../Guide/AddExercisePage';
 import DisplayNotification from '../DisplayNotification';
-import Home from '../Home';
 import SearchGuidePage from '../Guide/SearchGuidePage';
+import GuidesPage from '../Guide/GuidesPage';
+import Home from '../Home';
+import authWrapper from '../HOC/authWrapper';
+import { TEACHER, STUDENT } from '../../constants/roles';
+import MyGuidesPage from '../Guide/MyGuidesPage';
+import GuidePage from '../Guide/GuidePage';
 
 const theme = createMuiTheme({
   palette: {
@@ -46,10 +51,12 @@ const App = () => (
                 <Route path="/" exact component={Home} />
                 <Route path="/editor" exact component={CodeEditor} />
                 <Route path="/login" component={Login} />
-                <Route path="/guide/add" exact component={AddGuidePage} />
-
-                <Route path="/guide/add/exercise/" component={AddExercisePage} />
-                <Route path="/guide/list" component={AddGuidePage} />
+                <Route path="/guide/add/exercise" component={AddExercisePage} />
+                <Route path="/guide/add" component={AddGuidePage} />
+                <Route path="/guide/list" component={authWrapper(() => [TEACHER])(GuidesPage)} />
+                <Route path="/guide/list" component={authWrapper(() => [STUDENT])(MyGuidesPage)} />
+                <Route path="/guide/view/:guideId" component={GuidePage} />
+                <Route path="/guide/view/:guideId/exercise/:exerciseId" component={GuidePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
               </Body>
             </AppHeader>

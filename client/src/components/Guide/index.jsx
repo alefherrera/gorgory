@@ -11,6 +11,14 @@ import TableCell from '@material-ui/core/TableCell';
 import AddIcon from '@material-ui/icons/Add';
 import { Icon, IconButton } from '@material-ui/core';
 import styled from 'styled-components';
+import Divider from '@material-ui/core/Divider';
+
+export const ExerciseRows = ({ number, tests }) => (
+  <div>
+    {`${number} ${tests}`}
+    <Divider />
+  </div>
+);
 
 const StyledCard = styled(Card)`
   margin-top: 32px;
