@@ -10,7 +10,7 @@ import AreaTextWrapper from '../../components/AreaTextWrapper';
 
 class AddTestDialog extends Component {
   handleOnSubmit = (values) => {
-    this.props.onSubmit(values);
+    this.props.onSubmit({ ...values, arguments: values.input.split(',').map(x => ({ value: x })) });
   };
 
   handleClose = () => {
