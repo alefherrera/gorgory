@@ -38,9 +38,6 @@ class GuidesPage extends Component {
 
   renderIcons = guide => (
     <div>
-      <IconButton>
-        <Icon style={{ color: '#00897b' }}>edit</Icon>
-      </IconButton>
       <IconButton onClick={() => this.handleDelete(guide)}>
         <Icon style={{ color: '#ff511b' }}>delete</Icon>
       </IconButton>
