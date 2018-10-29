@@ -31,14 +31,14 @@ const FormComponent = ({
   title, buttonText, onSubmit, children,
 }) => (
   <div>
-    <Typography gutterBottom variant="title" align="left" component="h2">
+    <Typography gutterBottom variant="h5" align="left" component="h2">
       {title}
     </Typography>
     <Container>
       <Form onSubmit={onSubmit}>
         <Row>{children}</Row>
         <ButtonRow>
-          <Button type="submit" variant="raised" color="primary">
+          <Button type="submit" variant="contained" color="primary">
             {buttonText}
           </Button>
         </ButtonRow>

@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 export const RootFlexColumn = styled.div`
   width: 100%;
@@ -55,23 +55,17 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export const StyledForm = ({ onSubmit, flat, onCancel, children }) => (
+export const StyledForm = ({
+  onSubmit, flat, onCancel, children,
+}) => (
   <FormRoot>
     <Form onSubmit={onSubmit}>
       <Content>{children}</Content>
       <Buttons>
-        <StyledButton
-          onClick={onCancel}
-          variant={flat ? "flat" : "raised"}
-          color="secondary"
-        >
+        <StyledButton onClick={onCancel} variant={flat ? 'flat' : 'contained'} color="secondary">
           Cancelar
         </StyledButton>
-        <StyledButton
-          type="submit"
-          variant={flat ? "flat" : "raised"}
-          color="primary"
-        >
+        <StyledButton type="submit" variant={flat ? 'flat' : 'contained'} color="primary">
           Aceptar
         </StyledButton>
       </Buttons>

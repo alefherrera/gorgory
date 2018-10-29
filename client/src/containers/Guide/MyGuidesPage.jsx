@@ -46,7 +46,7 @@ class MyGuidesPage extends Component {
     return (
       <Container>
         <TitleRow>
-          <Typography gutterBottom variant="title" align="left" component="h2">
+          <Typography gutterBottom variant="h5" align="left" component="h2">
             Mis Guias
           </Typography>
         </TitleRow>

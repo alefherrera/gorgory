@@ -40,9 +40,9 @@ const StyledCardActions = styled(CardActions)`
 export const NewExercisesTable = ({ label, exercisesRows, children }) => (
   <StyledCard>
     <StyledCardContent>
+      {label}
       <Table>
         <TableHead>
-          {label}
           <TableRow>
             <TableCell>Numero</TableCell>
             <TableCell># Tests</TableCell>
@@ -66,9 +66,9 @@ export const NewExercisesTable = ({ label, exercisesRows, children }) => (
 export const NewTestTable = ({ label, testRows, onClick }) => (
   <StyledCard>
     <StyledCardContent>
+      {label}
       <Table>
         <TableHead>
-          {label}
           <TableRow>
             <TableCell>Test #</TableCell>
             <TableCell>Nombre</TableCell>

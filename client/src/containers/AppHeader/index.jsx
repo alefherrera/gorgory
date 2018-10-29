@@ -74,7 +74,7 @@ class AppHeader extends Component {
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <img src={gorgory} alt="img" style={{ height: 40, marginRight: 10 }} />
-            <Typography style={{ width: 200 }} variant="title" color="inherit" noWrap>
+            <Typography style={{ width: 200 }} variant="h5" color="inherit" noWrap>
               Gorgory
             </Typography>
             <ButtonContainer>{this.renderButton()}</ButtonContainer>
