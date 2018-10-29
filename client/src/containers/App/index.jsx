@@ -11,7 +11,6 @@ import Body from '../Body';
 // import CodeEditor from '../CodeEditor';
 import CodeEditor from '../CodeUploader';
 import DisplayNotification from '../DisplayNotification';
-import ShowExercicePage from '../Exercice/ShowExercisePage';
 import AddGuidePage from '../Guide/AddGuidePage';
 import GuidesPage from '../Guide/GuidesPage';
 import SearchGuidePage from '../Guide/SearchGuidePage';
