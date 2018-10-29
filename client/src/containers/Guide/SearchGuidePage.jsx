@@ -12,6 +12,8 @@ class SearchGuidePage extends Component {
     this.props.searchGuides(undefined, values.q ? values : { q: '' });
   };
 
+  renderIcons = () => {};
+
   render() {
     const { guides } = this.props;
     return (
@@ -20,7 +22,7 @@ class SearchGuidePage extends Component {
           <Field name="q" component={SearchBoxWrapper} />
         </form>
         <div>
-          <GuideTable guides={guides} />
+          <GuideTable guides={guides} iconsRenderer={this.renderIcons} />
         </div>
       </div>
     );

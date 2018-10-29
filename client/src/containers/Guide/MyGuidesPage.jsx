@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom';
 import GuideTable from '../../components/GuideTable';
 import { guidesSelector } from '../../selectors/entities/guide';
 import { getGuides } from '../../actions/guide';
@@ -27,18 +28,15 @@ const Row = styled.div`
   overflow-y: auto;
 `;
 
-class GuidesPage extends Component {
+class MyGuidesPage extends Component {
   componentDidMount() {
     this.props.getGuides();
   }
 
-  renderIcons = () => (
+  renderIcons = guide => (
     <div>
-      <IconButton>
-        <Icon style={{ color: '#00897b' }}>edit</Icon>
-      </IconButton>
-      <IconButton>
-        <Icon style={{ color: '#ff511b' }}>delete</Icon>
+      <IconButton component={Link} to={`view/${guide.id}`}>
+        <Icon style={{ color: '#00897b' }}>play_circle_filled</Icon>
       </IconButton>
     </div>
   );
@@ -60,7 +58,7 @@ class GuidesPage extends Component {
   }
 }
 
-GuidesPage.propTypes = {
+MyGuidesPage.propTypes = {
   guides: PropTypes.arrayOf(object),
   getGuides: PropTypes.func,
 };
@@ -70,4 +68,4 @@ export default connect(
     guides: guidesSelector(state),
   }),
   { getGuides },
-)(GuidesPage);
+)(MyGuidesPage);
