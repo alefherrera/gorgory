@@ -31,8 +31,9 @@ class DropZoneWrapper extends Component {
     label: this.props.label,
   };
 
-  handleDrop = (...args) => {
-    this.props.input.onChange(...args);
+  handleDrop = (files) => {
+    this.setState({ label: files[0].name });
+    this.props.input.onChange(files);
   };
 
   render() {
@@ -40,7 +41,7 @@ class DropZoneWrapper extends Component {
     return (
       <FieldContainer>
         <Container>
-          <Dropzone multiple={false} onDrop={input.onChange} {...input} {...custom} style={style}>
+          <Dropzone multiple={false} {...input} {...custom} style={style} onDrop={this.handleDrop}>
             <TextContainer>
               <Typography gutterBottom variant="body1">
                 {this.state.label}
