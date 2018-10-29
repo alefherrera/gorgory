@@ -21,6 +21,7 @@ import authWrapper from '../HOC/authWrapper';
 import { TEACHER, STUDENT } from '../../constants/roles';
 import MyGuidesPage from '../Guide/MyGuidesPage';
 import GuidePage from '../Guide/GuidePage';
+import ShowExercisePage from '../Exercise/ShowExercisePage';
 
 const theme = createMuiTheme({
   palette: {
@@ -55,7 +56,7 @@ const App = () => (
                 <Route path="/guide/list" component={authWrapper(() => [TEACHER])(GuidesPage)} />
                 <Route path="/guide/list" component={authWrapper(() => [STUDENT])(MyGuidesPage)} />
                 <Route path="/guide/view/:guideId" component={GuidePage} />
-                <Route path="/guide/view/:guideId/exercise/:exerciseId" component={GuidePage} />
+                <Route path="/guide/view/exercise/:exerciseId" component={ShowExercisePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
                 <Route path="/guide/exercice/:exerciceId" component={ShowExercicePage} />
               </Body>

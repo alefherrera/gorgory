@@ -4,12 +4,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import { uploadResolution } from '../../actions/resolution';
+import { getExercise } from '../../actions/exercise';
+import { getLastResolution, uploadResolution } from '../../actions/resolution';
 import DropZoneWrapper from '../../components/DropZoneWrapper';
 import FormComponent from '../../components/FormComponent';
-import { StyledButton, TitleText } from '../../components/Generic';
+import { TitleText } from '../../components/Generic';
 import MultilineText from '../../components/MultilineText';
 import TestCaseTable from '../../components/TestCaseTable';
+import { exerciseSelector } from '../../selectors/entities/exercise';
 import OutputLogger from '../OutputLogger';
 
 const Container = styled.div`
@@ -28,18 +30,19 @@ const Row = styled.div`
   justify-content: ${props => props.align || 'left'};
 `;
 
-class ShowExercicePage extends Component {
+class ShowExercisePage extends Component {
   componentDidMount = () => {
-    const { exerciceId } = this.props.match.params;
-    this.props.getExercise(exerciceId);
+    const { exerciseId } = this.props.match.params;
+    this.props.getExercise(undefined, { id: exerciseId });
+    this.props.getLastResolution();
   };
 
   handleSubmit = (values) => {
     const [file] = values.file;
-    const { exerciceId } = this.props.match.params;
+    const { exerciseId } = this.props.match.params;
     // eslint-disable-next-line
     values.file = file;
-    this.props.uploadResolution(values, { id: exerciceId });
+    this.props.uploadResolution(values, { id: exerciseId });
   };
 
   render() {
@@ -74,65 +77,24 @@ class ShowExercicePage extends Component {
             </FormComponent>
             <OutputLogger />
           </Row>
-          <Row>
-            <Divider />
-          </Row>
-          <Row align="right">
-            <StyledButton variant="raised" color="secondary">
-              Cancelar
-            </StyledButton>
-            <StyledButton type="submit" variant="raised" color="primary">
-              Aceptar
-            </StyledButton>
-          </Row>
         </Container>
       </div>
     );
   }
 }
 
-ShowExercicePage.propTypes = {
+ShowExercisePage.propTypes = {
   getExercise: PropTypes.func,
+  getLastResolution: PropTypes.func,
   handleSubmit: PropTypes.func,
   uploadResolution: PropTypes.func,
   match: PropTypes.object,
   exercise: PropTypes.object,
 };
 
-const MockExercise = {
-  description: 'Test test test test',
-  testCases: [
-    {
-      name: 'Caso de prueba 1',
-      arguments: [],
-      expected: 1,
-    },
-    {
-      name: 'Caso de prueba 2',
-      arguments: [],
-      expected: 1,
-    },
-    {
-      name: 'Caso de prueba 3',
-      arguments: [],
-      expected: 1,
-    },
-    {
-      name: 'Caso de prueba 4',
-      arguments: [],
-      expected: 1,
-    },
-    {
-      name: 'Caso de prueba 5',
-      arguments: [],
-      expected: 1,
-    },
-  ],
-};
-
 export default connect(
   state => ({
-    exercise: MockExercise,
+    exercise: exerciseSelector(state),
   }),
-  { getExercise, uploadResolution },
-)(reduxForm({ form: 'resolution' })(ShowExercicePage));
+  { getExercise, getLastResolution, uploadResolution },
+)(reduxForm({ form: 'resolution' })(ShowExercisePage));
