@@ -29,6 +29,14 @@ public class Course extends BaseEntity {
     )
     private List<User> students;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "course_guides",
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "guide_id")}
+    )
+    private List<Guide> guides;
+
     public Long getId() {
         return id;
     }
@@ -55,5 +63,13 @@ public class Course extends BaseEntity {
 
     public void setStudents(List<User> students) {
         this.students = students;
+    }
+
+    public List<Guide> getGuides() {
+        return guides;
+    }
+
+    public void setGuides(List<Guide> guides) {
+        this.guides = guides;
     }
 }

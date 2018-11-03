@@ -25,6 +25,9 @@ public class Guide extends BaseEntity {
     @OneToOne
     private User user;
 
+    @ManyToMany(mappedBy = "guides")
+    private Collection<Course> courses;
+
     public Long getId() {
         return id;
     }
