@@ -1,6 +1,7 @@
 package org.ungs.gorgory.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -20,6 +21,12 @@ public class User {
 
     @OneToOne
     private Role role;
+
+    @ManyToMany(mappedBy = "teachers")
+    private List<Course> teachingCourses;
+
+    @ManyToMany(mappedBy = "students")
+    private List<Course> learningCourses;
 
     public User() {}
 
@@ -69,5 +76,21 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Course> getTeachingCourses() {
+        return teachingCourses;
+    }
+
+    public void setTeachingCourses(List<Course> teachingCourses) {
+        this.teachingCourses = teachingCourses;
+    }
+
+    public List<Course> getLearningCourses() {
+        return learningCourses;
+    }
+
+    public void setLearningCourses(List<Course> learningCourses) {
+        this.learningCourses = learningCourses;
     }
 }
