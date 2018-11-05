@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+import { entitiesSelector } from './entities';
 
-const baseSelector = createSelector(state => state.guide, guides => guides);
+const baseSelector = createSelector(entitiesSelector, entities => entities.guides);
 
 export const guidesSelector = createSelector(baseSelector, guides => guides.all);
 

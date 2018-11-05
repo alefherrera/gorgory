@@ -22,6 +22,7 @@ import MyGuidesPage from '../Guide/MyGuidesPage';
 import GuidePage from '../Guide/GuidePage';
 import ShowExercisePage from '../Exercise/ShowExercisePage';
 import AddExercisePage from '../Guide/AddExercisePage';
+import User from '../User';
 
 const theme = createMuiTheme({
   palette: {
@@ -52,6 +53,7 @@ const App = () => (
                 <Route path="/" exact component={Home} />
                 <Route path="/editor" exact component={CodeEditor} />
                 <Route path="/login" component={Login} />
+                <Route path="/user" component={User} />
                 <Route path="/guide/add" exact component={AddGuidePage} />
                 <Route path="/guide/add/exercise" component={AddExercisePage} />
                 <Route path="/guide/list" component={authWrapper(() => [TEACHER])(GuidesPage)} />
