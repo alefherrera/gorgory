@@ -8,6 +8,7 @@ import org.ungs.gorgory.repository.RoleRepository;
 import org.ungs.gorgory.repository.UserRepository;
 import org.ungs.gorgory.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,23 @@ public class UserServiceImpl implements UserService {
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public User get(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    public Long delete(Long id) {
+        userRepository.deleteById(id);
+        return id;
     }
 
 }
