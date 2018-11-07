@@ -23,6 +23,7 @@ import SearchGuidePage from '../Guide/SearchGuidePage';
 import authWrapper from '../HOC/authWrapper';
 import Home from '../Home';
 import Login from '../Login';
+import CourseView from '../Course/CourseView';
 
 const theme = createMuiTheme({
   palette: {
@@ -60,10 +61,8 @@ const App = () => (
                 <Route path="/guide/view/:guideId" exact component={GuidePage} />
                 <Route path="/guide/view/exercise/:exerciseId" component={ShowExercisePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
-                <Route
-                  path="/course/list"
-                  component={authWrapper(() => [STUDENT])(CourseListPage)}
-                />
+                <Route path="/course/list" component={CourseListPage} />
+                <Route path="/course/view/:courseId" exact component={CourseView} />
               </Body>
             </AppHeader>
             <DisplayNotification />
