@@ -14,8 +14,6 @@ public interface UserService {
 
     User get(Long id);
 
-    void save(User user);
-
     List<User> getAll();
 
     Long delete(Long id);

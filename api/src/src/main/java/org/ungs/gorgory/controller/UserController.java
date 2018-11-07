@@ -2,12 +2,16 @@ package org.ungs.gorgory.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
+import org.ungs.gorgory.bean.SignUpPayload;
 import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.bean.dto.UserDTO;
+import org.ungs.gorgory.model.Role;
 import org.ungs.gorgory.model.User;
+import org.ungs.gorgory.service.RoleService;
 import org.ungs.gorgory.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -17,24 +21,26 @@ public class UserController {
 
     private final ModelMapper modelmapper;
     private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(ModelMapper modelmapper, UserService userService) {
+    public UserController(ModelMapper modelmapper, UserService userService, RoleService roleService) {
         this.modelmapper = modelmapper;
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @PostMapping
-    public UserDTO create(@RequestBody UserDTO dto) {
-        User user = modelmapper.map(dto, User.class);
-        return getMap(user);
+    public void create(@RequestBody SignUpPayload payload) {
+        payload.setPassword("");
+        userService.save(payload);
     }
 
     @PutMapping("/{id}")
-    public UserDTO update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        User user = userService.get(id);
-        modelmapper.map(userDTO, user);
-        userService.save(user);
-        return getMap(user);
+    public void update(@PathVariable Long id, @RequestBody SignUpPayload payload) {
+      /*  User user = userService.get(id);
+        userService.save(payload);
+        return getMap(user);*/
+
     }
 
     @GetMapping

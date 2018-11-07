@@ -44,6 +44,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody LoginPayload payload) {
+        if (payload.getPassword() == null) {
+            payload.setPassword("");
+        }
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         payload.getUsername(),

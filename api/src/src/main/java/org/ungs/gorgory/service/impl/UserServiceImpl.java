@@ -42,10 +42,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
-    }
-
     public List<User> getAll() {
         return userRepository.findAll();
     }

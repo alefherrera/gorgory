@@ -8,7 +8,7 @@ import { userSelector } from '../../selectors/entities/user';
 import RoleForm from './UserForm';
 import { displayNotification } from '../../actions/notification';
 
-class EditRolePage extends Component {
+class EditUserPage extends Component {
   componentDidMount() {
     this.props.getUser(undefined, this.props.match.params);
   }
@@ -33,7 +33,7 @@ class EditRolePage extends Component {
   }
 }
 
-EditRolePage.propTypes = {
+EditUserPage.propTypes = {
   handleSubmit: PropTypes.func,
   getUser: PropTypes.func,
   editUser: PropTypes.func,
@@ -56,5 +56,5 @@ export default connect(
   reduxForm({
     form: 'editUser',
     enableReinitialize: true,
-  })(EditRolePage),
+  })(EditUserPage),
 );
