@@ -33,3 +33,11 @@ export const DELETE_EXERCISE = 'DELETE_EXERCISE';
 export const UPLOAD_RESOLUTION = 'UPLOAD_RESOLUTION';
 export const SEND_RESOLUTION = 'SEND_RESOLUTION';
 export const GET_LAST_RESOLUTION = 'GET_LAST_RESOLUTION';
+
+export const ADD_USER = 'ADD_USER';
+export const EDIT_USER = 'EDIT_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const GET_USERS = 'GET_USERS';
+export const GET_USER = 'GET_USER';
+
+export const GET_ROLES = 'GET_ROLES';

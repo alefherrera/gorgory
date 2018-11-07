@@ -1,4 +1,4 @@
-import { TEACHER, STUDENT } from '../constants/roles';
+import { TEACHER, STUDENT, ADMIN } from '../constants/roles';
 
 export default [
   {
@@ -18,5 +18,17 @@ export default [
     link: '/guide/list',
     text: 'Mis Guias',
     roles: [TEACHER, STUDENT],
+  },
+  {
+    icon: 'person',
+    link: '/user',
+    text: 'Usuarios',
+    roles: [ADMIN],
+  },
+  {
+    icon: 'assignment',
+    link: '/signature',
+    text: 'Materias',
+    roles: [ADMIN],
   },
 ];
