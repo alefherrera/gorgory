@@ -58,4 +58,12 @@ public class Course extends BaseEntity {
     public void setStudents(List<User> students) {
         this.students = students;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
