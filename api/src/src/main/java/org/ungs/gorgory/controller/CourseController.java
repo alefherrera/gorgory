@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.model.Course;
-import org.ungs.gorgory.model.Role;
 import org.ungs.gorgory.model.Roles;
 import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.CourseRepository;

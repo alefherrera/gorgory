@@ -13,6 +13,8 @@ public class Course extends BaseEntity {
 
     private String name;
 
+    private String description;
+
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "course_teachers",
