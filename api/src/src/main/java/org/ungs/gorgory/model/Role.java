@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Role extends BaseEntity implements GrantedAuthority {
@@ -14,6 +15,13 @@ public class Role extends BaseEntity implements GrantedAuthority {
     private Long id;
 
     private String name;
+
+    public Role() {}
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -31,5 +39,19 @@ public class Role extends BaseEntity implements GrantedAuthority {
     @JsonIgnore
     public String getAuthority() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) &&
+                Objects.equals(name, role.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
