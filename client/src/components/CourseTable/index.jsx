@@ -27,7 +27,10 @@ const CourseTable = ({ courses = [] }) => (
         {courses.map((course, index) => (
           <TableRow key={index}>
             <TableCell>{course.name}</TableCell>
-            <TableCell>{course.teachers}</TableCell>
+            <TableCell>
+              {course.teachers
+                && course.teachers.reduce((prev, next) => `${prev + next.name}, `, '').slice(0, -2)}
+            </TableCell>
             <TableCell />
           </TableRow>
         ))}
