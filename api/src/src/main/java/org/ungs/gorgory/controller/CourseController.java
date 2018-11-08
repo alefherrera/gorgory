@@ -1,35 +1,40 @@
 package org.ungs.gorgory.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.ungs.gorgory.bean.dto.CourseDTO;
 import org.ungs.gorgory.model.Course;
-import org.ungs.gorgory.model.Roles;
 import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.CourseRepository;
 import org.ungs.gorgory.security.IAuthenticatedUserRetriever;
+import org.ungs.gorgory.service.CourseService;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
 
+    private CourseService courseService;
     private CourseRepository courseRepository;
-    private ObjectMapper objectMapper;
     private IAuthenticatedUserRetriever authenticatedUserRetriever;
+    private ModelMapper modelMapper;
 
-    public CourseController(CourseRepository courseRepository, ObjectMapper objectMapper, IAuthenticatedUserRetriever authenticatedUserRetriever) {
+    public CourseController(CourseService courseService, CourseRepository courseRepository,
+                            IAuthenticatedUserRetriever authenticatedUserRetriever, ModelMapper modelMapper) {
+        this.courseService = courseService;
         this.courseRepository = courseRepository;
-        this.objectMapper = objectMapper;
         this.authenticatedUserRetriever = authenticatedUserRetriever;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Course>> getCourses() {
-        return new ResponseEntity<>(courseRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<Collection<CourseDTO>> getCourses() {
+        return new ResponseEntity<>(courseRepository.findAll().stream().map(x -> modelMapper.map(x, CourseDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @PutMapping("/{id}/subscribe")
@@ -41,12 +46,7 @@ public class CourseController {
         Course course = optionalCourse.get();
 
         final User authenticatedUser = authenticatedUserRetriever.getAuthenticatedUser();
-        if (authenticatedUser.getRole().equals(Roles.STUDENT)) {
-            course.getStudents().add(authenticatedUser);
-        } else if (authenticatedUser.getRole().equals(Roles.TEACHER)) {
-            course.getTeachers().add(authenticatedUser);
-        }
-        courseRepository.save(course);
+        courseService.subscribeUserToCourse(authenticatedUser, course);
         return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
     }
 
@@ -59,12 +59,7 @@ public class CourseController {
         Course course = optionalCourse.get();
 
         final User authenticatedUser = authenticatedUserRetriever.getAuthenticatedUser();
-        if (authenticatedUser.getRole().equals(Roles.STUDENT)) {
-            course.getStudents().remove(authenticatedUser);
-        } else if (authenticatedUser.getRole().equals(Roles.TEACHER)) {
-            course.getTeachers().remove(authenticatedUser);
-        }
-        courseRepository.save(course);
+        courseService.unsubscribeUserToCourse(authenticatedUser, course);
         return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
     }
 }
