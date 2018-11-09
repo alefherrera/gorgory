@@ -25,6 +25,8 @@ public class CodeEvaluationController {
     public void test(@PathVariable String guid, @RequestBody CodeEvaluationPayload input) {
 
 
+        throw new RuntimeException("Test");
+/*
         TestCase t = new TestCase();
         t.setExpected("12");
         t.setSignature("int;sumar;int;int:Sumador");
@@ -38,10 +40,10 @@ public class CodeEvaluationController {
         args.add(a1);
         args.add(a2);
 
-        t.setArguments(args);
+
 
         javaExecutioner.execute("/scope/javatest", t);
-
+*/
 
 
     }
