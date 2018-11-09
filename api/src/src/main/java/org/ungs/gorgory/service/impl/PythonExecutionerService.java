@@ -38,7 +38,7 @@ public class PythonExecutionerService implements ExecutionerService {
     @Override
     public Result runTestCaseOnResolution(Resolution resolution, TestCase testCase) throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
         Collection<String> codeFilesPath = obtainCodeFiles(resolution.getPath());
-        Path inputFile = createInputFileFromArguments(resolution.getPath(), testCase.getArguments());
+        Path inputFile = createInputFileFromArguments(resolution.getPath(), testCase.getArgument());
         Collection<String> commands = buildExecutionCommand(Language.PYTHON, codeFilesPath, inputFile);
         String result = commandRunnerService.execute(commands);
         eraseInputFile(inputFile);
@@ -92,16 +92,14 @@ public class PythonExecutionerService implements ExecutionerService {
         return commandList;
     }
 
-    private Path createInputFileFromArguments(String resolutionDir, Collection<Argument> arguments) throws FileNotFoundException, UnsupportedEncodingException {
-        if (arguments.isEmpty())
+    private Path createInputFileFromArguments(String resolutionDir, String argument) throws FileNotFoundException, UnsupportedEncodingException {
+        if (argument.isEmpty())
             return null;
 
         Path filePath = Paths.get(resolutionDir, UUID.randomUUID().toString() + ".txt");
         PrintWriter writer = new PrintWriter(filePath.toFile(), "UTF-8");
 
-        for (Argument argument : arguments) {
-            writer.println(argument);
-        }
+        writer.println(argument);
         writer.close();
 
         return filePath;

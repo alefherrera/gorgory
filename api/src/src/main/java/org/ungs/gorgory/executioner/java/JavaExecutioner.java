@@ -39,7 +39,7 @@ public class JavaExecutioner {
 
         //Dame la lista de todos los .java
         List<File> javaFiles = javaFileFetcher.getAllFilesWithExtension(path, ".java");
-        JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getSignature());
+        //JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getSignature());
 
         List<String> pathsStr = javaFiles.stream().map(x-> x.getAbsolutePath().substring(pwd.length() + path.length() + 2))
                 .collect(Collectors.toList());
@@ -50,10 +50,10 @@ public class JavaExecutioner {
         int javacCompileCommand = commands.get(0).indexOf("javac") + ("javac").length();
         String compileCommand = commands.get(0).substring(0, javacCompileCommand) + " " + String.join(" ", pathsStr);
 
-        String echo = "echo " + testCase.getArgument();
+        String echo = "echo -e \"" + testCase.getArgument() + "\"";
 
         int javacRumCommand = commands.get(1).indexOf("java") + ("java").length();
-        String rumCommand = echo + "|" + commands.get(1).substring(0, javacRumCommand) + " Main" ;
+        String rumCommand = echo + " | " + commands.get(1).substring(0, javacRumCommand) + " Main" ;
 
         commandRunnerService.executeSingleCommand(compileCommand);
 

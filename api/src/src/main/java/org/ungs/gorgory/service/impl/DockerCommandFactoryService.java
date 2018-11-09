@@ -40,7 +40,7 @@ public class DockerCommandFactoryService implements CommandFactoryService {
     }
 
     private String getDockerCommand(String folder) {
-        return "docker run --rm -v $PWD:/app -w /app/" + folder;
+        return "docker run -i --rm -v $PWD:/app -w /app/" + folder;
     }
 
 }
