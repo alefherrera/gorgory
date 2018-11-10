@@ -3,15 +3,12 @@ package org.ungs.gorgory.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.SignUpPayload;
-import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.bean.dto.UserDTO;
-import org.ungs.gorgory.model.Role;
 import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.service.RoleService;
 import org.ungs.gorgory.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
