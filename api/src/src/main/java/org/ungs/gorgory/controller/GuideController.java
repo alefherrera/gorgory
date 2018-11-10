@@ -7,6 +7,7 @@ import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.security.UserRetrieverService;
 import org.ungs.gorgory.service.GuideService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class GuideController {
 
     @GetMapping
     public List<GuideDTO> getAll(@RequestParam(value = "q", required = false) String query) {
+
         List<Guide> guides;
         if (query != null) {
             guides = guideService.getByQuery(query);

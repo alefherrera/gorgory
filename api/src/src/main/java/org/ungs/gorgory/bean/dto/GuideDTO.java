@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.ungs.gorgory.Language;
 
 import javax.persistence.Column;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -30,6 +32,9 @@ public class GuideDTO {
 
     @JsonProperty("updateDateTime")
     private Date updateDateTime;
+
+    @JsonProperty("start")
+    private LocalDateTime start;
 
     public Long getId() {
         return id;
@@ -77,5 +82,13 @@ public class GuideDTO {
 
     public void setUpdateDateTime(Date updateDateTime) {
         this.updateDateTime = updateDateTime;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
     }
 }
