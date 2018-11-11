@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
 
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("username")
     private String username;
 
@@ -37,5 +40,13 @@ public class UserDTO {
 
     public void setRole(RoleDTO role) {
         this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
