@@ -6,10 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
 import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
-import org.ungs.gorgory.model.Argument;
-import org.ungs.gorgory.model.Resolution;
-import org.ungs.gorgory.model.Result;
-import org.ungs.gorgory.model.TestCase;
+import org.ungs.gorgory.model.*;
 import org.ungs.gorgory.service.impl.CommandRunnerServiceImpl;
 import org.ungs.gorgory.service.impl.LocalCommandFactoryService;
 import org.ungs.gorgory.service.impl.PythonExecutionerService;
@@ -49,7 +46,7 @@ public class PythonExecutionerServiceTest {
         Result result = service.runTestCaseOnResolution(resolution, testCase);
 
         Assert.assertNotNull(result);
-        Assert.assertEquals(true, result.getPassed());
+        Assert.assertEquals(ResultState.PASSED, result.getState());
     }
 
     @Test(expected = NoCodeFilesToCompileException.class)
@@ -88,7 +85,7 @@ public class PythonExecutionerServiceTest {
         Result result = service.runTestCaseOnResolution(resolution, testCase);
 
         Assert.assertNotNull(result);
-        Assert.assertEquals(true, result.getPassed());
+        Assert.assertEquals(ResultState.PASSED, result.getState());
     }
 
     @Test()
@@ -112,7 +109,7 @@ public class PythonExecutionerServiceTest {
         Result result = service.runTestCaseOnResolution(resolution, testCase);
 
         Assert.assertNotNull(result);
-        Assert.assertEquals(true, result.getPassed());
+        Assert.assertEquals(ResultState.PASSED, result.getState());
     }
 
     @Test(expected = NoMainCodeFilePresentException.class)
