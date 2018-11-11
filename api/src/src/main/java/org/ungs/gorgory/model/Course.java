@@ -1,7 +1,10 @@
 package org.ungs.gorgory.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Course extends BaseEntity {
@@ -21,7 +24,7 @@ public class Course extends BaseEntity {
             joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "teacher_id")}
     )
-    private List<User> teachers;
+    private Set<User> teachers;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
@@ -29,7 +32,7 @@ public class Course extends BaseEntity {
             joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
-    private List<User> students;
+    private Set<User> students;
 
     public Long getId() {
         return id;
@@ -43,19 +46,19 @@ public class Course extends BaseEntity {
         this.name = name;
     }
 
-    public List<User> getTeachers() {
+    public Set<User> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(List<User> teachers) {
+    public void setTeachers(Set<User> teachers) {
         this.teachers = teachers;
     }
 
-    public List<User> getStudents() {
+    public Set<User> getStudents() {
         return students;
     }
 
-    public void setStudents(List<User> students) {
+    public void setStudents(Set<User> students) {
         this.students = students;
     }
 
@@ -66,4 +69,28 @@ public class Course extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void addTeacher(User user) {
+        if (this.teachers == null)
+            this.teachers = new HashSet<>();
+        this.teachers.add(user);
+    }
+
+    public void removeTeacher(User user) {
+        if (this.teachers != null)
+            this.teachers.remove(user);
+    }
+
+    public void addStudent(User user) {
+        if (this.students == null)
+            this.students = new HashSet<>();
+        this.students.add(user);
+    }
+
+    public void removeStudent(User user) {
+        if (this.students != null)
+            this.students.remove(user);
+    }
+
+
 }
