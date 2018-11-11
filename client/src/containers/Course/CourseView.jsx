@@ -2,12 +2,13 @@ import { Divider, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import styled from 'styled-components';
+import { getCourse, subscribeCourse, unsubscribeCourse } from '../../actions/course';
 import { TitleText } from '../../components/Generic';
 import MultilineText from '../../components/MultilineText';
-import { exerciseSelector } from '../../selectors/entities/exercise';
-import { getCourse, subscribeCourse, unsubscribeCourse } from '../../actions/course';
+import { courseSelector } from '../../selectors/entities/course';
+import FollowCourseButton from '../../components/FollowCourseButton';
+import { userSelector } from '../../selectors/session';
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ class CourseView extends Component {
   };
 
   render() {
-    const { course } = this.props;
+    const { course, user } = this.props;
     return (
       <div>
         <TitleText text="Comisión" />
@@ -60,10 +61,16 @@ class CourseView extends Component {
             </Typography>
           </Row>
           <Row height="150px">
-            {course.teachers.reduce((prev, next) => `${prev + next}, `, '').slice(0, -2)}
+            {course.teachers
+              && course.teachers.reduce((prev, next) => `${prev + next.name}, `, '').slice(0, -2)}
           </Row>
           <Row>
-            <div />
+            <FollowCourseButton
+              course={course}
+              user={user}
+              onSubscribe={this.handleSubscribe}
+              onUnsubscribe={this.handleUnsubscribe}
+            />
           </Row>
         </Container>
       </div>
@@ -74,6 +81,7 @@ class CourseView extends Component {
 CourseView.propTypes = {
   match: PropTypes.object,
   course: PropTypes.object,
+  user: PropTypes.object,
   getCourse: PropTypes.func,
   subscribeCourse: PropTypes.func,
   unsubscribeCourse: PropTypes.func,
@@ -81,7 +89,8 @@ CourseView.propTypes = {
 
 export default connect(
   state => ({
-    exercise: exerciseSelector(state),
+    course: courseSelector(state),
+    user: userSelector(state),
   }),
   { getCourse, subscribeCourse, unsubscribeCourse },
-)(reduxForm({ form: 'resolution' })(CourseView));
+)(CourseView);

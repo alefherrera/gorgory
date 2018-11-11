@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import styled from 'styled-components';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,7 +13,7 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
-const CourseTable = ({ courses = [] }) => (
+const CourseTable = ({ courses = [], iconsRenderer = () => {} }) => (
   <Container>
     <Table>
       <TableHead>
@@ -31,7 +31,7 @@ const CourseTable = ({ courses = [] }) => (
               {course.teachers
                 && course.teachers.reduce((prev, next) => `${prev + next.name}, `, '').slice(0, -2)}
             </TableCell>
-            <TableCell />
+            <TableCell>{iconsRenderer(course)}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -40,7 +40,8 @@ const CourseTable = ({ courses = [] }) => (
 );
 
 CourseTable.propTypes = {
-  courses: PropTypes.object,
+  courses: PropTypes.arrayOf(object),
+  iconsRenderer: PropTypes.func,
 };
 
 export default CourseTable;

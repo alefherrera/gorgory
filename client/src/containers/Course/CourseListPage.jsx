@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import PropTypes, { object } from 'prop-types';
-import { connect } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import PropTypes, { object } from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { getCourses, subscribeCourse, unsubscribeCourse } from '../../actions/course';
 import CourseTable from '../../components/CourseTable';
 import { coursesSelector } from '../../selectors/entities/course';
-import { getCourses, subscribeCourse, unsubscribeCourse } from '../../actions/course';
 
 const Container = styled.div`
   width: 100%;
@@ -42,8 +43,8 @@ class CourseListPage extends Component {
 
   renderIcons = course => (
     <div>
-      <IconButton onClick={() => this.handleDelete(course)}>
-        <Icon style={{ color: '#ff511b' }}>delete</Icon>
+      <IconButton component={Link} to={`view/${course.id}`}>
+        <Icon style={{ color: '#00897b' }}>play_circle_filled</Icon>
       </IconButton>
     </div>
   );
