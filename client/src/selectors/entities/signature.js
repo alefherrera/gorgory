@@ -6,5 +6,5 @@ function getCurrent(signature) {
 }
 
 export const baseSelector = createSelector(entitiesSelector, entities => entities.signature);
-export const signatureSelector = createSelector(baseSelector, signature => signature.all);
-export const signaturesSelector = createSelector(baseSelector, signature => getCurrent(signature));
+export const signaturesSelector = createSelector(baseSelector, signature => signature.all);
+export const signatureSelector = createSelector(baseSelector, signature => getCurrent(signature));
