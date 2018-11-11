@@ -15,6 +15,7 @@ public class SignatureDTO {
     private String name;
 
     @JsonProperty("courses")
+    @JsonIgnoreProperties("signature")
     private List<CourseDTO> courses;
 
     public Long getId() {

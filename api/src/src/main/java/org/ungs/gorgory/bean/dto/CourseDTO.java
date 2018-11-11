@@ -2,6 +2,7 @@ package org.ungs.gorgory.bean.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.ungs.gorgory.model.Signature;
 
 import java.util.Collection;
 
@@ -22,6 +23,9 @@ public class CourseDTO {
 
     @JsonProperty("students")
     private Collection<UserDTO> students;
+
+    @JsonProperty("signature")
+    private SignatureDTO signature;
 
 
     public Long getId() {
@@ -62,5 +66,13 @@ public class CourseDTO {
 
     public void setStudents(Collection<UserDTO> students) {
         this.students = students;
+    }
+
+    public SignatureDTO getSignature() {
+        return signature;
+    }
+
+    public void setSignature(SignatureDTO signature) {
+        this.signature = signature;
     }
 }
