@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 
+import Moment from 'react-moment';
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -30,7 +32,7 @@ const GuideTable = ({ guides = [], iconsRenderer = () => {} }) => (
           <TableRow key={index}>
             <TableCell>{guide.name}</TableCell>
             <TableCell>{guide.exercises.length}</TableCell>
-            <TableCell>{guide.updateDateTime}</TableCell>
+            <TableCell><Moment format="YYYY/MM/DD hh:mm:ss" date ={guide.updateDateTime} /></TableCell>
             <TableCell>{iconsRenderer(guide)}</TableCell>
           </TableRow>
         ))}

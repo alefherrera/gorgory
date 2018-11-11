@@ -7,6 +7,7 @@ import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.security.UserRetrieverService;
 import org.ungs.gorgory.service.GuideService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class GuideController {
     @PostMapping
     public GuideDTO create(@RequestBody GuideDTO dto) {
         Guide guide = modelmapper.map(dto, Guide.class);
+        //TODO: el mapper no mapea la fecha
         guide.getExercises().forEach(exercise -> {
             if (exercise.getLanguage() == null) {
                 exercise.setLanguage(guide.getLanguage());
@@ -47,6 +49,7 @@ public class GuideController {
 
     @GetMapping
     public List<GuideDTO> getAll(@RequestParam(value = "q", required = false) String query) {
+
         List<Guide> guides;
         if (query != null) {
             guides = guideService.getByQuery(query);
@@ -54,6 +57,11 @@ public class GuideController {
             guides = guideService.getAll();
         }
         return guides.stream().map(this::getMap).collect(Collectors.toList());
+    }
+
+    @GetMapping("/noDate")
+    public List<GuideDTO> getAllWithoutDateFilter(){
+        return guideService.getAllWithoutDate().stream().map(this::getMap).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")

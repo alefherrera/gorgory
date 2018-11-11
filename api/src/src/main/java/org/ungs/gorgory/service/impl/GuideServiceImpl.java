@@ -5,7 +5,10 @@ import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.repository.GuideRepository;
 import org.ungs.gorgory.service.GuideService;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GuideServiceImpl implements GuideService {
@@ -25,11 +28,23 @@ public class GuideServiceImpl implements GuideService {
     }
 
     public List<Guide> getAll() {
-        return guideRepository.findAll();
+        return getVisibleGuides(guideRepository.findAll());
+    }
+
+    public List<Guide> getAllWithoutDate(){
+        return  guideRepository.findAll();
     }
 
     public List<Guide> getByQuery(String query) {
-        return guideRepository.findAllByNameContaining(query);
+        return getVisibleGuides(guideRepository.findAllByNameContaining(query));
+    }
+
+    private List<Guide> getVisibleGuides(List<Guide> guides){
+
+        LocalDateTime now = LocalDateTime.now();
+
+        return guides.stream().filter(x -> x.getStart() == null || x.getStart().isBefore(now)).collect(Collectors.toList());
+
     }
 
     public Long delete(Long id) {

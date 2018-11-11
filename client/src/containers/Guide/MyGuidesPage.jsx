@@ -30,6 +30,7 @@ const Row = styled.div`
 
 class MyGuidesPage extends Component {
   componentDidMount() {
+    console.log('vamo lo pibeee');
     this.props.getGuides();
   }
 
