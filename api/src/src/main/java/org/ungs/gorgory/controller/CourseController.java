@@ -8,7 +8,7 @@ import org.ungs.gorgory.bean.dto.CourseDTO;
 import org.ungs.gorgory.model.Course;
 import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.CourseRepository;
-import org.ungs.gorgory.security.IAuthenticatedUserRetriever;
+import org.ungs.gorgory.security.UserRetrieverService;
 import org.ungs.gorgory.service.CourseService;
 
 import java.util.Collection;
@@ -21,14 +21,14 @@ public class CourseController {
 
     private CourseService courseService;
     private CourseRepository courseRepository;
-    private IAuthenticatedUserRetriever authenticatedUserRetriever;
+    private final UserRetrieverService userRetrieverService;
     private ModelMapper modelMapper;
 
     public CourseController(CourseService courseService, CourseRepository courseRepository,
-                            IAuthenticatedUserRetriever authenticatedUserRetriever, ModelMapper modelMapper) {
+                            UserRetrieverService userRetrieverService, ModelMapper modelMapper) {
         this.courseService = courseService;
         this.courseRepository = courseRepository;
-        this.authenticatedUserRetriever = authenticatedUserRetriever;
+        this.userRetrieverService = userRetrieverService;
         this.modelMapper = modelMapper;
     }
 
@@ -51,7 +51,7 @@ public class CourseController {
 
         Course course = optionalCourse.get();
 
-        final User authenticatedUser = authenticatedUserRetriever.getAuthenticatedUser();
+        final User authenticatedUser = userRetrieverService.getUser();
         courseService.subscribeUserToCourse(authenticatedUser, course);
         return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
     }
@@ -64,7 +64,7 @@ public class CourseController {
 
         Course course = optionalCourse.get();
 
-        final User authenticatedUser = authenticatedUserRetriever.getAuthenticatedUser();
+        final User authenticatedUser = userRetrieverService.getUser();
         courseService.unsubscribeUserToCourse(authenticatedUser, course);
         return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
     }
