@@ -1,7 +1,9 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.model.Guide;
+import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.GuideRepository;
 import org.ungs.gorgory.service.GuideService;
 
@@ -28,18 +30,14 @@ public class GuideServiceImpl implements GuideService {
     }
 
     public List<Guide> getAll() {
-        return getVisibleGuides(guideRepository.findAll());
-    }
-
-    public List<Guide> getAllWithoutDate(){
-        return  guideRepository.findAll();
+        return guideRepository.findAll();
     }
 
     public List<Guide> getByQuery(String query) {
         return getVisibleGuides(guideRepository.findAllByNameContaining(query));
     }
 
-    private List<Guide> getVisibleGuides(List<Guide> guides){
+    private List<Guide> getVisibleGuides(List<Guide> guides) {
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -51,4 +49,11 @@ public class GuideServiceImpl implements GuideService {
         guideRepository.deleteById(id);
         return id;
     }
+
+    @Override
+    public List<Guide> getActiveGuidesForUser(User user) {
+        LocalDateTime now = LocalDateTime.now();
+        return guideRepository.findAllByStartBeforeAndEndAfterAndCoursesIn(now, now, user.getLearningCourses());
+    }
+
 }

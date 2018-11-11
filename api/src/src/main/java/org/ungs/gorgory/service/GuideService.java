@@ -1,6 +1,8 @@
 package org.ungs.gorgory.service;
 
+import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.model.Guide;
+import org.ungs.gorgory.model.User;
 
 import java.util.List;
 
@@ -12,9 +14,9 @@ public interface GuideService {
 
     List<Guide> getAll();
 
-    List<Guide> getAllWithoutDate();
-
     List<Guide> getByQuery(String query);
 
     Long delete(Long id);
+
+    List<Guide> getActiveGuidesForUser(User user);
 }

@@ -49,7 +49,6 @@ public class GuideController {
 
     @GetMapping
     public List<GuideDTO> getAll(@RequestParam(value = "q", required = false) String query) {
-
         List<Guide> guides;
         if (query != null) {
             guides = guideService.getByQuery(query);
@@ -59,9 +58,9 @@ public class GuideController {
         return guides.stream().map(this::getMap).collect(Collectors.toList());
     }
 
-    @GetMapping("/noDate")
-    public List<GuideDTO> getAllWithoutDateFilter(){
-        return guideService.getAllWithoutDate().stream().map(this::getMap).collect(Collectors.toList());
+    @GetMapping("/active")
+    public List<GuideDTO> getActiveGuidesForUser() {
+        return guideService.getActiveGuidesForUser(userRetriever.getUser()).stream().map(this::getMap).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
