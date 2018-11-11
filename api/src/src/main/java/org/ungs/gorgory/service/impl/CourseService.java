@@ -7,6 +7,8 @@ import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.CourseRepository;
 import org.ungs.gorgory.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class CourseService implements org.ungs.gorgory.service.CourseService {
 
@@ -21,11 +23,11 @@ public class CourseService implements org.ungs.gorgory.service.CourseService {
     @Override
     public void subscribeUserToCourse(User user, Course course) {
         if (user.getRole().equals(Roles.STUDENT.getValue())) {
-            course.getStudents().add(user);
-            user.getLearningCourses().add(course);
+            Optional.ofNullable(course.getStudents()).ifPresent(x -> x.add(user));
+            Optional.ofNullable(user.getLearningCourses()).ifPresent(x -> x.add(course));
         } else if (user.getRole().equals(Roles.TEACHER.getValue())) {
-            course.getTeachers().add(user);
-            user.getTeachingCourses().add(course);
+            Optional.ofNullable(course.getTeachers()).ifPresent(x -> x.add(user));
+            Optional.ofNullable(user.getTeachingCourses()).ifPresent(x -> x.add(course));
         }
         courseRepository.save(course);
         userRepository.save(user);
@@ -34,11 +36,11 @@ public class CourseService implements org.ungs.gorgory.service.CourseService {
     @Override
     public void unsubscribeUserToCourse(User user, Course course) {
         if (user.getRole().equals(Roles.STUDENT.getValue())) {
-            course.getStudents().remove(user);
-            user.getLearningCourses().remove(course);
+            Optional.ofNullable(course.getStudents()).ifPresent(x -> x.remove(user));
+            Optional.ofNullable(user.getLearningCourses()).ifPresent(x -> x.remove(course));
         } else if (user.getRole().equals(Roles.TEACHER.getValue())) {
-            course.getTeachers().remove(user);
-            user.getTeachingCourses().remove(course);
+            Optional.ofNullable(course.getTeachers()).ifPresent(x -> x.remove(user));
+            Optional.ofNullable(user.getTeachingCourses()).ifPresent(x -> x.remove(course));
         }
         courseRepository.save(course);
         userRepository.save(user);

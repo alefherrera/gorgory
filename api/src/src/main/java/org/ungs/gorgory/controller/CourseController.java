@@ -37,6 +37,12 @@ public class CourseController {
         return new ResponseEntity<>(courseRepository.findAll().stream().map(x -> modelMapper.map(x, CourseDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseDTO> get(@PathVariable Long id) {
+        return courseRepository.findById(id).map(course -> new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @PutMapping("/{id}/subscribe")
     public ResponseEntity<Course> subscribeToCourse(@PathVariable Long id) {
         final Optional<Course> optionalCourse = courseRepository.findById(id);

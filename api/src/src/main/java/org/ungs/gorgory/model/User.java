@@ -2,6 +2,7 @@ package org.ungs.gorgory.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User {
@@ -92,5 +93,18 @@ public class User {
 
     public void setLearningCourses(List<Course> learningCourses) {
         this.learningCourses = learningCourses;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

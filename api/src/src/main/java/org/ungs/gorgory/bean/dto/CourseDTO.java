@@ -8,6 +8,9 @@ import java.util.Collection;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CourseDTO {
 
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("name")
     private String name;
 
@@ -20,6 +23,14 @@ public class CourseDTO {
     @JsonProperty("students")
     private Collection<UserDTO> students;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
