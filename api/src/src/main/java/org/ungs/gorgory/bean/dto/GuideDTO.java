@@ -36,6 +36,9 @@ public class GuideDTO {
     @JsonProperty("start")
     private LocalDateTime start;
 
+    @JsonProperty("end")
+    private LocalDateTime end;
+
     public Long getId() {
         return id;
     }
@@ -90,5 +93,13 @@ public class GuideDTO {
 
     public void setStart(LocalDateTime start) {
         this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 }

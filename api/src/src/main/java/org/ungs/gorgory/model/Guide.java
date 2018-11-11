@@ -5,7 +5,6 @@ import org.ungs.gorgory.Language;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.Collection;
 
 @Entity
@@ -29,7 +28,10 @@ public class Guide extends BaseEntity {
 
     @ManyToMany(mappedBy = "guides")
     private Collection<Course> courses;
+
     private LocalDateTime start;
+
+    private LocalDateTime end;
 
     public Long getId() {
         return id;
@@ -70,12 +72,19 @@ public class Guide extends BaseEntity {
         this.user = user;
     }
 
-
     public LocalDateTime getStart() {
         return start;
     }
 
     public void setStart(LocalDateTime start) {
         this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 }
