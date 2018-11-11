@@ -13,7 +13,7 @@ public class Signature extends BaseEntity {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> courses;
 
     public Long getId() {
