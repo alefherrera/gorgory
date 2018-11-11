@@ -7,8 +7,6 @@ import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.CourseRepository;
 import org.ungs.gorgory.repository.UserRepository;
 
-import java.util.Optional;
-
 @Service
 public class CourseService implements org.ungs.gorgory.service.CourseService {
 
@@ -23,11 +21,11 @@ public class CourseService implements org.ungs.gorgory.service.CourseService {
     @Override
     public void subscribeUserToCourse(User user, Course course) {
         if (user.getRole().equals(Roles.STUDENT.getValue())) {
-            Optional.ofNullable(course.getStudents()).ifPresent(x -> x.add(user));
-            Optional.ofNullable(user.getLearningCourses()).ifPresent(x -> x.add(course));
+            course.addStudent(user);
+            user.addLearningCourse(course);
         } else if (user.getRole().equals(Roles.TEACHER.getValue())) {
-            Optional.ofNullable(course.getTeachers()).ifPresent(x -> x.add(user));
-            Optional.ofNullable(user.getTeachingCourses()).ifPresent(x -> x.add(course));
+            course.addTeacher(user);
+            user.addTeachingCourse(course);
         }
         courseRepository.save(course);
         userRepository.save(user);
@@ -36,11 +34,11 @@ public class CourseService implements org.ungs.gorgory.service.CourseService {
     @Override
     public void unsubscribeUserToCourse(User user, Course course) {
         if (user.getRole().equals(Roles.STUDENT.getValue())) {
-            Optional.ofNullable(course.getStudents()).ifPresent(x -> x.remove(user));
-            Optional.ofNullable(user.getLearningCourses()).ifPresent(x -> x.remove(course));
+            course.removeStudent(user);
+            user.removeLearningCourse(course);
         } else if (user.getRole().equals(Roles.TEACHER.getValue())) {
-            Optional.ofNullable(course.getTeachers()).ifPresent(x -> x.remove(user));
-            Optional.ofNullable(user.getTeachingCourses()).ifPresent(x -> x.remove(course));
+            course.removeTeacher(user);
+            user.removeTeachingCourse(course);
         }
         courseRepository.save(course);
         userRepository.save(user);
