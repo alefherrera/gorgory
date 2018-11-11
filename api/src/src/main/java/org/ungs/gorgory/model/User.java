@@ -1,7 +1,7 @@
 package org.ungs.gorgory.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class User {
@@ -23,10 +23,10 @@ public class User {
     private Role role;
 
     @ManyToMany(mappedBy = "teachers")
-    private List<Course> teachingCourses;
+    private Set<Course> teachingCourses;
 
     @ManyToMany(mappedBy = "students")
-    private List<Course> learningCourses;
+    private Set<Course> learningCourses;
 
     public User() {}
 
@@ -78,19 +78,54 @@ public class User {
         this.role = role;
     }
 
-    public List<Course> getTeachingCourses() {
+    public Set<Course> getTeachingCourses() {
         return teachingCourses;
     }
 
-    public void setTeachingCourses(List<Course> teachingCourses) {
+    public void setTeachingCourses(Set<Course> teachingCourses) {
         this.teachingCourses = teachingCourses;
     }
 
-    public List<Course> getLearningCourses() {
+    public Set<Course> getLearningCourses() {
         return learningCourses;
     }
 
-    public void setLearningCourses(List<Course> learningCourses) {
+    public void setLearningCourses(Set<Course> learningCourses) {
         this.learningCourses = learningCourses;
+    }
+
+    public void addLearningCourse(Course course) {
+        if (this.learningCourses == null)
+            setLearningCourses(new HashSet<>());
+        this.learningCourses.add(course);
+    }
+
+    public void removeLearningCourse(Course course) {
+        if (this.learningCourses != null)
+            this.learningCourses.remove(course);
+    }
+
+    public void addTeachingCourse(Course course) {
+        if (this.teachingCourses == null)
+            setTeachingCourses(new HashSet<>());
+        this.teachingCourses.add(course);
+    }
+
+    public void removeTeachingCourse(Course course) {
+        if (this.teachingCourses != null)
+            this.teachingCourses.remove(course);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

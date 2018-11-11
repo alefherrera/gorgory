@@ -6,6 +6,7 @@ import ui from './ui';
 import createGuide from './createGuide';
 import entities from './entities';
 import exercise from './exercise';
+import course from './course';
 
 export default combineReducers({
   session,
@@ -15,4 +16,5 @@ export default combineReducers({
   createGuide,
   entities,
   exercise,
+  course,
 });

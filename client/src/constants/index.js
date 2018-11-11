@@ -42,3 +42,8 @@ export const GET_USERS = 'GET_USERS';
 export const GET_USER = 'GET_USER';
 
 export const GET_ROLES = 'GET_ROLES';
+
+export const GET_COURSE = 'GET_COURSE';
+export const GET_COURSES = 'GET_COURSES';
+export const SUBSCRIBE_COURSE = 'SUBSCRIBE_COURSE';
+export const UNSUBSCRIBE_COURSE = 'UNSUBSCRIBE_COURSE';
