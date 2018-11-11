@@ -14,9 +14,15 @@ export default [
     roles: [STUDENT],
   },
   {
-    icon: 'assignment',
+    icon: 'description',
     link: '/guide/list',
     text: 'Mis Guias',
+    roles: [TEACHER, STUDENT],
+  },
+  {
+    icon: 'assignment',
+    link: '/course/list',
+    text: 'Cursos',
     roles: [TEACHER, STUDENT],
   },
 ];
