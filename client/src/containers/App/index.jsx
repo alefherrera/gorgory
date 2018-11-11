@@ -4,24 +4,26 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Route from 'react-router/Route';
 import { PersistGate } from 'redux-persist/integration/react';
+import { STUDENT, TEACHER } from '../../constants/roles';
 import history from '../../history';
 import { persistor, store } from '../../store';
 import AppHeader from '../AppHeader';
 import Body from '../Body';
 // import CodeEditor from '../CodeEditor';
 import CodeEditor from '../CodeUploader';
+import CourseListPage from '../Course/CourseListPage';
 import DisplayNotification from '../DisplayNotification';
-import AddGuidePage from '../Guide/AddGuidePage';
-import GuidesPage from '../Guide/GuidesPage';
-import SearchGuidePage from '../Guide/SearchGuidePage';
-import Home from '../Home';
-import Login from '../Login';
-import authWrapper from '../HOC/authWrapper';
-import { TEACHER, STUDENT } from '../../constants/roles';
-import MyGuidesPage from '../Guide/MyGuidesPage';
-import GuidePage from '../Guide/GuidePage';
 import ShowExercisePage from '../Exercise/ShowExercisePage';
 import AddExercisePage from '../Guide/AddExercisePage';
+import AddGuidePage from '../Guide/AddGuidePage';
+import GuidePage from '../Guide/GuidePage';
+import GuidesPage from '../Guide/GuidesPage';
+import MyGuidesPage from '../Guide/MyGuidesPage';
+import SearchGuidePage from '../Guide/SearchGuidePage';
+import authWrapper from '../HOC/authWrapper';
+import Home from '../Home';
+import Login from '../Login';
+import CourseView from '../Course/CourseView';
 import User from '../User';
 
 const theme = createMuiTheme({
@@ -61,6 +63,8 @@ const App = () => (
                 <Route path="/guide/view/:guideId" exact component={GuidePage} />
                 <Route path="/guide/view/exercise/:exerciseId" component={ShowExercisePage} />
                 <Route path="/guide/search" component={SearchGuidePage} />
+                <Route path="/course/list" component={CourseListPage} />
+                <Route path="/course/view/:courseId" exact component={CourseView} />
               </Body>
             </AppHeader>
             <DisplayNotification />
