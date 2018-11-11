@@ -32,7 +32,7 @@ const ResultTable = ({ output = [] }) => (
             <TableCell>{result.testCase.expected}</TableCell>
             <TableCell>{result.output}</TableCell>
             <TableCell>
-              <PassedIcon value={result.passed} />
+              <PassedIcon value={result.state} />
             </TableCell>
           </TableRow>
         ))}

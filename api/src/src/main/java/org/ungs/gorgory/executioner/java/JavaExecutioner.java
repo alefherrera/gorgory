@@ -33,18 +33,20 @@ public class JavaExecutioner {
 
 
     //Funcion que testea cosas sin main
-    public String execute(String path, TestCase testCase){
+    public JavaExecutionerResult execute(String path, TestCase testCase){
+
+        JavaExecutionerResult toRet = new JavaExecutionerResult();
 
         String pwd = System.getProperty("user.dir");
 
         //Dame la lista de todos los .java
         List<File> javaFiles = javaFileFetcher.getAllFilesWithExtension(path, ".java");
-        JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getSignature());
+        //JavaFileToTest javaFileToTest = javaFileFetcher.getFileToTest(javaFiles, testCase.getSignature());
 
         //Crearme el main
-        File main = javaMainCreator.createMain(path, "Main" + testCase.getId(), javaFileToTest, testCase.getArguments());
+        //File main = javaMainCreator.createMain(path, "Main" + testCase.getId(), javaFileToTest, testCase.getArguments());
 
-        javaFiles.add(main);
+        //javaFiles.add(main);
 
         List<String> pathsStr = javaFiles.stream().map(x-> x.getAbsolutePath().substring(pwd.length() + path.length() + 2))
                 .collect(Collectors.toList());
@@ -56,13 +58,23 @@ public class JavaExecutioner {
         String compileCommand = commands.get(0).substring(0, javacCompileCommand) + " " + String.join(" ", pathsStr);
 
         int javacRumCommand = commands.get(1).indexOf("java") + ("java").length();
-        String rumCommand = commands.get(1).substring(0, javacRumCommand) + " " + main.getName().replaceFirst("[.][^.]+$", "");
+        String rumCommand = "";//commands.get(1).substring(0, javacRumCommand) + " " + main.getName().replaceFirst("[.][^.]+$", "");
 
-        commandRunnerService.executeSingleCommand(compileCommand);
+        String compiledOutput = commandRunnerService.executeSingleCommand(compileCommand);
+
+        if(compiledOutput.length() > 0){
+            toRet.setCompilationError(true);
+            toRet.setOputput(compiledOutput);
+            return toRet;
+        }
 
         String result = commandRunnerService.executeSingleCommand(rumCommand);
 
-        return result.substring(0, result.length() - 1);
+        toRet.setOputput(result.substring(0, result.length() - 1));
+        toRet.setCompilationError(false);
+
+
+        return toRet;
 
 
     }
