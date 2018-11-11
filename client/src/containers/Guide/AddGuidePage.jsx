@@ -16,7 +16,6 @@ import { displayNotification } from '../../actions/notification';
 import { createdGuideSelector } from '../../selectors/createGuide';
 import SelectWrapper from '../../components/SelectWrapper';
 import { required } from '../../util/validations';
-import TextField from '@material-ui/core/TextField';
 
 class AddGuidePage extends Component {
   componentDidMount = () => {
@@ -39,6 +38,7 @@ class AddGuidePage extends Component {
         <Divider />
         <StyledForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="start" label="Fecha de Inicio" component={DatePickerWrapper} />
+          <Field name="end" label="Fecha de Fin" component={DatePickerWrapper} />
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
           <Field name="language" label="Lenguaje" component={SelectWrapper} validate={[required]}>
             <MenuItem value="JAVA">Java</MenuItem>
