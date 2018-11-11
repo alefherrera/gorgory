@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
 import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
 import org.ungs.gorgory.executioner.java.JavaExecutioner;
+import org.ungs.gorgory.executioner.java.JavaExecutionerResult;
 import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.model.Result;
+import org.ungs.gorgory.model.ResultState;
 import org.ungs.gorgory.model.TestCase;
 import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.service.ExecutionerService;
@@ -34,12 +36,19 @@ public class JavaExecutionerService implements ExecutionerService {
     public Result runTestCaseOnResolution(Resolution resolution, TestCase testCase) throws FileNotFoundException, UnsupportedEncodingException, NoCodeFilesToCompileException, NoMainCodeFilePresentException {
 
         Result result = new Result();
+        JavaExecutionerResult output = javaExecutioner.execute(resolution.getPath(), testCase);
 
-        String output = javaExecutioner.execute(resolution.getPath(), testCase);
+        //TODO: que diseño feo. by leafunes
+        if(output.isCompilationError()){
+            result.setState(ResultState.COMPILATION_ERROR);
+        }else{
+            if(testCase.getExpected().equals(output.getOputput()))
+                result.setState(ResultState.PASSED);
+            else
+                result.setState(ResultState.RUNTIME_ERROR);
+        }
 
-        boolean passed = testCase.getExpected().equals(output);
-        result.setPassed(passed);
-        result.setOutput(output);
+        result.setOutput(output.getOputput());
         result.setResolution(resolution);
         result.setTestCase(testCase);
 

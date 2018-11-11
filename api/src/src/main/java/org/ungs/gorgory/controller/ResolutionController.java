@@ -9,6 +9,7 @@ import org.ungs.gorgory.Language;
 import org.ungs.gorgory.model.Exercise;
 import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.model.Result;
+import org.ungs.gorgory.model.ResultState;
 import org.ungs.gorgory.repository.ExerciseRepository;
 import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.security.UserRetrieverService;
@@ -104,7 +105,7 @@ public class ResolutionController {
                 return executionerService.runTestCaseOnResolution(newResolution, testCase);
             } catch (Exception e) {
                 Result result = new Result();
-                result.setPassed(false);
+                result.setState(ResultState.RUNTIME_ERROR);
                 result.setOutput(e.toString());
                 result.setResolution(newResolution);
                 result.setTestCase(testCase);
