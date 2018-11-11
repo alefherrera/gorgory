@@ -75,7 +75,7 @@ public class Guide extends BaseEntity {
         return start;
     }
 
-    public void setPeriod(LocalDateTime start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 }

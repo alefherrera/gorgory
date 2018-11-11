@@ -28,6 +28,7 @@ public class GuideController {
     @PostMapping
     public GuideDTO create(@RequestBody GuideDTO dto) {
         Guide guide = modelmapper.map(dto, Guide.class);
+        //TODO: el mapper no mapea la fecha
         guide.getExercises().forEach(exercise -> {
             if (exercise.getLanguage() == null) {
                 exercise.setLanguage(guide.getLanguage());
