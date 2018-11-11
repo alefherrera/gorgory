@@ -1,7 +1,7 @@
 import typeToReducer from 'type-to-reducer';
 import { FULFILLED } from 'redux-promise-middleware';
 import {
-  GET_GUIDES, SEARCH_GUIDES, GET_GUIDE, DELETE_GUIDE,
+  GET_GUIDES, GET_ALL_GUIDES, SEARCH_GUIDES, GET_GUIDE, DELETE_GUIDE, 
 } from '../../constants';
 
 const initialState = {
@@ -13,6 +13,12 @@ const initialState = {
 export default typeToReducer(
   {
     [GET_GUIDES]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        all: payload,
+      }),
+    },    
+    [GET_ALL_GUIDES]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
         all: payload,

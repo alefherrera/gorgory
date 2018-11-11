@@ -7,7 +7,7 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import GuideTable from '../../components/GuideTable';
 import { guidesSelector } from '../../selectors/entities/guide';
-import { getGuides, deleteGuide } from '../../actions/guide';
+import { getAllGuides, deleteGuide } from '../../actions/guide';
 
 const Container = styled.div`
   width: 100%;
@@ -29,7 +29,7 @@ const Row = styled.div`
 
 class GuidesPage extends Component {
   componentDidMount() {
-    this.props.getGuides();
+    this.props.getAllGuides();
   }
 
   handleDelete = (guide) => {
@@ -71,5 +71,5 @@ export default connect(
   state => ({
     guides: guidesSelector(state),
   }),
-  { getGuides, deleteGuide },
+  { getAllGuides, deleteGuide },
 )(GuidesPage);

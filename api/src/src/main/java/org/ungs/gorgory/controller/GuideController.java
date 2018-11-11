@@ -59,6 +59,11 @@ public class GuideController {
         return guides.stream().map(this::getMap).collect(Collectors.toList());
     }
 
+    @GetMapping("/noDate")
+    public List<GuideDTO> getAllWithoutDateFilter(){
+        return guideService.getAllWithoutDate().stream().map(this::getMap).collect(Collectors.toList());
+    }
+
     @GetMapping("/{id}")
     public GuideDTO get(@PathVariable Long id) {
         Guide guide = guideService.get(id);

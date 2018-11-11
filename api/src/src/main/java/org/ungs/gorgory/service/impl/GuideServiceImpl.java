@@ -31,6 +31,10 @@ public class GuideServiceImpl implements GuideService {
         return getVisibleGuides(guideRepository.findAll());
     }
 
+    public List<Guide> getAllWithoutDate(){
+        return  guideRepository.findAll();
+    }
+
     public List<Guide> getByQuery(String query) {
         return getVisibleGuides(guideRepository.findAllByNameContaining(query));
     }

@@ -12,6 +12,8 @@ public interface GuideService {
 
     List<Guide> getAll();
 
+    List<Guide> getAllWithoutDate();
+
     List<Guide> getByQuery(String query);
 
     Long delete(Long id);
