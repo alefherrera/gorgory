@@ -45,9 +45,9 @@ public class UserController {
         return userService.getAll().stream().map(this::getMap).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
-    public UserDTO get(@PathVariable Long id) {
-        User user = userService.get(id);
+    @GetMapping("/{username}")
+    public UserDTO get(@PathVariable String username) {
+        User user = userService.findByUsername(username).orElse(null);
         return getMap(user);
     }
 

@@ -16,7 +16,7 @@ class SignatureListPage extends Component {
   getSecondaryText = () => '';
 
   handleDeleteClick = (id) => {
-    this.props.deleteSignature(id).then((x) => {
+    this.props.deleteSignature(undefined, { id }).then((x) => {
       this.props.displayNotification('Materia eliminado correctamente');
       return x;
     });

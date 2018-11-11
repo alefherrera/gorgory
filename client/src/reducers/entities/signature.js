@@ -12,7 +12,7 @@ export default typeToReducer(
     [GET_SIGNATURES]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        all: payload.map(x => ({ ...x, id: x.username })),
+        all: payload,
       }),
     },
     [GET_SIGNATURE]: {
