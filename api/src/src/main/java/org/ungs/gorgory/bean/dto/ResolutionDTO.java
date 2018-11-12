@@ -14,10 +14,10 @@ public class ResolutionDTO {
     private Long id;
 
     @JsonProperty("exercise")
-    private Exercise exercise;
+    private ExerciseDTO exercise;
 
     @JsonProperty("student")
-    private User student;
+    private UserDTO student;
 
     @JsonProperty("path")
     private String path;
@@ -33,19 +33,19 @@ public class ResolutionDTO {
         this.id = id;
     }
 
-    public Exercise getExercise() {
+    public ExerciseDTO getExercise() {
         return exercise;
     }
 
-    public void setExercise(Exercise exercise) {
+    public void setExercise(ExerciseDTO exercise) {
         this.exercise = exercise;
     }
 
-    public User getStudent() {
+    public UserDTO getStudent() {
         return student;
     }
 
-    public void setStudent(User student) {
+    public void setStudent(UserDTO student) {
         this.student = student;
     }
 

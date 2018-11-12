@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { replace } from 'react-router-redux';
+import { replace } from 'connected-react-router';
 import FormComponent from '../../components/FormComponent';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
 import { login } from '../../actions/login';

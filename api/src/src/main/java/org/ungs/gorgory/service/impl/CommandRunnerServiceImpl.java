@@ -33,7 +33,11 @@ public class CommandRunnerServiceImpl implements CommandRunnerService {
             String error = getString(process.getErrorStream());
             String output = getString(process.getInputStream());
 
-            return error.isEmpty() ? output : error;
+            if (error.isEmpty()) {
+                return output;
+            }
+
+            throw new RuntimeException(error);
 
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);

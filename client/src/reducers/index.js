@@ -4,8 +4,9 @@ import session from './session';
 import resolution from './resolution';
 import ui from './ui';
 import createGuide from './createGuide';
-import guide from './guide';
+import entities from './entities';
 import exercise from './exercise';
+import course from './course';
 
 export default combineReducers({
   session,
@@ -13,6 +14,7 @@ export default combineReducers({
   form: formReducer,
   ui,
   createGuide,
-  guide,
+  entities,
   exercise,
+  course,
 });

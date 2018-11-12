@@ -2,13 +2,11 @@ package org.ungs.gorgory.service.impl;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
+import org.ungs.gorgory.enums.ResultState;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
 import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
-import org.ungs.gorgory.model.Argument;
-import org.ungs.gorgory.model.Resolution;
-import org.ungs.gorgory.model.Result;
-import org.ungs.gorgory.model.TestCase;
+import org.ungs.gorgory.model.*;
 import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
 import org.ungs.gorgory.service.ExecutionerService;
@@ -47,7 +45,11 @@ public class PythonExecutionerService implements ExecutionerService {
         resolutionResult.setResolution(resolution);
         resolutionResult.setTestCase(testCase);
         resolutionResult.setOutput(result);
-        resolutionResult.setPassed(testCase.getExpected().trim().equals(result.trim()));
+        if(testCase.getExpected().trim().equals(result.trim()))
+            resolutionResult.setState(ResultState.PASSED);
+        else
+            resolutionResult.setState(ResultState.NOT_PASSED);
+
 
         return resolutionResult;
     }

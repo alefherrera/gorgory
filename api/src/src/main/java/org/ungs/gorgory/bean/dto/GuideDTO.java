@@ -2,11 +2,9 @@ package org.ungs.gorgory.bean.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 
-import javax.persistence.Column;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -30,6 +28,16 @@ public class GuideDTO {
 
     @JsonProperty("updateDateTime")
     private Date updateDateTime;
+
+    @JsonProperty("start")
+    private LocalDateTime start;
+
+    @JsonProperty("end")
+    private LocalDateTime end;
+
+    @JsonProperty("courses")
+    @JsonIgnoreProperties("signature")
+    private Collection<CourseDTO> courses;
 
     public Long getId() {
         return id;
@@ -77,5 +85,29 @@ public class GuideDTO {
 
     public void setUpdateDateTime(Date updateDateTime) {
         this.updateDateTime = updateDateTime;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public Collection<CourseDTO> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<CourseDTO> courses) {
+        this.courses = courses;
     }
 }

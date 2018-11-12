@@ -20,6 +20,9 @@ public class TestCaseDTO {
     @JsonProperty("signature")
     private String signature;
 
+    @JsonProperty("isPublic")
+    private Boolean isPublic;
+
     public Long getId() {
         return id;
     }
@@ -50,5 +53,13 @@ public class TestCaseDTO {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
     }
 }

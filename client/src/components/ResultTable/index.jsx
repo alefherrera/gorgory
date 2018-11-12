@@ -29,10 +29,10 @@ const ResultTable = ({ output = [] }) => (
         {output.map((result, index) => (
           <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
-            <TableCell>{result.testCase.expected}</TableCell>
+            <TableCell>{result.testCase.isPublic ? result.testCase.expected : ''}</TableCell>
             <TableCell>{result.output}</TableCell>
             <TableCell>
-              <PassedIcon value={result.passed} />
+              <PassedIcon value={result.state} />
             </TableCell>
           </TableRow>
         ))}
@@ -42,7 +42,7 @@ const ResultTable = ({ output = [] }) => (
 );
 
 ResultTable.propTypes = {
-  output: PropTypes.object,
+  output: PropTypes.array,
 };
 
 export default ResultTable;

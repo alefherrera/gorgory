@@ -1,6 +1,7 @@
 package org.ungs.gorgory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.ungs.gorgory.enums.ResultState;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,8 +21,9 @@ public class Result implements Serializable {
     @ManyToOne
     private TestCase testCase;
 
-    private Boolean passed;
+    private ResultState state;
 
+    @Lob
     private String output;
 
     public Long getId() {
@@ -44,12 +46,12 @@ public class Result implements Serializable {
         this.testCase = testCase;
     }
 
-    public Boolean getPassed() {
-        return passed;
+    public ResultState getState() {
+        return state;
     }
 
-    public void setPassed(Boolean passed) {
-        this.passed = passed;
+    public void setState(ResultState state) {
+        this.state = state;
     }
 
     public String getOutput() {

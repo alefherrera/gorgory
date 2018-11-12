@@ -8,21 +8,25 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextFieldWrapper from '../../components/TextFieldWrapper';
+import DatePickerWrapper from '../../components/DatePickerWrapper';
 import { RootFlexColumn, TitleText, StyledForm } from '../../components/Generic';
 import { NewExercisesTable } from '../../components/Guide';
 import { addGuide, createGuide } from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
+import { getSubscribedCourses } from '../../actions/course';
 import { createdGuideSelector } from '../../selectors/createGuide';
 import SelectWrapper from '../../components/SelectWrapper';
 import { required } from '../../util/validations';
+import { subscribedCoursesSelector } from '../../selectors/entities/course';
 
 class AddGuidePage extends Component {
   componentDidMount = () => {
     this.props.createGuide();
+    this.props.getSubscribedCourses();
   };
 
   handleSubmit = (values) => {
-    this.props.addGuide({ ...values, ...this.props.created }).then(() => {
+    this.props.addGuide({ ...values, ...this.props.created, courses: [{ id: values.course }] }).then(() => {
       this.props.displayNotification('Guia creada correctamente').then(() => {
         this.props.reset();
         this.props.history.push('/guide/list');
@@ -36,16 +40,21 @@ class AddGuidePage extends Component {
         <TitleText text="Nueva Guia" />
         <Divider />
         <StyledForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+          <Field name="start" label="Fecha de Inicio" component={DatePickerWrapper} />
+          <Field name="end" label="Fecha de Fin" component={DatePickerWrapper} />
           <Field name="name" label="Nombre" component={TextFieldWrapper} />
           <Field name="language" label="Lenguaje" component={SelectWrapper} validate={[required]}>
             <MenuItem value="JAVA">Java</MenuItem>
             <MenuItem value="PYTHON">Python</MenuItem>
           </Field>
-          <NewExercisesTable
-            label="Ejercicios"
-            // TODO: harcodeado
-            exercisesRows={this.props.created.exercises}
-          >
+          <Field name="course" label="Comisión" component={SelectWrapper} validate={[required]}>
+            {this.props.courses.map(course => (
+              <MenuItem key={course.id} value={course.id}>
+                {`${course.signature && course.signature.name} - ${course.name}`}
+              </MenuItem>
+            ))}
+          </Field>
+          <NewExercisesTable label="Ejercicios" exercisesRows={this.props.created.exercises}>
             <Button
               component={Link}
               to="/guide/add/exercise"
@@ -68,13 +77,21 @@ AddGuidePage.propTypes = {
   createGuide: PropTypes.func,
   displayNotification: PropTypes.func,
   created: PropTypes.object,
-  history: PropTypes.func,
+  history: PropTypes.object,
   reset: PropTypes.func,
+  getSubscribedCourses: PropTypes.func,
+  courses: PropTypes.array,
 };
 
 export default connect(
   state => ({
     created: createdGuideSelector(state),
+    courses: subscribedCoursesSelector(state),
   }),
-  { addGuide, createGuide, displayNotification },
+  {
+    addGuide,
+    createGuide,
+    displayNotification,
+    getSubscribedCourses,
+  },
 )(reduxForm({ form: 'addGuide', destroyOnUnmount: false })(AddGuidePage));

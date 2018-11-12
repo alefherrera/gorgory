@@ -1,39 +1,49 @@
 import typeToReducer from 'type-to-reducer';
 import { FULFILLED } from 'redux-promise-middleware';
 import {
-  GET_GUIDES, SEARCH_GUIDES, GET_GUIDE, DELETE_GUIDE,
+  GET_COURSE,
+  GET_COURSES,
+  SUBSCRIBE_COURSE,
+  UNSUBSCRIBE_COURSE,
+  GET_SUBSCRIBED_COURSES,
 } from '../constants';
 
 const initialState = {
   all: [],
-  search: [],
+  subscribed: [],
   current: {},
 };
 
 export default typeToReducer(
   {
-    [GET_GUIDES]: {
-      [FULFILLED]: (state, { payload }) => ({
-        ...state,
-        all: payload,
-      }),
-    },
-    [SEARCH_GUIDES]: {
-      [FULFILLED]: (state, { payload }) => ({
-        ...state,
-        search: payload,
-      }),
-    },
-    [GET_GUIDE]: {
+    [GET_COURSE]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
         current: payload,
       }),
     },
-    [DELETE_GUIDE]: {
+    [GET_COURSES]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        all: state.all.filter(x => x.id !== payload),
+        all: payload,
+      }),
+    },
+    [GET_SUBSCRIBED_COURSES]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        subscribed: payload,
+      }),
+    },
+    [SUBSCRIBE_COURSE]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        current: payload,
+      }),
+    },
+    [UNSUBSCRIBE_COURSE]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        current: payload,
       }),
     },
   },

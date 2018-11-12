@@ -1,10 +1,12 @@
 package org.ungs.gorgory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 public class Guide extends BaseEntity {
@@ -24,6 +26,13 @@ public class Guide extends BaseEntity {
 
     @OneToOne
     private User user;
+
+    @ManyToMany(mappedBy = "guides")
+    private Collection<Course> courses;
+
+    private LocalDateTime start;
+
+    private LocalDateTime end;
 
     public Long getId() {
         return id;
@@ -62,5 +71,32 @@ public class Guide extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        if (courses != null) {
+            courses.forEach(course -> course.setGuides(Collections.singletonList(this)));
+        }
+        this.courses = courses;
     }
 }

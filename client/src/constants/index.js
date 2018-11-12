@@ -17,6 +17,7 @@ export const RUN = 'RUN';
 export const ADD_GUIDE = 'ADD_GUIDE';
 export const EDIT_GUIDE = 'EDIT_GUIDE';
 export const GET_GUIDES = 'GET_GUIDES';
+export const GET_ACTIVE_GUIDES = 'GET_ACTIVE_GUIDES';
 export const GET_GUIDE = 'GET_GUIDE';
 export const DELETE_GUIDE = 'DELETE_GUIDE';
 export const SEARCH_GUIDES = 'SEARCH_GUIDES';
@@ -33,3 +34,23 @@ export const DELETE_EXERCISE = 'DELETE_EXERCISE';
 export const UPLOAD_RESOLUTION = 'UPLOAD_RESOLUTION';
 export const SEND_RESOLUTION = 'SEND_RESOLUTION';
 export const GET_LAST_RESOLUTION = 'GET_LAST_RESOLUTION';
+
+export const ADD_USER = 'ADD_USER';
+export const EDIT_USER = 'EDIT_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const GET_USERS = 'GET_USERS';
+export const GET_USER = 'GET_USER';
+
+export const GET_ROLES = 'GET_ROLES';
+
+export const GET_COURSE = 'GET_COURSE';
+export const GET_COURSES = 'GET_COURSES';
+export const GET_SUBSCRIBED_COURSES = 'GET_SUBSCRIBED_COURSES';
+export const SUBSCRIBE_COURSE = 'SUBSCRIBE_COURSE';
+export const UNSUBSCRIBE_COURSE = 'UNSUBSCRIBE_COURSE';
+
+export const ADD_SIGNATURE = 'ADD_SIGNATURE';
+export const EDIT_SIGNATURE = 'EDIT_SIGNATURE';
+export const DELETE_SIGNATURE = 'DELETE_SIGNATURE';
+export const GET_SIGNATURES = 'GET_SIGNATURES';
+export const GET_SIGNATURE = 'GET_SIGNATURE';
