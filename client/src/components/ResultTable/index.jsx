@@ -42,7 +42,7 @@ const ResultTable = ({ output = [] }) => (
 );
 
 ResultTable.propTypes = {
-  output: PropTypes.object,
+  output: PropTypes.array,
 };
 
 export default ResultTable;

@@ -32,7 +32,7 @@ const TestCaseTable = ({ testCases = [] }) => (
 );
 
 TestCaseTable.propTypes = {
-  testCases: PropTypes.object,
+  testCases: PropTypes.array,
 };
 
 export default TestCaseTable;

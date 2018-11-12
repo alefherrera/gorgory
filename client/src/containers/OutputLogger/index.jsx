@@ -7,7 +7,7 @@ import { outputSelector } from '../../selectors/resolution';
 const OutputLogger = ({ output }) => <ResultTable output={output} />;
 
 OutputLogger.propTypes = {
-  output: PropTypes.object,
+  output: PropTypes.array,
 };
 
 export default connect(
