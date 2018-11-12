@@ -13,7 +13,7 @@ public class Signature extends BaseEntity {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "signature", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> courses;
 
     public Long getId() {
@@ -33,6 +33,9 @@ public class Signature extends BaseEntity {
     }
 
     public void setCourses(List<Course> courses) {
+        if (courses != null) {
+            courses.forEach(course -> course.setSignature(this));
+        }
         this.courses = courses;
     }
 }
