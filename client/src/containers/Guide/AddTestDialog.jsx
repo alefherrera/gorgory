@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { StyledForm } from '../../components/Generic';
 import AreaTextWrapper from '../../components/AreaTextWrapper';
-import SwitchWrapper from '../../components/SwitchWrapper'
+import SwitchWrapper from '../../components/SwitchWrapper';
 
 class AddTestDialog extends Component {
   handleOnSubmit = (values) => {
@@ -63,6 +63,8 @@ AddTestDialog.propTypes = {
 };
 
 export default connect(
+  () => ({
+    initialValues: { isPublic: true },
+  }),
   null,
-  null,
-)(reduxForm({ form: 'addTest', initialValues:{isPublic:true} })(AddTestDialog));
+)(reduxForm({ form: 'addTest' })(AddTestDialog));
