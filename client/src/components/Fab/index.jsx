@@ -12,7 +12,7 @@ const styles = theme => ({
 });
 
 const Fab = ({ classes, children, ...rest }) => (
-  <Button variant="fab" color="secondary" className={classes.fab} {...rest}>
+  <Button variant="fab" color="primary" className={classes.fab} {...rest}>
     {children}
   </Button>
 );
