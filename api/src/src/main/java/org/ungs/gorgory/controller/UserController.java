@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.SignUpPayload;
 import org.ungs.gorgory.bean.dto.UserDTO;
+import org.ungs.gorgory.bean.internal.MailPayload;
 import org.ungs.gorgory.model.User;
+import org.ungs.gorgory.service.MailService;
 import org.ungs.gorgory.service.RoleService;
 import org.ungs.gorgory.service.UserService;
 
@@ -19,17 +21,22 @@ public class UserController {
     private final ModelMapper modelmapper;
     private final UserService userService;
     private final RoleService roleService;
+    private final MailService mailService;
 
-    public UserController(ModelMapper modelmapper, UserService userService, RoleService roleService) {
+    public UserController(ModelMapper modelmapper, UserService userService, RoleService roleService, MailService mailService) {
         this.modelmapper = modelmapper;
         this.userService = userService;
         this.roleService = roleService;
+        this.mailService = mailService;
     }
 
     @PostMapping
     public void create(@RequestBody SignUpPayload payload) {
         payload.setPassword("");
         userService.save(payload);
+        String body = "<h1>Usuario</h1><h3>" + payload.getUsername() + "</h3><span>la primera vez podra ingresar sin contraseña</span>";
+        MailPayload mailPayload = new MailPayload(payload.getEmail(), "Nuevo acceso a gorgory", body);
+        mailService.send(mailPayload);
     }
 
     @PutMapping("/{id}")
