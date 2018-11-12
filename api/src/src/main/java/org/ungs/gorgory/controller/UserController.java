@@ -56,7 +56,6 @@ public class UserController {
         return userService.delete(id);
     }
 
-
     private UserDTO getMap(User user) {
         return modelmapper.map(user, UserDTO.class);
     }

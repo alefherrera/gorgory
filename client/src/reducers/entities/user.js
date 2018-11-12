@@ -12,7 +12,7 @@ export default typeToReducer(
     [GET_USERS]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        all: payload.map(x => ({ ...x, id: x.username })),
+        all: payload,
       }),
     },
     [GET_USER]: {
