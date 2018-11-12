@@ -44,7 +44,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}/subscribe")
-    public ResponseEntity<Course> subscribeToCourse(@PathVariable Long id) {
+    public ResponseEntity<CourseDTO> subscribeToCourse(@PathVariable Long id) {
         final Optional<Course> optionalCourse = courseRepository.findById(id);
         if (!optionalCourse.isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,11 +53,11 @@ public class CourseController {
 
         final User authenticatedUser = userRetrieverService.getUser();
         courseService.subscribeUserToCourse(authenticatedUser, course);
-        return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}/unsubscribe")
-    public ResponseEntity<Course> unsubscribeToCourse(@PathVariable Long id) {
+    public ResponseEntity<CourseDTO> unsubscribeToCourse(@PathVariable Long id) {
         final Optional<Course> optionalCourse = courseRepository.findById(id);
         if (!optionalCourse.isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -66,6 +66,6 @@ public class CourseController {
 
         final User authenticatedUser = userRetrieverService.getUser();
         courseService.unsubscribeUserToCourse(authenticatedUser, course);
-        return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.ACCEPTED);
     }
 }
