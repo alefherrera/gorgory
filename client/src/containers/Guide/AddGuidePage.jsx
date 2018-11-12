@@ -26,7 +26,7 @@ class AddGuidePage extends Component {
   };
 
   handleSubmit = (values) => {
-    this.props.addGuide({ ...values, ...this.props.created }).then(() => {
+    this.props.addGuide({ ...values, ...this.props.created, courses: [values.course] }).then(() => {
       this.props.displayNotification('Guia creada correctamente').then(() => {
         this.props.reset();
         this.props.history.push('/guide/list');
