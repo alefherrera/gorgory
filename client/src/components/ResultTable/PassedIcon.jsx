@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
 
 const PassedIcon = ({ value }) => {
-  if(value === "PASSED")
-    return <Icon style={{ color: '#00897b' }}>thumb_up</Icon>;
-  else if(value === "RUNTIME_ERROR")
-    return <Icon style={{ color: '#ff511b' }}>thumb_down</Icon>;
-  else
-    return <Icon style={{ color: '#ff511b' }}>build</Icon>;
-}
+  if (value === 'PASSED') return <Icon style={{ color: '#00897b' }}>check_circle_outline</Icon>;
+  if (value === 'NOT_PASSED') return <Icon style={{ color: '#ff511b' }}>remove_circle_outline</Icon>;
+  if (value === 'COMPILATION_ERROR') return <Icon style={{ color: '#ff511b' }}>error_outline</Icon>;
+  return <Icon style={{ color: '#ff511b' }}>build</Icon>;
+};
 
 PassedIcon.propTypes = {
-  value: PropTypes.bool,
+  value: PropTypes.string,
 };
 
 export default PassedIcon;
