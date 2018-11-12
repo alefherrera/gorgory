@@ -17,7 +17,7 @@ export const RUN = 'RUN';
 export const ADD_GUIDE = 'ADD_GUIDE';
 export const EDIT_GUIDE = 'EDIT_GUIDE';
 export const GET_GUIDES = 'GET_GUIDES';
-export const GET_ALL_GUIDES = 'GET_ALL_GUIDES';
+export const GET_ACTIVE_GUIDES = 'GET_ACTIVE_GUIDES';
 export const GET_GUIDE = 'GET_GUIDE';
 export const DELETE_GUIDE = 'DELETE_GUIDE';
 export const SEARCH_GUIDES = 'SEARCH_GUIDES';
@@ -45,6 +45,7 @@ export const GET_ROLES = 'GET_ROLES';
 
 export const GET_COURSE = 'GET_COURSE';
 export const GET_COURSES = 'GET_COURSES';
+export const GET_SUBSCRIBED_COURSES = 'GET_SUBSCRIBED_COURSES';
 export const SUBSCRIBE_COURSE = 'SUBSCRIBE_COURSE';
 export const UNSUBSCRIBE_COURSE = 'UNSUBSCRIBE_COURSE';
 

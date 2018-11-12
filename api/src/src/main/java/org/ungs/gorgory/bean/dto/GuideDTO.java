@@ -39,6 +39,10 @@ public class GuideDTO {
     @JsonProperty("end")
     private LocalDateTime end;
 
+    @JsonProperty("courses")
+    @JsonIgnoreProperties("signature")
+    private Collection<CourseDTO> courses;
+
     public Long getId() {
         return id;
     }
@@ -101,5 +105,13 @@ public class GuideDTO {
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
+    }
+
+    public Collection<CourseDTO> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<CourseDTO> courses) {
+        this.courses = courses;
     }
 }

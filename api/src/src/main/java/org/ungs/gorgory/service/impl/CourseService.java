@@ -7,6 +7,10 @@ import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.CourseRepository;
 import org.ungs.gorgory.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 @Service
 public class CourseService implements org.ungs.gorgory.service.CourseService {
 
@@ -42,5 +46,17 @@ public class CourseService implements org.ungs.gorgory.service.CourseService {
         }
         courseRepository.save(course);
         userRepository.save(user);
+    }
+
+    @Override
+    public Collection<Course> getCoursesForUser(User user) {
+        if (user.getRole().equals(Roles.STUDENT.getValue())) return user.getLearningCourses();
+        else if (user.getRole().equals(Roles.TEACHER.getValue())) return user.getTeachingCourses();
+        else return new ArrayList<>();
+    }
+
+    @Override
+    public Course getById(Long id) {
+        return courseRepository.findById(id).orElse(null);
     }
 }

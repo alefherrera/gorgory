@@ -42,6 +42,9 @@ public class Course extends BaseEntity {
     )
     private List<Guide> guides;
 
+    @ManyToOne
+    private Signature signature;
+
     public Long getId() {
         return id;
     }
@@ -84,6 +87,14 @@ public class Course extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Signature getSignature() {
+        return signature;
+    }
+
+    public void setSignature(Signature signature) {
+        this.signature = signature;
     }
 
     public void addTeacher(User user) {

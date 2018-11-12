@@ -4,3 +4,4 @@ const baseSelector = createSelector(state => state.course, course => course);
 
 export const coursesSelector = createSelector(baseSelector, course => course.all);
 export const courseSelector = createSelector(baseSelector, course => course.current);
+export const subscribedCoursesSelector = createSelector(baseSelector, course => course.subscribed);

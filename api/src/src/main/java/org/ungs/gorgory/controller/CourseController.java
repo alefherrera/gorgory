@@ -37,6 +37,11 @@ public class CourseController {
         return new ResponseEntity<>(courseRepository.findAll().stream().map(x -> modelMapper.map(x, CourseDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @GetMapping("/subscribed")
+    public ResponseEntity<Collection<CourseDTO>> getCoursesForUser() {
+        return new ResponseEntity<>(courseService.getCoursesForUser(userRetrieverService.getUser()).stream().map(x -> modelMapper.map(x, CourseDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<CourseDTO> get(@PathVariable Long id) {
         return courseRepository.findById(id).map(course -> new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.OK))
@@ -44,7 +49,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}/subscribe")
-    public ResponseEntity<Course> subscribeToCourse(@PathVariable Long id) {
+    public ResponseEntity<CourseDTO> subscribeToCourse(@PathVariable Long id) {
         final Optional<Course> optionalCourse = courseRepository.findById(id);
         if (!optionalCourse.isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,11 +58,11 @@ public class CourseController {
 
         final User authenticatedUser = userRetrieverService.getUser();
         courseService.subscribeUserToCourse(authenticatedUser, course);
-        return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}/unsubscribe")
-    public ResponseEntity<Course> unsubscribeToCourse(@PathVariable Long id) {
+    public ResponseEntity<CourseDTO> unsubscribeToCourse(@PathVariable Long id) {
         final Optional<Course> optionalCourse = courseRepository.findById(id);
         if (!optionalCourse.isPresent())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -66,6 +71,6 @@ public class CourseController {
 
         final User authenticatedUser = userRetrieverService.getUser();
         courseService.unsubscribeUserToCourse(authenticatedUser, course);
-        return new ResponseEntity<>(course, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.ACCEPTED);
     }
 }

@@ -9,6 +9,7 @@ import MultilineText from '../../components/MultilineText';
 import { courseSelector } from '../../selectors/entities/course';
 import FollowCourseButton from '../../components/FollowCourseButton';
 import { userSelector } from '../../selectors/session';
+import { displayNotification } from '../../actions/notification';
 
 const Container = styled.div`
   display: flex;
@@ -33,7 +34,10 @@ class CourseView extends Component {
   };
 
   handleSubscribe = (course) => {
-    this.props.subscribeCourse(undefined, { id: course.id });
+    this.props.subscribeCourse(undefined, { id: course.id }).then((result) => {
+      this.props.displayNotification('Suscripción realizada correctamente.');
+      return result;
+    });
   };
 
   handleUnsubscribe = (course) => {
@@ -85,6 +89,7 @@ CourseView.propTypes = {
   getCourse: PropTypes.func,
   subscribeCourse: PropTypes.func,
   unsubscribeCourse: PropTypes.func,
+  displayNotification: PropTypes.func,
 };
 
 export default connect(
@@ -92,5 +97,10 @@ export default connect(
     course: courseSelector(state),
     user: userSelector(state),
   }),
-  { getCourse, subscribeCourse, unsubscribeCourse },
+  {
+    getCourse,
+    subscribeCourse,
+    unsubscribeCourse,
+    displayNotification,
+  },
 )(CourseView);
