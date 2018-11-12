@@ -87,4 +87,12 @@ public class Guide extends BaseEntity {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
+    }
 }

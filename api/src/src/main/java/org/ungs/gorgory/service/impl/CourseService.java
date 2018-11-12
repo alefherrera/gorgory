@@ -54,4 +54,9 @@ public class CourseService implements org.ungs.gorgory.service.CourseService {
         else if (user.getRole().equals(Roles.TEACHER.getValue())) return user.getTeachingCourses();
         else return new ArrayList<>();
     }
+
+    @Override
+    public Course getById(Long id) {
+        return courseRepository.findById(id).orElse(null);
+    }
 }

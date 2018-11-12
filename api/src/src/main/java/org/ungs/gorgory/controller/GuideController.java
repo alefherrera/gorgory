@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.security.UserRetrieverService;
+import org.ungs.gorgory.service.CourseService;
 import org.ungs.gorgory.service.GuideService;
 
 import java.time.LocalDateTime;
@@ -18,11 +19,13 @@ public class GuideController {
     private final ModelMapper modelmapper;
     private final GuideService guideService;
     private final UserRetrieverService userRetriever;
+    private final CourseService courseService;
 
-    public GuideController(ModelMapper modelmapper, GuideService guideService, UserRetrieverService userRetriever) {
+    public GuideController(ModelMapper modelmapper, GuideService guideService, UserRetrieverService userRetriever, CourseService courseService) {
         this.modelmapper = modelmapper;
         this.guideService = guideService;
         this.userRetriever = userRetriever;
+        this.courseService = courseService;
     }
 
     @PostMapping
@@ -35,6 +38,7 @@ public class GuideController {
             }
         });
         guide.setUser(userRetriever.getUser());
+        guide.setCourses(dto.getCourses().stream().map(course -> courseService.getById(course.getId())).collect(Collectors.toList()));
         guideService.save(guide);
         return getMap(guide);
     }
