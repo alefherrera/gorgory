@@ -40,6 +40,7 @@ public class GuideDTO {
     private LocalDateTime end;
 
     @JsonProperty("courses")
+    @JsonIgnoreProperties("signature")
     private Collection<CourseDTO> courses;
 
     public Long getId() {
