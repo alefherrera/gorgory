@@ -29,7 +29,7 @@ const ResultTable = ({ output = [] }) => (
         {output.map((result, index) => (
           <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
-            <TableCell>{result.testCase.expected}</TableCell>
+            <TableCell>{result.testCase.isPublic ? result.testCase.expected : ''}</TableCell>
             <TableCell>{result.output}</TableCell>
             <TableCell>
               <PassedIcon value={result.state} />
