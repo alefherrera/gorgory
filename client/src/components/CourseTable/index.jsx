@@ -18,6 +18,7 @@ const CourseTable = ({ courses = [], iconsRenderer = () => {} }) => (
     <Table>
       <TableHead>
         <TableRow>
+          <TableCell>Materia</TableCell>
           <TableCell>Comisión</TableCell>
           <TableCell>Profesores</TableCell>
           <TableCell />
@@ -26,6 +27,7 @@ const CourseTable = ({ courses = [], iconsRenderer = () => {} }) => (
       <TableBody>
         {courses.map((course, index) => (
           <TableRow key={index}>
+            <TableCell>{course.signature && course.signature.name}</TableCell>
             <TableCell>{course.name}</TableCell>
             <TableCell>
               {course.teachers
