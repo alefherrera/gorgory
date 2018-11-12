@@ -48,7 +48,7 @@ public class PythonExecutionerService implements ExecutionerService {
         if(testCase.getExpected().trim().equals(result.trim()))
             resolutionResult.setState(ResultState.PASSED);
         else
-            resolutionResult.setState(ResultState.RUNTIME_ERROR);
+            resolutionResult.setState(ResultState.NOT_PASSED);
 
 
         return resolutionResult;

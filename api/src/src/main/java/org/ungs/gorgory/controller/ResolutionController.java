@@ -64,9 +64,9 @@ public class ResolutionController {
     }
 
     @GetMapping("/last/{exerciseId}")
-    public ResponseEntity<Resolution> getResolution(@PathVariable Long exerciseId) {
+    public ResponseEntity<ResolutionDTO> getResolution(@PathVariable Long exerciseId) {
         Resolution resolution = resolutionRepository.findFirstByExerciseAndStudentOrderByCreateDateTimeDesc(new Exercise(exerciseId), userRetrieverService.getUser()).orElse(null);
-        return ResponseEntity.ok(resolution);
+        return ResponseEntity.ok(modelMapper.map(resolution, ResolutionDTO.class));
     }
 
     @PostMapping("/upload/{exerciseId}")
@@ -108,7 +108,7 @@ public class ResolutionController {
                 return executionerService.runTestCaseOnResolution(newResolution, testCase);
             } catch (Exception e) {
                 Result result = new Result();
-                result.setState(ResultState.RUNTIME_ERROR);
+                result.setState(ResultState.COMPILATION_ERROR);
                 result.setOutput(e.toString());
                 result.setResolution(newResolution);
                 result.setTestCase(testCase);

@@ -35,12 +35,12 @@ public class ResultDTO {
         this.testCase = testCase;
     }
 
-    public ResultState getPassed() {
+    public ResultState getState() {
         return state;
     }
 
-    public void setPassed(ResultState passed) {
-        this.state = passed;
+    public void setState(ResultState state) {
+        this.state = state;
     }
 
     public String getOutput() {

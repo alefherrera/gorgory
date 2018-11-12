@@ -42,7 +42,7 @@ public class JavaExecutionerService implements ExecutionerService {
             if(testCase.getExpected().equals(output.getOputput()))
                 result.setState(ResultState.PASSED);
             else
-                result.setState(ResultState.RUNTIME_ERROR);
+                result.setState(ResultState.NOT_PASSED);
         }
 
         result.setOutput(output.getOputput());
