@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { entitiesSelector } from './entities';
 
 function getCurrent(user) {
-  return user.all.find(x => x.id === user.current);
+  return user.current;
 }
 
 export const baseSelector = createSelector(entitiesSelector, entities => entities.user);

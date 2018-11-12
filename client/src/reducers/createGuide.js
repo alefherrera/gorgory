@@ -1,11 +1,12 @@
-import { handleActions } from 'redux-actions';
-import { CREATE_GUIDE, ADD_EXERCISE_TO_GUIDE } from '../constants';
+import typeToReducer from 'type-to-reducer';
+import { FULFILLED } from 'redux-promise-middleware';
+import { CREATE_GUIDE, ADD_EXERCISE_TO_GUIDE, ADD_GUIDE } from '../constants';
 
 const initialState = {
   exercises: [],
 };
 
-export default handleActions(
+export default typeToReducer(
   {
     [CREATE_GUIDE]: (state, { payload }) => ({
       ...state,
@@ -15,6 +16,9 @@ export default handleActions(
       ...state,
       exercises: [...state.exercises, payload],
     }),
+    [ADD_GUIDE]: {
+      [FULFILLED]: () => initialState,
+    },
   },
   initialState,
 );

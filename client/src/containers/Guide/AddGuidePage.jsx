@@ -26,7 +26,7 @@ class AddGuidePage extends Component {
   };
 
   handleSubmit = (values) => {
-    this.props.addGuide({ ...values, ...this.props.created, courses: [values.course] }).then(() => {
+    this.props.addGuide({ ...values, ...this.props.created, courses: [{ id: values.course }] }).then(() => {
       this.props.displayNotification('Guia creada correctamente').then(() => {
         this.props.reset();
         this.props.history.push('/guide/list');
@@ -49,7 +49,7 @@ class AddGuidePage extends Component {
           </Field>
           <Field name="course" label="Comisión" component={SelectWrapper} validate={[required]}>
             {this.props.courses.map(course => (
-              <MenuItem key={course.id} value={course}>
+              <MenuItem key={course.id} value={course.id}>
                 {`${course.signature && course.signature.name} - ${course.name}`}
               </MenuItem>
             ))}

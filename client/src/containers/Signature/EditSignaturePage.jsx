@@ -14,8 +14,8 @@ class EditSignaturePage extends Component {
   }
 
   handleSubmit = (values) => {
-    this.props.editSignature(this.props.match.params.id, values).then((operator) => {
-      this.props.displayNotification('Usuario editado correctamente').then(() => {
+    this.props.editSignature(values, this.props.match.params).then((operator) => {
+      this.props.displayNotification('Materia editada correctamente').then(() => {
         this.props.goBack();
       });
       return operator;
@@ -25,7 +25,7 @@ class EditSignaturePage extends Component {
   render() {
     return (
       <RoleForm
-        title="Editar Usuario"
+        title="Editar Materia"
         buttonText="Editar"
         onSubmit={this.props.handleSubmit(this.handleSubmit)}
       />

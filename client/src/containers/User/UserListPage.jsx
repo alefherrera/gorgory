@@ -16,7 +16,7 @@ class UserListPage extends Component {
   getSecondaryText = () => '';
 
   handleDeleteClick = (id) => {
-    this.props.deleteUser(id).then((x) => {
+    this.props.deleteUser(undefined, { id }).then((x) => {
       this.props.displayNotification('Usuario eliminado correctamente');
       return x;
     });

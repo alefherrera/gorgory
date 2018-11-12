@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { entitiesSelector } from './entities';
 
 function getCurrent(signature) {
-  return signature.all.find(x => x.id === signature.current);
+  return signature.current;
 }
 
 export const baseSelector = createSelector(entitiesSelector, entities => entities.signature);
