@@ -34,8 +34,9 @@ class CourseView extends Component {
   };
 
   handleSubscribe = (course) => {
-    this.props.subscribeCourse(undefined, { id: course.id }).then(() => {
+    this.props.subscribeCourse(undefined, { id: course.id }).then((result) => {
       this.props.displayNotification('Suscripción realizada correctamente.');
+      return result;
     });
   };
 

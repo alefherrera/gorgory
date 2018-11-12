@@ -6,8 +6,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-
 import Moment from 'react-moment';
+import { DATETIME_FORMAT } from '../../constants/date';
 
 const Container = styled.div`
   width: 100%;
@@ -34,14 +34,14 @@ const GuideTable = ({ guides = [], iconsRenderer = () => {} }) => (
             <TableCell>{guide.name}</TableCell>
             <TableCell>{guide.exercises.length}</TableCell>
             <TableCell>
-              <Moment format="YYYY/MM/DD hh:mm:ss" date={guide.updateDateTime} />
+              <Moment format={DATETIME_FORMAT} date={guide.updateDateTime} />
             </TableCell>
             <TableCell>
-              <Moment format="YYYY/MM/DD hh:mm:ss" date={guide.start} />
+              <Moment format={DATETIME_FORMAT} date={guide.start} />
               {' '}
 -
               {' '}
-              <Moment format="YYYY/MM/DD hh:mm:ss" date={guide.end} />
+              <Moment format={DATETIME_FORMAT} date={guide.end} />
             </TableCell>
             <TableCell>{iconsRenderer(guide)}</TableCell>
           </TableRow>
