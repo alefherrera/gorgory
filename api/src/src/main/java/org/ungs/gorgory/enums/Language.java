@@ -1,4 +1,4 @@
-package org.ungs.gorgory;
+package org.ungs.gorgory.enums;
 
 public enum Language {
     JAVA,

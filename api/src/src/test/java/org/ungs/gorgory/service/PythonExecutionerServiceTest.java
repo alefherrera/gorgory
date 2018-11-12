@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.ungs.gorgory.enums.ResultState;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
 import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
 import org.ungs.gorgory.model.*;

@@ -8,17 +8,14 @@ import org.ungs.gorgory.executioner.java.JavaExecutioner;
 import org.ungs.gorgory.executioner.java.JavaExecutionerResult;
 import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.model.Result;
-import org.ungs.gorgory.model.ResultState;
+import org.ungs.gorgory.enums.ResultState;
 import org.ungs.gorgory.model.TestCase;
 import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.service.ExecutionerService;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 @Service
 public class JavaExecutionerService implements ExecutionerService {

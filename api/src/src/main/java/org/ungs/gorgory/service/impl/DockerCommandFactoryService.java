@@ -1,7 +1,7 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 import org.ungs.gorgory.service.CommandFactoryService;
 
 import java.io.File;

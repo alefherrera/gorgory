@@ -2,7 +2,7 @@ package org.ungs.gorgory.bean.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
