@@ -47,10 +47,10 @@ class AddGuidePage extends Component {
             <MenuItem value="JAVA">Java</MenuItem>
             <MenuItem value="PYTHON">Python</MenuItem>
           </Field>
-          <Field name="course" label="Rol" component={SelectWrapper} validate={[required]}>
+          <Field name="course" label="Comisión" component={SelectWrapper} validate={[required]}>
             {this.props.courses.map(course => (
-              <MenuItem key={course.name} value={course}>
-                {course.name}
+              <MenuItem key={course.id} value={course}>
+                {`${course.signature && course.signature.name} - ${course.name}`}
               </MenuItem>
             ))}
           </Field>
