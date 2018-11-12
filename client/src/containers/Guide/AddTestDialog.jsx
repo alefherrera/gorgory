@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { StyledForm } from '../../components/Generic';
 import AreaTextWrapper from '../../components/AreaTextWrapper';
+import SwitchWrapper from '../../components/SwitchWrapper'
 
 class AddTestDialog extends Component {
   handleOnSubmit = (values) => {
@@ -36,6 +37,7 @@ class AddTestDialog extends Component {
           onCancel={this.handleClose}
         >
           <DialogTitle id="form-dialog-title">Agregar Test</DialogTitle>
+          <Field name="isPublic" label="Publico" component={SwitchWrapper} />
           <DialogContent>
             <Field name="input" label="Input" rows="10" maxRows="5" component={AreaTextWrapper} />
             <Field
@@ -63,4 +65,4 @@ AddTestDialog.propTypes = {
 export default connect(
   null,
   null,
-)(reduxForm({ form: 'addTest' })(AddTestDialog));
+)(reduxForm({ form: 'addTest', initialValues:{isPublic:true} })(AddTestDialog));

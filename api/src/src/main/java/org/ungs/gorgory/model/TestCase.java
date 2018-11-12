@@ -25,6 +25,8 @@ public class TestCase extends BaseEntity {
 
     private String signature;
 
+    private Boolean isPublic;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +64,13 @@ public class TestCase extends BaseEntity {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public Boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
     }
 }
