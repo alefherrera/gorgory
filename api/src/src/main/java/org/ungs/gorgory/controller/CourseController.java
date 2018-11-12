@@ -37,6 +37,11 @@ public class CourseController {
         return new ResponseEntity<>(courseRepository.findAll().stream().map(x -> modelMapper.map(x, CourseDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @GetMapping("/subscribed")
+    public ResponseEntity<Collection<CourseDTO>> getCoursesForUser() {
+        return new ResponseEntity<>(courseService.getCoursesForUser(userRetrieverService.getUser()).stream().map(x -> modelMapper.map(x, CourseDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<CourseDTO> get(@PathVariable Long id) {
         return courseRepository.findById(id).map(course -> new ResponseEntity<>(modelMapper.map(course, CourseDTO.class), HttpStatus.OK))
