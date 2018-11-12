@@ -2,14 +2,12 @@ package org.ungs.gorgory.executioner.java;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 import org.ungs.gorgory.model.TestCase;
 import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

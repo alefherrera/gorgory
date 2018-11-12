@@ -2,6 +2,7 @@ package org.ungs.gorgory.bean.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.ungs.gorgory.enums.ResultState;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResultDTO {
@@ -13,7 +14,7 @@ public class ResultDTO {
     private TestCaseDTO testCase;
 
     @JsonProperty("passed")
-    private Boolean passed;
+    private ResultState passed;
 
     @JsonProperty("output")
     private String output;
@@ -34,11 +35,11 @@ public class ResultDTO {
         this.testCase = testCase;
     }
 
-    public Boolean getPassed() {
+    public ResultState getPassed() {
         return passed;
     }
 
-    public void setPassed(Boolean passed) {
+    public void setPassed(ResultState passed) {
         this.passed = passed;
     }
 

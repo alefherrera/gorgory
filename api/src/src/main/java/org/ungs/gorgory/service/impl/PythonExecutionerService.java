@@ -2,7 +2,8 @@ package org.ungs.gorgory.service.impl;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
+import org.ungs.gorgory.enums.ResultState;
 import org.ungs.gorgory.exceptions.NoCodeFilesToCompileException;
 import org.ungs.gorgory.exceptions.NoMainCodeFilePresentException;
 import org.ungs.gorgory.model.*;

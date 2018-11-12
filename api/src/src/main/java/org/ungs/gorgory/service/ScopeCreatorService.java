@@ -1,6 +1,6 @@
 package org.ungs.gorgory.service;
 
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 
 public interface ScopeCreatorService {
 

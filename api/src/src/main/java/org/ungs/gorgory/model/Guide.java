@@ -1,7 +1,7 @@
 package org.ungs.gorgory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.ungs.gorgory.Language;
+import org.ungs.gorgory.enums.Language;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
