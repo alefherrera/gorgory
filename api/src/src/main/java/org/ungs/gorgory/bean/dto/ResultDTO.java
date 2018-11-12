@@ -13,8 +13,8 @@ public class ResultDTO {
     @JsonProperty("testCase")
     private TestCaseDTO testCase;
 
-    @JsonProperty("passed")
-    private ResultState passed;
+    @JsonProperty("state")
+    private ResultState state;
 
     @JsonProperty("output")
     private String output;
@@ -36,11 +36,11 @@ public class ResultDTO {
     }
 
     public ResultState getPassed() {
-        return passed;
+        return state;
     }
 
     public void setPassed(ResultState passed) {
-        this.passed = passed;
+        this.state = passed;
     }
 
     public String getOutput() {
