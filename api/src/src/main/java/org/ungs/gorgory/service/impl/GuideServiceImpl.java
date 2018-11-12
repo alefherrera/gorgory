@@ -53,7 +53,7 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public List<Guide> getActiveGuidesForUser(User user) {
-        LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
+        LocalDateTime now = LocalDateTime.now();
         return guideRepository.findAllByStartBeforeAndEndAfterAndCoursesIn(now, now, user.getLearningCourses());
     }
 

@@ -77,7 +77,7 @@ AddGuidePage.propTypes = {
   createGuide: PropTypes.func,
   displayNotification: PropTypes.func,
   created: PropTypes.object,
-  history: PropTypes.func,
+  history: PropTypes.object,
   reset: PropTypes.func,
   getSubscribedCourses: PropTypes.func,
   courses: PropTypes.array,
