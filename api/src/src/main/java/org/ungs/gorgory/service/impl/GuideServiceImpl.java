@@ -7,6 +7,7 @@ import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.GuideRepository;
 import org.ungs.gorgory.service.GuideService;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -52,7 +53,7 @@ public class GuideServiceImpl implements GuideService {
 
     @Override
     public List<Guide> getActiveGuidesForUser(User user) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
         return guideRepository.findAllByStartBeforeAndEndAfterAndCoursesIn(now, now, user.getLearningCourses());
     }
 

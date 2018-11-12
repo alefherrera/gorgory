@@ -6,6 +6,7 @@ import org.ungs.gorgory.Language;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 public class Guide extends BaseEntity {
@@ -93,6 +94,9 @@ public class Guide extends BaseEntity {
     }
 
     public void setCourses(Collection<Course> courses) {
+        if (courses != null) {
+            courses.forEach(course -> course.setGuides(Collections.singletonList(this)));
+        }
         this.courses = courses;
     }
 }
