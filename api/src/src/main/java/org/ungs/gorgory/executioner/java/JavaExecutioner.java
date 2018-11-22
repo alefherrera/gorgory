@@ -3,11 +3,15 @@ package org.ungs.gorgory.executioner.java;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.ungs.gorgory.enums.Language;
+import org.ungs.gorgory.model.Argument;
 import org.ungs.gorgory.model.TestCase;
 import org.ungs.gorgory.service.CommandFactoryService;
 import org.ungs.gorgory.service.CommandRunnerService;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,8 +59,32 @@ public class JavaExecutioner {
         int javacCompileCommand = commands.get(0).indexOf("javac") + ("javac").length();
         String compileCommand = commands.get(0).substring(0, javacCompileCommand) + " " + String.join(" ", pathsStr);
 
+
+        File temp = null;
+        try {
+            temp = File.createTempFile("javaExecutioner", ".txt");
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+
+            for (Argument arg:
+                 testCase.getArguments()) {
+
+                writer.write(arg.getValue());
+                writer.newLine();
+            }
+
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String pipeCommand = "cat " + temp.getAbsolutePath() + " | ";
+
+
         int javacRumCommand = commands.get(1).indexOf("java") + ("java").length();
-        String rumCommand = "";//commands.get(1).substring(0, javacRumCommand) + " " + main.getName().replaceFirst("[.][^.]+$", "");
+        String rumCommand = pipeCommand + commands.get(1).substring(0, javacRumCommand) + " Main";
 
         String compiledOutput = commandRunnerService.executeSingleCommand(compileCommand);
 

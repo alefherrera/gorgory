@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import PropTypes, { object } from 'prop-types';
-import { connect } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import GuideTable from '../../components/GuideTable';
-import { guidesSelector } from '../../selectors/entities/guide';
-import { getGuides, deleteGuide } from '../../actions/guide';
+import React, { Component } from "react";
+import styled from "styled-components";
+import PropTypes, { object } from "prop-types";
+import { connect } from "react-redux";
+import Typography from "@material-ui/core/Typography";
+import Icon from "@material-ui/core/Icon";
+import IconButton from "@material-ui/core/IconButton";
+import GuideTable from "../../components/GuideTable";
+import { guidesSelector } from "../../selectors/entities/guide";
+import { getGuides, deleteGuide, editGuide } from "../../actions/guide";
 
 const Container = styled.div`
   width: 100%;
@@ -32,14 +32,21 @@ class GuidesPage extends Component {
     this.props.getGuides();
   }
 
-  handleDelete = (guide) => {
+  handleDelete = guide => {
     this.props.deleteGuide(undefined, { id: guide.id });
+  };
+
+  handleEdit = guide => {
+    this.props.editGuide(guide.id);
   };
 
   renderIcons = guide => (
     <div>
       <IconButton onClick={() => this.handleDelete(guide)}>
-        <Icon style={{ color: '#ff511b' }}>delete</Icon>
+        <Icon style={{ color: "#ff511b" }}>delete</Icon>
+      </IconButton>
+      <IconButton onClick={() => this.handleEdit(guide)}>
+        <Icon style={{ color: "#FFA000" }}> edit</Icon>
       </IconButton>
     </div>
   );
@@ -64,12 +71,12 @@ class GuidesPage extends Component {
 GuidesPage.propTypes = {
   guides: PropTypes.arrayOf(object),
   getGuides: PropTypes.func,
-  deleteGuide: PropTypes.func,
+  deleteGuide: PropTypes.func
 };
 
 export default connect(
   state => ({
-    guides: guidesSelector(state),
+    guides: guidesSelector(state)
   }),
-  { getGuides, deleteGuide },
+  { getGuides, deleteGuide, editGuide }
 )(GuidesPage);
