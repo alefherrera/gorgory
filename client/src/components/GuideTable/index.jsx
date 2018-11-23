@@ -56,7 +56,7 @@ const columns = iconsRenderer => [
   },
 ];
 
-const adaptGuides = guides => guides.map(guide => [guide.name, guide.exercises.length, guide.updateDateTime, guide]);
+const adaptGuides = guides => guides.map(guide => [guide.name, guide.exercises.length, guide.updateDateTime, guide, guide]);
 
 const GuideTable = ({ guides = [], iconsRenderer = () => {} }) => (
   <Container>
