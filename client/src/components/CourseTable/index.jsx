@@ -25,13 +25,13 @@ const columns = iconsRenderer => [
   {
     name: 'Profesores',
     options: {
-      filter: false,
+      filter: true,
     },
   },
   {
     name: '',
     options: {
-      filter: true,
+      filter: false,
       customBodyRender: value => iconsRenderer(value),
     },
   },
