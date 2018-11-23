@@ -30,8 +30,8 @@ const GorgoryTable = ({ data = {}, columns = {}, options = {} }) => (
 );
 
 GorgoryTable.propTypes = {
-  data: PropTypes.object,
-  columns: PropTypes.object,
+  data: PropTypes.arrayOf(PropTypes.object),
+  columns: PropTypes.arrayOf(PropTypes.object),
   options: PropTypes.object,
 };
 
