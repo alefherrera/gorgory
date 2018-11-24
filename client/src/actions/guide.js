@@ -1,5 +1,5 @@
-import { createAction } from "redux-actions";
-import { createApiAction } from "./util";
+import { createAction } from 'redux-actions';
+import { createApiAction } from './util';
 import {
   ADD_GUIDE,
   GET_GUIDES,
@@ -9,9 +9,9 @@ import {
   ADD_EXERCISE_TO_GUIDE,
   DELETE_GUIDE,
   GET_ACTIVE_GUIDES,
-  EDIT_GUIDE
-} from "../constants";
-import api from "../api/client/guide";
+  EDIT_GUIDE,
+} from '../constants';
+import api from '../api/client/guide';
 
 export const createGuide = createAction(CREATE_GUIDE);
 export const addExerciseToGuide = createAction(ADD_EXERCISE_TO_GUIDE);
@@ -20,12 +20,9 @@ export const deleteGuide = createApiAction(DELETE_GUIDE, api.delete);
 
 export const getGuides = createApiAction(GET_GUIDES, api.getAll);
 export const getGuide = createApiAction(GET_GUIDE, api.get);
-export const getActiveGuides = createApiAction(
-  GET_ACTIVE_GUIDES,
-  api.getActive
-);
+export const getActiveGuides = createApiAction(GET_ACTIVE_GUIDES, api.getActive);
 export const searchGuides = createApiAction(SEARCH_GUIDES, api.search);
 
 // Anda a saber que hacer esto.. jaja
-export const editGuide = id => dispatch =>
-  dispatch(createAction(EDIT_GUIDE)(id));
+export const editGuide = createApiAction(EDIT_GUIDE, api.get);
+export const dummy = createAction('DUMMY');

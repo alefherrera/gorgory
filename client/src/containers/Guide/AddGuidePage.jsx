@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Divider from '@material-ui/core/Divider';
-import { Field, reduxForm } from 'redux-form';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextFieldWrapper from '../../components/TextFieldWrapper';
-import DatePickerWrapper from '../../components/DatePickerWrapper';
-import { RootFlexColumn, TitleText, StyledForm } from '../../components/Generic';
-import { NewExercisesTable } from '../../components/Guide';
+import { reduxForm } from 'redux-form';
 import { addGuide, createGuide } from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
 import { getSubscribedCourses } from '../../actions/course';
 import { createdGuideSelector } from '../../selectors/createGuide';
-import SelectWrapper from '../../components/SelectWrapper';
-import { required } from '../../util/validations';
 import { subscribedCoursesSelector } from '../../selectors/entities/course';
+import GuideEditorLayout from '../../components/Guide/GuideEditorLayout';
 
 class AddGuidePage extends Component {
   componentDidMount = () => {
@@ -26,47 +16,28 @@ class AddGuidePage extends Component {
   };
 
   handleSubmit = (values) => {
-    this.props.addGuide({ ...values, ...this.props.created, courses: [{ id: values.course }] }).then(() => {
-      this.props.displayNotification('Guia creada correctamente').then(() => {
-        this.props.reset();
-        this.props.history.push('/guide/list');
+    this.props
+      .addGuide({
+        ...values,
+        ...this.props.created,
+        courses: [{ id: values.course }],
+      })
+      .then(() => {
+        this.props.displayNotification('Guia creada correctamente').then(() => {
+          this.props.reset();
+          this.props.history.push('/guide/list');
+        });
       });
-    });
   };
 
   render() {
     return (
-      <RootFlexColumn>
-        <TitleText text="Nueva Guia" />
-        <Divider />
-        <StyledForm onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-          <Field name="start" label="Fecha de Inicio" component={DatePickerWrapper} />
-          <Field name="end" label="Fecha de Fin" component={DatePickerWrapper} />
-          <Field name="name" label="Nombre" component={TextFieldWrapper} />
-          <Field name="language" label="Lenguaje" component={SelectWrapper} validate={[required]}>
-            <MenuItem value="JAVA">Java</MenuItem>
-            <MenuItem value="PYTHON">Python</MenuItem>
-          </Field>
-          <Field name="course" label="Comisión" component={SelectWrapper} validate={[required]}>
-            {this.props.courses.map(course => (
-              <MenuItem key={course.id} value={course.id}>
-                {`${course.signature && course.signature.name} - ${course.name}`}
-              </MenuItem>
-            ))}
-          </Field>
-          <NewExercisesTable label="Ejercicios" exercisesRows={this.props.created.exercises}>
-            <Button
-              component={Link}
-              to="/guide/add/exercise"
-              variant="fab"
-              color="primary"
-              aria-label="Add"
-            >
-              <AddIcon />
-            </Button>
-          </NewExercisesTable>
-        </StyledForm>
-      </RootFlexColumn>
+      <GuideEditorLayout
+        title="Nueva Guia"
+        handleSubmit={this.props.handleSubmit(this.handleSubmit)}
+        courses={this.props.courses}
+        guide={this.props.created}
+      />
     );
   }
 }
@@ -94,4 +65,10 @@ export default connect(
     displayNotification,
     getSubscribedCourses,
   },
-)(reduxForm({ form: 'addGuide', destroyOnUnmount: false })(AddGuidePage));
+)(
+  reduxForm({
+    form: 'addGuide',
+
+    destroyOnUnmount: false,
+  })(AddGuidePage),
+);

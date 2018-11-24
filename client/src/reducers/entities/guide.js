@@ -12,7 +12,8 @@ import {
 const initialState = {
   all: [],
   search: [],
-  current: {}
+  current: {},
+  toEdit: {}
 };
 
 export default typeToReducer(
@@ -47,11 +48,11 @@ export default typeToReducer(
         all: state.all.filter(x => x.id !== payload)
       })
     },
-    [EDIT_GUIDE]: (state, { payload }) => {
-      debugger;
-      return {
-        ...state
-      };
+    [EDIT_GUIDE]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        toEdit: payload
+      })
     }
   },
   initialState
