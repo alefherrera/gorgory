@@ -14,6 +14,13 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
+const TextWrapper = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+`;
+
 const ResultTable = ({ output = [] }) => (
   <Container>
     <Table>
@@ -30,7 +37,9 @@ const ResultTable = ({ output = [] }) => (
           <TableRow key={index}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>{result.testCase.isPublic ? result.testCase.expected : ''}</TableCell>
-            <TableCell>{result.output}</TableCell>
+            <TableCell>
+              <TextWrapper>{result.output}</TextWrapper>
+            </TableCell>
             <TableCell>
               <PassedIcon value={result.state} />
             </TableCell>
