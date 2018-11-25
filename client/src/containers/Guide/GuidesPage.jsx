@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import GuideTable from '../../components/GuideTable';
 import { guidesSelector } from '../../selectors/entities/guide';
 import {
-  getGuides, deleteGuide, editGuide, dummy,
+  getGuides, deleteGuide, editGuide,
 } from '../../actions/guide';
 
 const Container = styled.div`
