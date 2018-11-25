@@ -12,7 +12,7 @@ class SearchGuidePage extends Component {
     this.props.searchGuides(undefined, values.q ? values : { q: '' });
   };
 
-  renderIcons = () => {};
+  renderIcons = () => '';
 
   render() {
     const { guides } = this.props;

@@ -23,14 +23,13 @@ const getMuiTheme = () => createMuiTheme({
   },
 });
 
-const GorgoryTable = ({ data = {}, columns = {}, options = {} }) => (
+const GorgoryTable = ({ data = [], columns = [], options = {} }) => (
   <MuiThemeProvider theme={getMuiTheme()}>
     <MUIDataTable data={data} columns={columns} options={Object.assign(defaultOptions, options)} />
   </MuiThemeProvider>
 );
-
 GorgoryTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.array),
   columns: PropTypes.arrayOf(PropTypes.object),
   options: PropTypes.object,
 };
