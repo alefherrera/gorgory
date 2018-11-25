@@ -9,6 +9,7 @@ import { RootFlexColumn, TitleText, StyledForm } from '../../components/Generic'
 import { NewTestTable } from '../../components/Guide';
 import AddTestDialog from './AddTestDialog';
 import { addExerciseToGuide } from '../../actions/guide';
+import { routeFlowSelector } from '../../selectors/routeFlow';
 
 class AddExercisePage extends Component {
   state = {
@@ -22,7 +23,7 @@ class AddExercisePage extends Component {
 
   handleSubmit = (values) => {
     this.props.addExerciseToGuide({ ...values, testCases: this.state.tests });
-    this.props.history.push('/guide/add');
+    this.props.history.push(this.props.routeFlow.toGuidePage);
   };
 
   handleDialogClose = () => {
@@ -60,6 +61,8 @@ AddExercisePage.propTypes = {
 };
 
 export default connect(
-  null,
+  state => ({
+    routeFlow: routeFlowSelector(state),
+  }),
   { addExerciseToGuide },
 )(reduxForm({ form: 'addExercise' })(AddExercisePage));

@@ -1,17 +1,17 @@
-import React from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableHead from "@material-ui/core/TableHead";
-import TableCell from "@material-ui/core/TableCell";
-import AddIcon from "@material-ui/icons/Add";
-import { Icon, IconButton, Paper } from "@material-ui/core";
-import styled from "styled-components";
-import Divider from "@material-ui/core/Divider";
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import AddIcon from '@material-ui/icons/Add';
+import { Icon, IconButton, Paper } from '@material-ui/core';
+import styled from 'styled-components';
+import Divider from '@material-ui/core/Divider';
 
 export const ExerciseRows = ({ number, tests }) => (
   <div>
@@ -38,8 +38,10 @@ const StyledCardActions = styled(CardActions)`
   margin: 6px;
 `;
 
-export const NewExercisesTable = ({ label, exercisesRows, children }) => (
-  <Paper style={{ maxHeight: 200, overflow: "auto", marginTop: "32px" }}>
+export const NewExercisesTable = ({
+  label, exercisesRows, buttonsProvider, children,
+}) => (
+  <Paper style={{ maxHeight: 200, overflow: 'auto', marginTop: '32px' }}>
     <StyledCard>
       <StyledCardContent>
         {label}
@@ -56,6 +58,7 @@ export const NewExercisesTable = ({ label, exercisesRows, children }) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{ex.testCases.length}</TableCell>
+                {<TableCell>{buttonsProvider ? buttonsProvider(ex.id) : undefined}</TableCell>}
               </TableRow>
             ))}
           </TableBody>
@@ -67,7 +70,7 @@ export const NewExercisesTable = ({ label, exercisesRows, children }) => (
 );
 
 export const NewTestTable = ({ label, testRows, onClick }) => (
-  <Paper style={{ maxHeight: 200, overflow: "auto", marginTop: "32px" }}>
+  <Paper style={{ maxHeight: 200, overflow: 'auto', marginTop: '32px' }}>
     <StyledCard>
       <StyledCardContent>
         {label}
@@ -86,10 +89,10 @@ export const NewTestTable = ({ label, testRows, onClick }) => (
                 <TableCell>{ex.name}</TableCell>
                 <TableCell>
                   <IconButton onClick={ex.edit}>
-                    <Icon style={{ color: "#00897b" }}>edit</Icon>
+                    <Icon style={{ color: '#00897b' }}>edit</Icon>
                   </IconButton>
                   <IconButton onClick={ex.delete}>
-                    <Icon style={{ color: "#ff511b" }}>delete</Icon>
+                    <Icon style={{ color: '#ff511b' }}>delete</Icon>
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -98,12 +101,7 @@ export const NewTestTable = ({ label, testRows, onClick }) => (
         </Table>
       </StyledCardContent>
       <StyledCardActions>
-        <StyledButton
-          onClick={onClick}
-          variant="fab"
-          color="primary"
-          aria-label="Add"
-        >
+        <StyledButton onClick={onClick} variant="fab" color="primary" aria-label="Add">
           <AddIcon />
         </StyledButton>
       </StyledCardActions>

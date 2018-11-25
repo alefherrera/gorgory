@@ -1,19 +1,20 @@
-import typeToReducer from "type-to-reducer";
-import { FULFILLED } from "redux-promise-middleware";
+import typeToReducer from 'type-to-reducer';
+import { FULFILLED } from 'redux-promise-middleware';
 import {
   GET_GUIDES,
   GET_ACTIVE_GUIDES,
   SEARCH_GUIDES,
   GET_GUIDE,
   DELETE_GUIDE,
-  EDIT_GUIDE
-} from "../../constants";
+  EDIT_GUIDE,
+  ADD_EXERCISE_TO_GUIDE,
+} from '../../constants';
 
 const initialState = {
   all: [],
   search: [],
   current: {},
-  toEdit: {}
+  toEdit: {},
 };
 
 export default typeToReducer(
@@ -21,39 +22,46 @@ export default typeToReducer(
     [GET_GUIDES]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        all: payload
-      })
+        all: payload,
+      }),
     },
     [GET_ACTIVE_GUIDES]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        all: payload
-      })
+        all: payload,
+      }),
     },
     [SEARCH_GUIDES]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        search: payload
-      })
+        search: payload,
+      }),
     },
     [GET_GUIDE]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        current: payload
-      })
+        current: payload,
+      }),
     },
     [DELETE_GUIDE]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        all: state.all.filter(x => x.id !== payload)
-      })
+        all: state.all.filter(x => x.id !== payload),
+      }),
     },
     [EDIT_GUIDE]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        toEdit: payload
-      })
-    }
+        toEdit: payload,
+      }),
+    },
+    [ADD_EXERCISE_TO_GUIDE]: (state, { payload }) => ({
+      ...state,
+      toEdit: {
+        ...state.toEdit,
+        exercises: state.toEdit.exercises && [...state.toEdit.exercises, payload],
+      },
+    }),
   },
-  initialState
+  initialState,
 );

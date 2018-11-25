@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { IconButton, Icon } from '@material-ui/core';
 import GuideEditorLayout from '../../components/Guide/GuideEditorLayout';
 import { editGuideSelector } from '../../selectors/entities/guide';
 import { subscribedCoursesSelector } from '../../selectors/entities/course';
 import { getSubscribedCourses } from '../../actions/course';
 import { updateGuide } from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
+import { setRouteFlow } from '../../actions/routeFlow';
 
 class EditGuidePage extends Component {
-  componentDidMount = () => {
+  componentWillMount = () => {
+    const { guideId } = this.props.match.params;
     this.props.getSubscribedCourses();
+    this.props.setRouteFlow({
+      toGuidePage: `/guide/edit/${guideId}`,
+    });
   };
 
   handleSubmit = (values) => {
-    debugger;
+    const { guideId } = this.props.match.params;
     this.props
       .updateGuide(
         {
@@ -23,7 +29,7 @@ class EditGuidePage extends Component {
           courses: [{ id: values.course }],
         },
         {
-          id: this.props.guide.id,
+          id: guideId,
         },
       )
       .then(() => {
@@ -34,12 +40,31 @@ class EditGuidePage extends Component {
       });
   };
 
+  handleDeleteExercise = (id) => {
+    console.log(id);
+  };
+
+  handleDeleteExercise = (id) => {
+    console.log(id);
+  };
+
+  exercisesButtonsProvider = id => (
+    <div>
+      <IconButton>
+        <Icon style={{ color: '#00897b' }}>edit</Icon>
+      </IconButton>
+      <IconButton onClick={() => this.handleDeleteExercise(id)}>
+        <Icon style={{ color: '#ff511b' }}>delete</Icon>
+      </IconButton>
+    </div>
+  );
+
   render() {
-    const { guideId } = this.props.match.params;
     const { guide, courses } = this.props;
     return (
       <GuideEditorLayout
         title="Editar Guia"
+        exercisesButtonsProvider={this.exercisesButtonsProvider}
         handleSubmit={this.props.handleSubmit(this.handleSubmit)}
         courses={courses}
         guide={guide}
@@ -66,6 +91,7 @@ export default connect(
     getSubscribedCourses,
     updateGuide,
     displayNotification,
+    setRouteFlow,
   },
 )(
   reduxForm({

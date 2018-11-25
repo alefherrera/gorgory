@@ -7,12 +7,16 @@ import { displayNotification } from '../../actions/notification';
 import { getSubscribedCourses } from '../../actions/course';
 import { createdGuideSelector } from '../../selectors/createGuide';
 import { subscribedCoursesSelector } from '../../selectors/entities/course';
+import { setRouteFlow } from '../../actions/routeFlow';
 import GuideEditorLayout from '../../components/Guide/GuideEditorLayout';
 
 class AddGuidePage extends Component {
   componentDidMount = () => {
     this.props.createGuide();
     this.props.getSubscribedCourses();
+    this.props.setRouteFlow({
+      toGuidePage: '/guide/add',
+    });
   };
 
   handleSubmit = (values) => {
@@ -51,6 +55,7 @@ AddGuidePage.propTypes = {
   history: PropTypes.object,
   reset: PropTypes.func,
   getSubscribedCourses: PropTypes.func,
+  setRouteFlow: PropTypes.func,
   courses: PropTypes.array,
 };
 
@@ -64,6 +69,7 @@ export default connect(
     createGuide,
     displayNotification,
     getSubscribedCourses,
+    setRouteFlow,
   },
 )(
   reduxForm({

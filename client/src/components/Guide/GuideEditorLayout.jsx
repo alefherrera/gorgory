@@ -13,7 +13,7 @@ import SelectWrapper from '../SelectWrapper';
 import { required } from '../../util/validations';
 
 const GuideEditorLayout = ({
-  handleSubmit, title, courses, guide,
+  handleSubmit, exercisesButtonsProvider, title, courses, guide,
 }) => (
   <RootFlexColumn>
     <TitleText text={title} />
@@ -33,7 +33,11 @@ const GuideEditorLayout = ({
           </MenuItem>
         ))}
       </Field>
-      <NewExercisesTable label="Ejercicios" exercisesRows={guide.exercises}>
+      <NewExercisesTable
+        buttonsProvider={exercisesButtonsProvider}
+        label="Ejercicios"
+        exercisesRows={guide.exercises}
+      >
         <Button
           component={Link}
           to="/guide/add/exercise"
