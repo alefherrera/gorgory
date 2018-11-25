@@ -57,15 +57,15 @@ class ShowExercisePage extends Component {
               Enunciado
             </Typography>
           </Row>
-          <Row height="150px">
+          <Row>
             <MultilineText>{exercise.description}</MultilineText>
           </Row>
           <Row>
             <Typography gutterBottom variant="title" align="left" component="h2">
-              Tests
+              Casos de prueba
             </Typography>
           </Row>
-          <Row height="150px">
+          <Row>
             <TestCaseTable testCases={exercise.testCases} />
           </Row>
           <Row>

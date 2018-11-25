@@ -26,16 +26,14 @@ const ResultTable = ({ output = [], onDetailClick }) => (
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Test #</TableCell>
-          <TableCell>Expected</TableCell>
-          <TableCell>Output</TableCell>
-          <TableCell>Passed</TableCell>
+          <TableCell>Valor esperado</TableCell>
+          <TableCell>Valor obtenido</TableCell>
+          <TableCell>Estado</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {output.map((result, index) => (
           <TableRow key={index}>
-            <TableCell>{index + 1}</TableCell>
             <TableCell>{result.testCase.isPublic ? result.testCase.expected : ''}</TableCell>
             <TableCell>
               <TextWrapper onClick={() => onDetailClick(result)}>{result.output}</TextWrapper>

@@ -21,7 +21,6 @@ const TestCaseTable = ({ testCases = [] }) => (
       <TableBody>
         {testCases.filter(x => x.isPublic).map((testCase, index) => (
           <TableRow key={index}>
-            <TableCell>{testCase.name}</TableCell>
             <TableCell>{testCase.arguments.length}</TableCell>
             <TableCell>{testCase.expected}</TableCell>
           </TableRow>
