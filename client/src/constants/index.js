@@ -16,6 +16,7 @@ export const RUN = 'RUN';
 
 export const ADD_GUIDE = 'ADD_GUIDE';
 export const EDIT_GUIDE = 'EDIT_GUIDE';
+export const UPDATE_GUIDE = 'UPDATE_GUIDE';
 export const GET_GUIDES = 'GET_GUIDES';
 export const GET_ACTIVE_GUIDES = 'GET_ACTIVE_GUIDES';
 export const GET_GUIDE = 'GET_GUIDE';

@@ -1,13 +1,14 @@
-import fetch from "../fetch";
+import fetch from '../fetch';
 
 export default {
-  add: fetch.post("guide"),
-  getAll: fetch.get("guide"),
-  getActive: fetch.get("guide/active"),
+  add: fetch.post('guide'),
+  getAll: fetch.get('guide'),
+  getActive: fetch.get('guide/active'),
   // eslint-disable-next-line
-  search: fetch.get("guide?q=${q}"),
+  search: fetch.get('guide?q=${q}'),
   // eslint-disable-next-line
-  get: fetch.get("guide/${id}"),
+  get: fetch.get('guide/${id}'),
   // eslint-disable-next-line
-  delete: fetch.delete("guide/${id}")
+  delete: fetch.delete('guide/${id}'),
+  update: fetch.put('guide/${id}'),
 };

@@ -1,6 +1,8 @@
 package org.ungs.gorgory;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.config.Configuration;
+import org.modelmapper.convention.NamingConventions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +24,14 @@ public class GorgoryApplication {
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper toRet = new ModelMapper();
+
+        toRet.getConfiguration()
+                .setFieldMatchingEnabled(true)
+      .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
+      .setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
+
+        return toRet;
     }
 
 }
