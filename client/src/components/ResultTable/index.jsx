@@ -6,7 +6,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-import PassedIcon from './PassedIcon';
+import PassedIcon from '../PassedIcon';
 
 const Container = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ const TextWrapper = styled.div`
   width: 200px;
 `;
 
-const ResultTable = ({ output = [] }) => (
+const ResultTable = ({ output = [], onDetailClick }) => (
   <Container>
     <Table>
       <TableHead>
@@ -38,7 +38,7 @@ const ResultTable = ({ output = [] }) => (
             <TableCell>{index + 1}</TableCell>
             <TableCell>{result.testCase.isPublic ? result.testCase.expected : ''}</TableCell>
             <TableCell>
-              <TextWrapper>{result.output}</TextWrapper>
+              <TextWrapper onClick={() => onDetailClick(result)}>{result.output}</TextWrapper>
             </TableCell>
             <TableCell>
               <PassedIcon value={result.state} />
@@ -52,6 +52,7 @@ const ResultTable = ({ output = [] }) => (
 
 ResultTable.propTypes = {
   output: PropTypes.array,
+  onDetailClick: PropTypes.func,
 };
 
 export default ResultTable;
