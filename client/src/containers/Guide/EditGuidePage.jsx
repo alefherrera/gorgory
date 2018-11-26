@@ -44,13 +44,13 @@ class EditGuidePage extends Component {
     console.log(id);
   };
 
-  handleDeleteExercise = (id) => {
+  handleEditExercise = (id) => {
     console.log(id);
   };
 
   exercisesButtonsProvider = id => (
     <div>
-      <IconButton>
+      <IconButton onClick={() => this.handleEditExercise(id)}>
         <Icon style={{ color: '#00897b' }}>edit</Icon>
       </IconButton>
       <IconButton onClick={() => this.handleDeleteExercise(id)}>

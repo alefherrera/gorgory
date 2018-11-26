@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, reset as resetForm } from 'redux-form';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { StyledForm } from '../../components/Generic';
 import AreaTextWrapper from '../../components/AreaTextWrapper';
 import SwitchWrapper from '../../components/SwitchWrapper';
+import { testToEditSelector } from '../../selectors/test';
 
 class AddTestDialog extends Component {
   handleOnSubmit = (values) => {
@@ -15,12 +16,12 @@ class AddTestDialog extends Component {
       ...values,
       arguments: values.input && values.input.split(',').map(x => ({ value: x })),
     });
-    this.props.reset();
+    this.props.resetForm('addTest');
   };
 
   handleClose = () => {
     this.props.onClose();
-    this.props.reset();
+    this.props.resetForm('addTest');
   };
 
   render() {
@@ -53,12 +54,23 @@ AddTestDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onSubmit: PropTypes.func,
-  reset: PropTypes.func,
+  resetForm: PropTypes.func,
 };
 
+const getInitalValues = state => ({
+  input: state.input,
+  expected: state.expected,
+  isPublic: state.isPublic,
+});
+
 export default connect(
-  () => ({
-    initialValues: { isPublic: true },
+  state => ({
+    initialValues: { ...getInitalValues(testToEditSelector(state)), isPublic: true },
   }),
-  null,
-)(reduxForm({ form: 'addTest' })(AddTestDialog));
+  { resetForm },
+)(
+  reduxForm({
+    form: 'addTest',
+    enableReinitialize: true,
+  })(AddTestDialog),
+);

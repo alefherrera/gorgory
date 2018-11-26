@@ -69,7 +69,9 @@ export const NewExercisesTable = ({
   </Paper>
 );
 
-export const NewTestTable = ({ label, testRows, onClick }) => (
+export const NewTestTable = ({
+  buttonsProvider, label, testRows, onClick,
+}) => (
   <Paper style={{ maxHeight: 200, overflow: 'auto', marginTop: '32px' }}>
     <StyledCard>
       <StyledCardContent>
@@ -87,14 +89,7 @@ export const NewTestTable = ({ label, testRows, onClick }) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{ex.name}</TableCell>
-                <TableCell>
-                  <IconButton onClick={ex.edit}>
-                    <Icon style={{ color: '#00897b' }}>edit</Icon>
-                  </IconButton>
-                  <IconButton onClick={ex.delete}>
-                    <Icon style={{ color: '#ff511b' }}>delete</Icon>
-                  </IconButton>
-                </TableCell>
+                <TableCell>{buttonsProvider ? buttonsProvider(index) : undefined}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -59,3 +59,4 @@ export const GET_SIGNATURES = 'GET_SIGNATURES';
 export const GET_SIGNATURE = 'GET_SIGNATURE';
 
 export const SET_ROUTE_FLOW = 'SET_ROUTE_FLOW';
+export const SET_TEST_TO_EDIT = 'SET_TEST_TO_EDIT';
