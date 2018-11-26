@@ -6,7 +6,7 @@ import GuideEditorLayout from '../../components/Guide/GuideEditorLayout';
 import { editGuideSelector } from '../../selectors/entities/guide';
 import { subscribedCoursesSelector } from '../../selectors/entities/course';
 import { getSubscribedCourses } from '../../actions/course';
-import { updateGuide } from '../../actions/guide';
+import { updateGuide, deleteExerciseFromGuide, selectExerciseToEdit } from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
 import { setRouteFlow } from '../../actions/routeFlow';
 
@@ -41,11 +41,13 @@ class EditGuidePage extends Component {
   };
 
   handleDeleteExercise = (id) => {
-    console.log(id);
+    this.props.deleteExerciseFromGuide({ id });
   };
 
   handleEditExercise = (id) => {
-    console.log(id);
+    const { guideId } = this.props.match.params;
+    this.props.history.push(`/guide/edit/${guideId}/${id}`);
+    this.props.selectExerciseToEdit({ id });
   };
 
   exercisesButtonsProvider = id => (
@@ -92,6 +94,8 @@ export default connect(
     updateGuide,
     displayNotification,
     setRouteFlow,
+    deleteExerciseFromGuide,
+    selectExerciseToEdit,
   },
 )(
   reduxForm({

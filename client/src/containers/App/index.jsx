@@ -28,6 +28,7 @@ import CourseView from '../Course/CourseView';
 import User from '../User';
 import Signature from '../Signature';
 import EditExercisePage from '../Guide/EditExercisePage';
+import AddGuideDecorator from '../Guide/AddGuideDecorator';
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +61,7 @@ const App = () => (
                 <Route path="/login" component={Login} />
                 <Route path="/user" component={User} />
                 <Route path="/signature" component={Signature} />
+                <Route path="/guide/new" component={AddGuideDecorator} />
                 <Route path="/guide/add" exact component={AddGuidePage} />
                 <Route path="/guide/edit/:guideId" exact component={EditGuidePage} />
                 <Route path="/guide/add/exercise" exact component={AddExercisePage} />

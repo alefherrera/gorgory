@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { IconButton, Icon } from '@material-ui/core';
-import {
-  addGuide,
-  createGuide,
-  deleteExerciseFromGuide,
-  selectExerciseToEdit,
-} from '../../actions/guide';
+import { addGuide, deleteExerciseFromGuide, selectExerciseToEdit } from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
 import { getSubscribedCourses } from '../../actions/course';
 import { createdGuideSelector } from '../../selectors/createGuide';
@@ -18,7 +13,6 @@ import GuideEditorLayout from '../../components/Guide/GuideEditorLayout';
 
 class AddGuidePage extends Component {
   componentDidMount = () => {
-    this.props.createGuide();
     this.props.getSubscribedCourses();
     this.props.setRouteFlow({
       toGuidePage: '/guide/add',
@@ -76,7 +70,6 @@ class AddGuidePage extends Component {
 AddGuidePage.propTypes = {
   handleSubmit: PropTypes.func,
   addGuide: PropTypes.func,
-  createGuide: PropTypes.func,
   displayNotification: PropTypes.func,
   created: PropTypes.object,
   history: PropTypes.object,
@@ -93,7 +86,6 @@ export default connect(
   }),
   {
     addGuide,
-    createGuide,
     displayNotification,
     getSubscribedCourses,
     setRouteFlow,
