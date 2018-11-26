@@ -4,16 +4,21 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { IconButton, Icon } from '@material-ui/core';
 import AddTestDialog from './AddTestDialog';
-import { addExerciseToGuide } from '../../actions/guide';
+import { editExerciseFromGuide } from '../../actions/guide';
 import { routeFlowSelector } from '../../selectors/routeFlow';
 import ExerciseEditorLayout from '../../components/Exercise/ExerciseEditorLayout';
 import { setTestToEdit } from '../../actions/test';
+import { toEditExerciseSelector } from '../../selectors/createGuide';
 
-class AddExercisePage extends Component {
+class EditExercisePage extends Component {
   state = {
     dialog: false,
     edit: false,
     tests: [],
+  };
+
+  componentWillMount = () => {
+    this.setState({ ...this.state, tests: this.props.testCases || [] });
   };
 
   showTestDialog = () => {
@@ -21,7 +26,11 @@ class AddExercisePage extends Component {
   };
 
   handleSubmit = (values) => {
-    this.props.addExerciseToGuide({ ...values, testCases: this.state.tests });
+    const { exerciseId } = this.props.match.params;
+    this.props.editExerciseFromGuide({
+      id: exerciseId,
+      exercise: { ...values, testCases: this.state.tests },
+    });
     this.props.history.push(this.props.routeFlow.toGuidePage);
   };
 
@@ -67,7 +76,7 @@ class AddExercisePage extends Component {
   render() {
     return (
       <ExerciseEditorLayout
-        title="Nuevo Ejercicio"
+        title="Editar Ejercicio"
         handleSubmit={this.props.handleSubmit(this.handleSubmit)}
         onButtonClick={this.showTestDialog}
         testRows={this.state.tests}
@@ -84,15 +93,22 @@ class AddExercisePage extends Component {
   }
 }
 
-AddExercisePage.propTypes = {
+EditExercisePage.propTypes = {
   handleSubmit: PropTypes.func,
-  addExerciseToGuide: PropTypes.func,
+  editExerciseFromGuide: PropTypes.func,
   history: PropTypes.object,
 };
 
 export default connect(
   state => ({
     routeFlow: routeFlowSelector(state),
+    initialValues: { ...toEditExerciseSelector(state) },
+    testCases: toEditExerciseSelector(state).testCases,
   }),
-  { addExerciseToGuide, setTestToEdit },
-)(reduxForm({ form: 'addExercise' })(AddExercisePage));
+  { editExerciseFromGuide, setTestToEdit },
+)(
+  reduxForm({
+    form: 'editExercise',
+    enableReinitialize: true,
+  })(EditExercisePage),
+);

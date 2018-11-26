@@ -37,7 +37,7 @@ class AddTestDialog extends Component {
           onSubmit={this.props.handleSubmit(this.handleOnSubmit)}
           onCancel={this.handleClose}
         >
-          <DialogTitle id="form-dialog-title">Agregar Test</DialogTitle>
+          <DialogTitle id="form-dialog-title">{this.props.title}</DialogTitle>
           <Field name="isPublic" label="Publico" component={SwitchWrapper} />
           <DialogContent>
             <Field name="input" label="Input" rows="10" component={AreaTextWrapper} />

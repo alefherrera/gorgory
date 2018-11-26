@@ -58,7 +58,7 @@ export const NewExercisesTable = ({
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{ex.testCases.length}</TableCell>
-                {<TableCell>{buttonsProvider ? buttonsProvider(ex.id) : undefined}</TableCell>}
+                {<TableCell>{buttonsProvider ? buttonsProvider(index) : undefined}</TableCell>}
               </TableRow>
             ))}
           </TableBody>

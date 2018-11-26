@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { addGuide, createGuide } from '../../actions/guide';
+import { IconButton, Icon } from '@material-ui/core';
+import {
+  addGuide,
+  createGuide,
+  deleteExerciseFromGuide,
+  selectExerciseToEdit,
+} from '../../actions/guide';
 import { displayNotification } from '../../actions/notification';
 import { getSubscribedCourses } from '../../actions/course';
 import { createdGuideSelector } from '../../selectors/createGuide';
@@ -34,10 +40,31 @@ class AddGuidePage extends Component {
       });
   };
 
+  handleDeleteExercise = (id) => {
+    this.props.deleteExerciseFromGuide({ id });
+  };
+
+  handleEditExercise = (id) => {
+    this.props.history.push(`/guide/add/exercise/${id}`);
+    this.props.selectExerciseToEdit({ id });
+  };
+
+  exercisesButtonsProvider = id => (
+    <div>
+      <IconButton onClick={() => this.handleEditExercise(id)}>
+        <Icon style={{ color: '#00897b' }}>edit</Icon>
+      </IconButton>
+      <IconButton onClick={() => this.handleDeleteExercise(id)}>
+        <Icon style={{ color: '#ff511b' }}>delete</Icon>
+      </IconButton>
+    </div>
+  );
+
   render() {
     return (
       <GuideEditorLayout
         title="Nueva Guia"
+        exercisesButtonsProvider={this.exercisesButtonsProvider}
         handleSubmit={this.props.handleSubmit(this.handleSubmit)}
         courses={this.props.courses}
         guide={this.props.created}
@@ -70,6 +97,8 @@ export default connect(
     displayNotification,
     getSubscribedCourses,
     setRouteFlow,
+    deleteExerciseFromGuide,
+    selectExerciseToEdit,
   },
 )(
   reduxForm({

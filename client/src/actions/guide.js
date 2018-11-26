@@ -7,6 +7,9 @@ import {
   GET_GUIDE,
   CREATE_GUIDE,
   ADD_EXERCISE_TO_GUIDE,
+  EDIT_EXERCISE_FROM_GUIDE,
+  SELECT_EXERCISE_TO_EDIT,
+  DELETE_EXERCISE_FROM_GUIDE,
   DELETE_GUIDE,
   GET_ACTIVE_GUIDES,
   EDIT_GUIDE,
@@ -16,6 +19,9 @@ import api from '../api/client/guide';
 
 export const createGuide = createAction(CREATE_GUIDE);
 export const addExerciseToGuide = createAction(ADD_EXERCISE_TO_GUIDE);
+export const deleteExerciseFromGuide = createAction(DELETE_EXERCISE_FROM_GUIDE);
+export const editExerciseFromGuide = createAction(EDIT_EXERCISE_FROM_GUIDE);
+export const selectExerciseToEdit = createAction(SELECT_EXERCISE_TO_EDIT);
 export const addGuide = createApiAction(ADD_GUIDE, api.add);
 export const deleteGuide = createApiAction(DELETE_GUIDE, api.delete);
 
