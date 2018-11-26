@@ -12,7 +12,7 @@ export default typeToReducer(
     [UPLOAD_RESOLUTION]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        ...payload,
+        history: [payload, ...state.history],
       }),
     },
     [GET_LAST_RESOLUTION]: {
