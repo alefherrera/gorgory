@@ -75,7 +75,9 @@ public class GuideController {
 
     @GetMapping("/active")
     public List<GuideDTO> getActiveGuidesForUser() {
-        return guideService.getActiveGuidesForUser(userRetriever.getUser()).stream().map(this::getMap).collect(Collectors.toList());
+        List<GuideDTO> toRet = guideService.getActiveGuidesForUser(userRetriever.getUser()).stream().map(this::getMap).collect(Collectors.toList());
+        return toRet;
+
     }
 
     @GetMapping("/{id}")
