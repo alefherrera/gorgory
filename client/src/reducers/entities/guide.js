@@ -9,6 +9,7 @@ import {
   EDIT_GUIDE,
   ADD_EXERCISE_TO_GUIDE,
   ADD_GUIDE,
+  GET_GUIDE_REPORT,
 } from '../../constants';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   search: [],
   current: {},
   toEdit: {},
+  report: {},
 };
 
 export default typeToReducer(
@@ -72,6 +74,12 @@ export default typeToReducer(
         exercises: state.toEdit.exercises && [...state.toEdit.exercises, payload],
       },
     }),
+    [GET_GUIDE_REPORT]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        report: payload,
+      }),
+    },
   },
   initialState,
 );

@@ -14,6 +14,7 @@ import {
   GET_ACTIVE_GUIDES,
   EDIT_GUIDE,
   UPDATE_GUIDE,
+  GET_GUIDE_REPORT,
 } from '../constants';
 import api from '../api/client/guide';
 
@@ -29,6 +30,7 @@ export const getGuides = createApiAction(GET_GUIDES, api.getAll);
 export const getGuide = createApiAction(GET_GUIDE, api.get);
 export const getActiveGuides = createApiAction(GET_ACTIVE_GUIDES, api.getActive);
 export const searchGuides = createApiAction(SEARCH_GUIDES, api.search);
+export const getGuideReport = createApiAction(GET_GUIDE_REPORT, api.report);
 
 // Anda a saber que hacer esto.. jaja
 export const editGuide = createApiAction(EDIT_GUIDE, api.get);
