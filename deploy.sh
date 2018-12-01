@@ -5,3 +5,4 @@ cd ../../../../../../api/src && (rm ./build/libs/*.jar || true)
 ./gradlew bootJar
 rm ../../gorgory.jar || true
 cp ./build/libs/*.jar ../../gorgory.jar
+cd ../../
