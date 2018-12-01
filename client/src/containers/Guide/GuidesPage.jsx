@@ -7,9 +7,7 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import GuideTable from '../../components/GuideTable';
 import { guidesSelector } from '../../selectors/entities/guide';
-import {
-  getGuides, deleteGuide, editGuide,
-} from '../../actions/guide';
+import { getGuides, deleteGuide, editGuide } from '../../actions/guide';
 
 const Container = styled.div`
   width: 100%;
@@ -44,13 +42,20 @@ class GuidesPage extends Component {
       .then(() => this.props.history.push(`/guide/edit/${guide.id}`));
   };
 
+  handleReport = (guide) => {
+    this.props.history.push(`/guide/report/${guide.id}`);
+  };
+
   renderIcons = guide => (
     <div>
       <IconButton onClick={() => this.handleDelete(guide)}>
         <Icon style={{ color: '#ff511b' }}>delete</Icon>
       </IconButton>
       <IconButton onClick={() => this.handleEdit(guide)}>
-        <Icon style={{ color: '#FFA000' }}> edit</Icon>
+        <Icon style={{ color: '#FFA000' }}>edit</Icon>
+      </IconButton>
+      <IconButton onClick={() => this.handleReport(guide)}>
+        <Icon style={{ color: '#1e88e5' }}>bar_chart</Icon>
       </IconButton>
     </div>
   );
@@ -76,6 +81,8 @@ GuidesPage.propTypes = {
   guides: PropTypes.arrayOf(object),
   getGuides: PropTypes.func,
   deleteGuide: PropTypes.func,
+  editGuide: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default connect(

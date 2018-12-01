@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import AddIcon from '@material-ui/icons/Add';
-import { Icon, IconButton, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import styled from 'styled-components';
 import Divider from '@material-ui/core/Divider';
 

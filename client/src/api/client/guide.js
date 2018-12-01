@@ -12,4 +12,6 @@ export default {
   delete: fetch.delete('guide/${id}'),
   // eslint-disable-next-line
   update: fetch.put('guide/${id}'),
+  // eslint-disable-next-line
+  report: fetch.get('guide/${id}/report'),
 };
