@@ -13,6 +13,7 @@ import {
 } from '../../constants';
 
 const report = {
+  name: 'Guia 1',
   courses: [
     {
       students: [

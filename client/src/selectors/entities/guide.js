@@ -10,3 +10,5 @@ export const guidesSelector = createSelector(baseSelector, guide => guide.all);
 export const guideSelector = createSelector(baseSelector, guide => guide.current);
 
 export const searchSelector = createSelector(baseSelector, guide => guide.search);
+
+export const reportSelector = createSelector(baseSelector, guide => guide.report);

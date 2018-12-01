@@ -8,8 +8,19 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CourseReportDTO {
 
+    @JsonProperty("name")
+    private String name;
+
     @JsonProperty("students")
     private List<StudentReportDTO> students;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<StudentReportDTO> getStudents() {
         return students;
