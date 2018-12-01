@@ -28,7 +28,7 @@ export default typeToReducer(
     }),
     [EDIT_EXERCISE_FROM_GUIDE]: (state, { payload }) => ({
       ...state,
-      exercises: state.exercises.map((e, i) => (i != payload.id ? e : payload.exercise)),
+      exercises: state.exercises.map((e, i) => (i !== payload.id ? e : payload.exercise)),
     }),
     [SELECT_EXERCISE_TO_EDIT]: (state, { payload }) => ({
       ...state,
