@@ -12,12 +12,84 @@ import {
   GET_GUIDE_REPORT,
 } from '../../constants';
 
+const report = {
+  courses: [
+    {
+      students: [
+        {
+          student: {
+            name: 'Juanito',
+          },
+          totals: {
+            done: 1,
+            error: 1,
+            unknown: 1,
+          },
+          exercise_results: [
+            {
+              exercise: {
+                language: 'JAVA',
+                description: 'hace tal cosa',
+              },
+              result: {
+                status: 'done',
+              },
+            },
+          ],
+        },
+        {
+          student: {
+            name: 'Robertito',
+          },
+          totals: {
+            done: 1,
+            error: 1,
+            unknown: 1,
+          },
+          exercise_results: [
+            {
+              exercise: {
+                language: 'PYTHON',
+                description: 'hace tal otra',
+              },
+              result: {
+                status: 'error',
+              },
+            },
+          ],
+        },
+        {
+          student: {
+            name: 'Robertito',
+          },
+          totals: {
+            done: 1,
+            error: 1,
+            unknown: 1,
+          },
+          exercise_results: [
+            {
+              exercise: {
+                language: 'PYTHON',
+                description: 'hace tal otra',
+              },
+              result: {
+                status: 'unknown',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const initialState = {
   all: [],
   search: [],
   current: {},
   toEdit: {},
-  report: {},
+  report,
 };
 
 export default typeToReducer(

@@ -15,6 +15,9 @@ public class StudentReportDTO {
     @JsonProperty("exercise_results")
     private List<ExerciseReportDTO> exerciseResults;
 
+    @JsonProperty("totals")
+    private ReportTotalsDTO reportTotalsDTO;
+
     public UserDTO getStudent() {
         return student;
     }
