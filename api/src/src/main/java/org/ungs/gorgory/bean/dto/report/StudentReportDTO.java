@@ -1,11 +1,18 @@
 package org.ungs.gorgory.bean.dto.report;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.ungs.gorgory.bean.dto.UserDTO;
 
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentReportDTO {
+
+    @JsonProperty("student")
     private UserDTO student;
+
+    @JsonProperty("exercise_results")
     private List<ExerciseReportDTO> exerciseResults;
 
     public UserDTO getStudent() {
