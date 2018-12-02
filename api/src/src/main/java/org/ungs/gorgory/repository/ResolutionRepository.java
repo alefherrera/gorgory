@@ -17,4 +17,5 @@ public interface ResolutionRepository extends JpaRepository<Resolution, Long>, J
 
     List<Resolution> findAllByExerciseAndStudentOrderByCreateDateTimeDesc(Exercise exercise, User student);
 
+
 }
