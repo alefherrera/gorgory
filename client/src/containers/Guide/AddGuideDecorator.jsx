@@ -4,7 +4,6 @@ import { createGuide } from '../../actions/guide';
 
 class AddGuideDecorator extends Component {
   componentDidMount = () => {
-    debugger;
     this.props.createGuide();
     this.props.history.push('/guide/add');
   };
