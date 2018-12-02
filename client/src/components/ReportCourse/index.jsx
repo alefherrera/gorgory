@@ -10,7 +10,7 @@ const ReportCourse = ({ course }) => (
     {course.students.map((student, i) => (
       <ReportStudent key={i} student={student} />
     ))}
-    <ReportChart />
+    <ReportChart data={course.totals} />
   </div>
 );
 

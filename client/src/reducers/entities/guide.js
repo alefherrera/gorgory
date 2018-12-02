@@ -17,6 +17,11 @@ const report = {
   courses: [
     {
       name: 'Com 1',
+      totals: {
+        done: 3,
+        error: 10,
+        unknown: 5,
+      },
       students: [
         {
           student: {
