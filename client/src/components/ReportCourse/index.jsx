@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReportStudent from '../ReportStudent';
 import ReportChart from '../ReportChart';
+import { SubtitleTitleText } from '../Generic';
 
 const ReportCourse = ({ course }) => (
   <div>
-    {course.name}
+    <SubtitleTitleText text={course.name} />
     {course.students.map((student, i) => (
       <ReportStudent key={i} student={student} />
     ))}

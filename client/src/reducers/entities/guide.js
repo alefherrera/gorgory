@@ -16,6 +16,7 @@ const report = {
   name: 'Guia 1',
   courses: [
     {
+      name: 'Com 1',
       students: [
         {
           student: {
