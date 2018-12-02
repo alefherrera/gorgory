@@ -14,6 +14,9 @@ public class CourseReportDTO {
     @JsonProperty("students")
     private List<StudentReportDTO> students;
 
+    @JsonProperty("totals")
+    private ReportTotalsDTO totals;
+
     public String getName() {
         return name;
     }
@@ -28,5 +31,13 @@ public class CourseReportDTO {
 
     public void setStudents(List<StudentReportDTO> students) {
         this.students = students;
+    }
+
+    public ReportTotalsDTO getTotals() {
+        return totals;
+    }
+
+    public void setTotals(ReportTotalsDTO totals) {
+        this.totals = totals;
     }
 }

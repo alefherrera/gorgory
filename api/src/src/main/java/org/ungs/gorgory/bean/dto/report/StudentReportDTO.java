@@ -16,7 +16,7 @@ public class StudentReportDTO {
     private List<ExerciseReportDTO> exerciseResults;
 
     @JsonProperty("totals")
-    private ReportTotalsDTO reportTotalsDTO;
+    private ReportTotalsDTO totals;
 
     public UserDTO getStudent() {
         return student;
@@ -32,5 +32,13 @@ public class StudentReportDTO {
 
     public void setExerciseResults(List<ExerciseReportDTO> exerciseResults) {
         this.exerciseResults = exerciseResults;
+    }
+
+    public ReportTotalsDTO getTotals() {
+        return totals;
+    }
+
+    public void setTotals(ReportTotalsDTO totals) {
+        this.totals = totals;
     }
 }
