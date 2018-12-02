@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { reportSelector } from '../../selectors/entities/guide';
 import ReportHeader from '../../components/ReportHeader';
 import ReportCourse from '../../components/ReportCourse';
+import { getGuideReport } from '../../actions/guide';
 
 class GuideReportPage extends Component {
   componentDidMount() {
-    this.props.getReport(undefined, { id: this.props.match.params.guideId });
+    this.props.getGuideReport(undefined, { id: this.props.match.params.guideId });
   }
 
   render() {
@@ -24,18 +25,18 @@ class GuideReportPage extends Component {
 }
 
 GuideReportPage.propTypes = {
-  getReport: PropTypes.func,
+  getGuideReport: PropTypes.func,
   match: PropTypes.object,
   report: PropTypes.object,
 };
 
 GuideReportPage.defaultProps = {
-  getReport: () => {},
+  getGuideReport: () => {},
 };
 
 export default connect(
   state => ({
     report: reportSelector(state),
   }),
-  null,
+  { getGuideReport },
 )(GuideReportPage);

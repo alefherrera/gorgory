@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ReportTotalsDTO {
 
     @JsonProperty("done")
-    private Integer done;
+    private Integer done = 0;
 
     @JsonProperty("error")
-    private Integer error;
+    private Integer error = 0;
 
     @JsonProperty("unknown")
-    private Integer unknown;
+    private Integer unknown = 0;
 
     public Integer getDone() {
         return done;
@@ -21,6 +21,10 @@ public class ReportTotalsDTO {
 
     public void setDone(Integer done) {
         this.done = done;
+    }
+
+    public void increaseDone() {
+        this.done++;
     }
 
     public Integer getError() {
@@ -31,11 +35,19 @@ public class ReportTotalsDTO {
         this.error = error;
     }
 
+    public void increaseError() {
+        this.error++;
+    }
+
     public Integer getUnknown() {
         return unknown;
     }
 
     public void setUnknown(Integer unknown) {
         this.unknown = unknown;
+    }
+
+    public void increaseUnknown() {
+        this.unknown++;
     }
 }
