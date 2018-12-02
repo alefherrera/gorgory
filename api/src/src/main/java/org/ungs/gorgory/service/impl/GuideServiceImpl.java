@@ -1,15 +1,14 @@
 package org.ungs.gorgory.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.ungs.gorgory.bean.dto.GuideDTO;
+import org.ungs.gorgory.bean.dto.report.GuideReportDTO;
 import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.model.User;
 import org.ungs.gorgory.repository.GuideRepository;
+import org.ungs.gorgory.repository.UserRepository;
 import org.ungs.gorgory.service.GuideService;
 
-import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +16,11 @@ import java.util.stream.Collectors;
 public class GuideServiceImpl implements GuideService {
 
     private GuideRepository guideRepository;
+    private UserRepository userRepository;
 
-    public GuideServiceImpl(GuideRepository guideRepository) {
+    public GuideServiceImpl(GuideRepository guideRepository, UserRepository userRepository) {
         this.guideRepository = guideRepository;
+        this.userRepository = userRepository;
     }
 
     public Guide save(Guide guide) {
@@ -55,6 +56,23 @@ public class GuideServiceImpl implements GuideService {
     public List<Guide> getActiveGuidesForUser(User user) {
         LocalDateTime now = LocalDateTime.now();
         return guideRepository.findAllByStartBeforeAndEndAfterAndCoursesIn(now, now, user.getLearningCourses());
+    }
+
+    @Override
+    public GuideReportDTO getGuideReport(Long id) {
+
+        GuideReportDTO result = new GuideReportDTO();
+        Guide guide = guideRepository.findById(id).orElse(null);
+
+        GuideReportDTO.CourseReportDTO
+        result.getCourse() guide.getCourses();
+
+
+
+
+
+
+        return null;
     }
 
 }
