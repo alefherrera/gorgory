@@ -9,7 +9,7 @@ import { logout } from '../../actions/logout';
 
 // eslint-disable-next-line
 const HOST = process.env.NODE_ENV === 'production' ? location.hostname : 'localhost';
-const PORT = process.env.NODE_ENV === 'production' ? 80 : 8080;
+const PORT = process.env.NODE_ENV === 'production' ? 80 : 80;
 const API_ENDPOINT = `http://${HOST}:${PORT}/api`;
 
 const getBody = (res) => {

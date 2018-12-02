@@ -3,6 +3,7 @@ package org.ungs.gorgory.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.dto.GuideDTO;
+import org.ungs.gorgory.bean.dto.report.GuideReportDTO;
 import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.security.UserRetrieverService;
 import org.ungs.gorgory.service.CourseService;
@@ -79,6 +80,7 @@ public class GuideController {
         return toRet;
 
     }
+
 
     @GetMapping("/{id}")
     public GuideDTO get(@PathVariable Long id) {
