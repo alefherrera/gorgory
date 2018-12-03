@@ -3,7 +3,7 @@ import { TEACHER, STUDENT, ADMIN } from '../constants/roles';
 export default [
   {
     icon: 'add-circle-outline',
-    link: '/guide/add',
+    link: '/guide/new',
     text: 'Nueva Guia',
     roles: [TEACHER],
   },

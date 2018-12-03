@@ -3,6 +3,7 @@ package org.ungs.gorgory.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.ungs.gorgory.bean.dto.GuideDTO;
+import org.ungs.gorgory.bean.dto.report.GuideReportDTO;
 import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.security.UserRetrieverService;
 import org.ungs.gorgory.service.CourseService;
@@ -32,23 +33,34 @@ public class GuideController {
     public GuideDTO create(@RequestBody GuideDTO dto) {
         Guide guide = modelmapper.map(dto, Guide.class);
         //TODO: el mapper no mapea la fecha
-        guide.getExercises().forEach(exercise -> {
-            if (exercise.getLanguage() == null) {
-                exercise.setLanguage(guide.getLanguage());
-            }
-        });
-        guide.setUser(userRetriever.getUser());
-        guide.setCourses(dto.getCourses().stream().map(course -> courseService.getById(course.getId())).collect(Collectors.toList()));
+
+        injectDatesAndCourses(guide, dto);
+
         guideService.save(guide);
         return getMap(guide);
     }
 
     @PutMapping("/{id}")
     public GuideDTO update(@PathVariable Long id, @RequestBody GuideDTO guideDTO) {
-        Guide guide = guideService.get(id);
-        modelmapper.map(guideDTO, guide);
+        Guide guide = modelmapper.map(guideDTO, Guide.class);
+
+        //TODO: el mapper no mapea la fecha
+        injectDatesAndCourses(guide, guideDTO);
+        guide.setId(id);
+
         guideService.save(guide);
         return getMap(guide);
+    }
+
+    private void injectDatesAndCourses(Guide guide, GuideDTO guideDTO){
+        guide.getExercises().forEach(exercise -> {
+            if (exercise.getLanguage() == null) {
+                exercise.setLanguage(guide.getLanguage());
+            }
+        });
+        guide.setUser(userRetriever.getUser());
+        guide.setCourses(guideDTO.getCourses().stream().map(course -> courseService.getById(course.getId())).collect(Collectors.toList()));
+
     }
 
     @GetMapping
@@ -64,13 +76,17 @@ public class GuideController {
 
     @GetMapping("/active")
     public List<GuideDTO> getActiveGuidesForUser() {
-        return guideService.getActiveGuidesForUser(userRetriever.getUser()).stream().map(this::getMap).collect(Collectors.toList());
+        List<GuideDTO> toRet = guideService.getActiveGuidesForUser(userRetriever.getUser()).stream().map(this::getMap).collect(Collectors.toList());
+        return toRet;
+
     }
+
 
     @GetMapping("/{id}")
     public GuideDTO get(@PathVariable Long id) {
         Guide guide = guideService.get(id);
-        return getMap(guide);
+        GuideDTO toRet = getMap(guide);
+        return toRet;
     }
 
     @DeleteMapping("/{id}")

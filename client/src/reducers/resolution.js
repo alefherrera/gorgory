@@ -1,21 +1,30 @@
 import typeToReducer from 'type-to-reducer';
 import { FULFILLED } from 'redux-promise-middleware';
-import { UPLOAD_RESOLUTION, GET_LAST_RESOLUTION } from '../constants';
+import { UPLOAD_RESOLUTION, GET_LAST_RESOLUTION, GET_RESOLUTION_HISTORY } from '../constants';
 
-const initialState = {};
+const initialState = {
+  last: undefined,
+  history: [],
+};
 
 export default typeToReducer(
   {
     [UPLOAD_RESOLUTION]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        ...payload,
+        history: [payload, ...state.history],
       }),
     },
     [GET_LAST_RESOLUTION]: {
       [FULFILLED]: (state, { payload }) => ({
         ...state,
-        ...payload,
+        last: payload,
+      }),
+    },
+    [GET_RESOLUTION_HISTORY]: {
+      [FULFILLED]: (state, { payload }) => ({
+        ...state,
+        history: payload,
       }),
     },
   },

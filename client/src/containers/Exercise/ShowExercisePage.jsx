@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import { getExercise } from '../../actions/exercise';
-import { getLastResolution, uploadResolution } from '../../actions/resolution';
+import { getResolutionHistory, uploadResolution } from '../../actions/resolution';
 import DropZoneWrapper from '../../components/DropZoneWrapper';
 import FormComponent from '../../components/FormComponent';
 import { TitleText } from '../../components/Generic';
@@ -34,7 +34,7 @@ class ShowExercisePage extends Component {
   componentDidMount = () => {
     const { exerciseId } = this.props.match.params;
     this.props.getExercise(undefined, { id: exerciseId });
-    this.props.getLastResolution(undefined, { exerciseId });
+    this.props.getResolutionHistory(undefined, { exerciseId });
   };
 
   handleSubmit = (values) => {
@@ -57,15 +57,15 @@ class ShowExercisePage extends Component {
               Enunciado
             </Typography>
           </Row>
-          <Row height="150px">
+          <Row>
             <MultilineText>{exercise.description}</MultilineText>
           </Row>
           <Row>
             <Typography gutterBottom variant="title" align="left" component="h2">
-              Tests
+              Casos de prueba
             </Typography>
           </Row>
-          <Row height="150px">
+          <Row>
             <TestCaseTable testCases={exercise.testCases} />
           </Row>
           <Row>
@@ -85,7 +85,7 @@ class ShowExercisePage extends Component {
 
 ShowExercisePage.propTypes = {
   getExercise: PropTypes.func,
-  getLastResolution: PropTypes.func,
+  getResolutionHistory: PropTypes.func,
   handleSubmit: PropTypes.func,
   uploadResolution: PropTypes.func,
   match: PropTypes.object,
@@ -96,5 +96,5 @@ export default connect(
   state => ({
     exercise: exerciseSelector(state),
   }),
-  { getExercise, getLastResolution, uploadResolution },
+  { getExercise, getResolutionHistory, uploadResolution },
 )(reduxForm({ form: 'resolution' })(ShowExercisePage));

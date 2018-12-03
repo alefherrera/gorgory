@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import AddIcon from '@material-ui/icons/Add';
-import { Icon, IconButton } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import styled from 'styled-components';
 import Divider from '@material-ui/core/Divider';
 
@@ -21,12 +21,13 @@ export const ExerciseRows = ({ number, tests }) => (
 );
 
 const StyledCard = styled(Card)`
-  margin-top: 32px;
+  overflow-y: scroll;
 `;
 
 const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 const StyledButton = styled(Button)``;
@@ -37,66 +38,68 @@ const StyledCardActions = styled(CardActions)`
   margin: 6px;
 `;
 
-export const NewExercisesTable = ({ label, exercisesRows, children }) => (
-  <StyledCard>
-    <StyledCardContent>
-      {label}
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Numero</TableCell>
-            <TableCell># Tests</TableCell>
-            <TableCell />
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {exercisesRows.map((ex, index) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{ex.testCases.length}</TableCell>
+export const NewExercisesTable = ({
+  label, exercisesRows, buttonsProvider, children,
+}) => (
+  <Paper style={{ maxHeight: 200, overflow: 'auto', marginTop: '32px' }}>
+    <StyledCard>
+      <StyledCardContent>
+        {label}
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Numero</TableCell>
+              <TableCell># Tests</TableCell>
+              <TableCell />
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </StyledCardContent>
-    <StyledCardActions>{children}</StyledCardActions>
-  </StyledCard>
+          </TableHead>
+          <TableBody>
+            {exercisesRows.map((ex, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{ex.testCases.length}</TableCell>
+                {<TableCell>{buttonsProvider ? buttonsProvider(index) : undefined}</TableCell>}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </StyledCardContent>
+      <StyledCardActions>{children}</StyledCardActions>
+    </StyledCard>
+  </Paper>
 );
 
-export const NewTestTable = ({ label, testRows, onClick }) => (
-  <StyledCard>
-    <StyledCardContent>
-      {label}
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Test #</TableCell>
-            <TableCell>Nombre</TableCell>
-            <TableCell />
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {testRows.map((ex, index) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{ex.name}</TableCell>
-              <TableCell>
-                <IconButton onClick={ex.edit}>
-                  <Icon style={{ color: '#00897b' }}>edit</Icon>
-                </IconButton>
-                <IconButton onClick={ex.delete}>
-                  <Icon style={{ color: '#ff511b' }}>delete</Icon>
-                </IconButton>
-              </TableCell>
+export const NewTestTable = ({
+  buttonsProvider, label, testRows, onClick,
+}) => (
+  <Paper style={{ maxHeight: 200, overflow: 'auto', marginTop: '32px' }}>
+    <StyledCard>
+      <StyledCardContent>
+        {label}
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Test #</TableCell>
+              <TableCell>Nombre</TableCell>
+              <TableCell />
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </StyledCardContent>
-    <StyledCardActions>
-      <StyledButton onClick={onClick} variant="fab" color="primary" aria-label="Add">
-        <AddIcon />
-      </StyledButton>
-    </StyledCardActions>
-  </StyledCard>
+          </TableHead>
+          <TableBody>
+            {testRows.map((ex, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{ex.name}</TableCell>
+                <TableCell>{buttonsProvider ? buttonsProvider(index) : undefined}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </StyledCardContent>
+      <StyledCardActions>
+        <StyledButton onClick={onClick} variant="fab" color="primary" aria-label="Add">
+          <AddIcon />
+        </StyledButton>
+      </StyledCardActions>
+    </StyledCard>
+  </Paper>
 );

@@ -7,6 +7,8 @@ import createGuide from './createGuide';
 import entities from './entities';
 import exercise from './exercise';
 import course from './course';
+import routeFlow from './routeFlow';
+import test from './test';
 
 export default combineReducers({
   session,
@@ -17,4 +19,6 @@ export default combineReducers({
   entities,
   exercise,
   course,
+  routeFlow,
+  test,
 });

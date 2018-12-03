@@ -15,12 +15,13 @@ const Row = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin: 10px;
-  min-height: 300px;
+  min-height: 250px;
 `;
 
 const ButtonRow = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const Form = styled.form`

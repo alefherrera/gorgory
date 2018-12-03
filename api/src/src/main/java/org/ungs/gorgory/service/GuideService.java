@@ -1,6 +1,5 @@
 package org.ungs.gorgory.service;
 
-import org.ungs.gorgory.bean.dto.GuideDTO;
 import org.ungs.gorgory.model.Guide;
 import org.ungs.gorgory.model.User;
 

@@ -22,6 +22,18 @@ export const TitleText = ({ text }) => (
   </TitleTextStyle>
 );
 
+export const SubtitleTitleText = ({ text }) => (
+  <TitleTextStyle variant="h5" gutterBottom>
+    {text}
+  </TitleTextStyle>
+);
+
+export const SubHeadingText = ({ text }) => (
+  <TitleTextStyle variant="subtitle1" gutterBottom>
+    {text}
+  </TitleTextStyle>
+);
+
 const FormRoot = styled.div`
   width: 100%;
   height: 100%;

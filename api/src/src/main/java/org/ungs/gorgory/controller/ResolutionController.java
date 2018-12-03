@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.ungs.gorgory.enums.Language;
 import org.ungs.gorgory.bean.dto.ResolutionDTO;
+import org.ungs.gorgory.enums.Language;
+import org.ungs.gorgory.enums.ResultState;
 import org.ungs.gorgory.model.Exercise;
 import org.ungs.gorgory.model.Resolution;
 import org.ungs.gorgory.model.Result;
-import org.ungs.gorgory.enums.ResultState;
 import org.ungs.gorgory.repository.ExerciseRepository;
 import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.security.UserRetrieverService;
@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,6 +68,12 @@ public class ResolutionController {
     public ResponseEntity<ResolutionDTO> getResolution(@PathVariable Long exerciseId) {
         Optional<Resolution> resolution = resolutionRepository.findFirstByExerciseAndStudentOrderByCreateDateTimeDesc(new Exercise(exerciseId), userRetrieverService.getUser());
         return resolution.map(resolution1 -> ResponseEntity.ok(modelMapper.map(resolution1, ResolutionDTO.class))).orElse(null);
+    }
+
+    @GetMapping("/history/{exerciseId}")
+    public ResponseEntity<Collection<ResolutionDTO>> getResolutionHistory(@PathVariable Long exerciseId) {
+        List<Resolution> resolutions = resolutionRepository.findAllByExerciseAndStudentOrderByCreateDateTimeDesc(new Exercise(exerciseId), userRetrieverService.getUser());
+        return ResponseEntity.ok(resolutions.stream().map(resolution -> modelMapper.map(resolution, ResolutionDTO.class)).collect(Collectors.toList()));
     }
 
     @PostMapping("/upload/{exerciseId}")
