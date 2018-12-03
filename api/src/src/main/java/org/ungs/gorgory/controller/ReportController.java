@@ -25,6 +25,7 @@ import org.ungs.gorgory.repository.ResolutionRepository;
 import org.ungs.gorgory.service.GuideService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,6 @@ public class ReportController {
 
     @GetMapping("/{id}/report")
     public GuideReportDTO getReport(@PathVariable Long id) {
-
         Guide g = guideService.get(id);
         if (g == null)
             return null;
@@ -51,7 +51,6 @@ public class ReportController {
         GuideReportDTO dto = new GuideReportDTO();
         dto.setName(g.getName());
         List<CourseReportDTO> courses = new ArrayList<>();
-
 
         for (Course course :
                 g.getCourses()) {
@@ -72,28 +71,32 @@ public class ReportController {
                         g.getExercises()) {
 
                     ExerciseReportDTO exerciseReportDTO = new ExerciseReportDTO();
-                    exerciseReportDTO.setExercise(modelmapper.map(exercise, ExerciseDTO.class));
+                    ExerciseDTO exerciseDTO = modelmapper.map(exercise, ExerciseDTO.class);
+                    exerciseReportDTO.setExercise(exerciseDTO);
 
                     List<Resolution> resolutions = resolutionRepository.findAllByExerciseAndStudentOrderByCreateDateTimeDesc(exercise, student);
-
                     ReportResultDTO reportResultDTO = new ReportResultDTO();
 
                     if (resolutions.size() == 0) {
                         reportResultDTO.setStatus("unknown");
                         courseReportDTO.getTotals().increaseUnknown();
                         studentReportDTO.getTotals().increaseUnknown();
+                        dto.increaseExerciseUnknown(exerciseDTO);
                     } else {
                         Resolution r = resolutions.get(0);
+
                         for (Result res : r.getResults()) {
                             if (res.getState() == ResultState.NOT_PASSED || res.getState() == ResultState.COMPILATION_ERROR) {
                                 reportResultDTO.setStatus("error");
                                 courseReportDTO.getTotals().increaseError();
                                 studentReportDTO.getTotals().increaseError();
+                                dto.increaseExerciseError(exerciseDTO);
                                 break;
                             } else {
                                 reportResultDTO.setStatus("done");
                                 courseReportDTO.getTotals().increaseDone();
                                 studentReportDTO.getTotals().increaseDone();
+                                dto.increaseExerciseDone(exerciseDTO);
                             }
                         }
                     }
